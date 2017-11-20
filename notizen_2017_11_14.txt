@@ -1,0 +1,28 @@
+Roboter die sich selbst konstruieren Asiimov, Dick, Lem
+
+Bild Braun gemara laptop davor liegt roboter der tippt code
+
+roboter arm der roboter arm baut
+
+idee dass roboter roboter baut finden sci fi, brücke, dann aber zurück zu software
+
+neuronale netze die neuronale netze bauen 
+
+autopoesis in der biologie
+
+Des Weitern
+
+in motivation nochmal bogen schlagen
+
+latex begin quote umgebung
+
+/type=tt für code monotype
+
+
+Satz überarbeiten, kürzen, 1.1 / 1.2; Donnertag 30.11.17 Später Nachmittag ggn 16:30
+
+
+Backus oder Naur: 60ger Jahre wurden großrechner nur in asm programmiert, es kam eine zeit dass rechner so schnell neu erfunden wurden, sodass entwickler nichtmehr hinterkamen: Frage: Wie kann man die Programmierung von Rechnern einfacher machen? => Idee von Programmiersprachen; Es gab eine klare Anweisung: "Entwickle eine höhere Programmiersprache"
+=> Argumentation bis heute: Wir sind immernoch zu langsam, vll heutiger ansatz softwaregeneratoren / dsl / mdsd
+
+evtl auch nasa
