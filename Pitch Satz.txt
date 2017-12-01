@@ -1,0 +1,2 @@
+In meiner Bachelorarbeit beschäftige ich mich mit der automatisierten Entwicklung von Code Generatoren,
+um deren

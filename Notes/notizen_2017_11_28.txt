@@ -1,0 +1,12 @@
+Notes 28.11.2017:
+
+Arten von DSL:
+	_ stand-alone DSL
+	_ embedded DSL
+		> shallow
+		> deeply
+		
+Diff embedded DSL <> Internal DSL => Gleich, bzw. sehr ähnlich, Fowler nennt sie zB internal, andere Artikel verwenden die Bezeichnung embedded
+
+Frage an Braun: Wie verfahre ich mit den mini Artikeln auf der Internetseite von Martin Fowler?
+

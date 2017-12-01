@@ -1,0 +1,23 @@
+Zu
+https://dl.acm.org/citation.cfm?id=2617811
+
+Domain-specific Languages and Code Synthesis Using Haskell
+Full Text:	HtmlHtml  PDFPDF
+Author:	Andy Gill	University of Kansas
+Published in:
+· Magazine
+Queue - Domain-specific Languages Queue Homepage archive
+Volume 12 Issue 4, April 2014 
+pages 30 
+ACM New York, NY, USA 
+table of contents doi>10.1145/2611429.2617811
+
+Einleitung:
+_ DSLs je nach Disziplin andere Anforderungen und entsprechend andere Form.
+_ Eine DSL hat einen bestimmten Zweck und eine entsprechende Domain (MATLAB, SQL, Verilog, ...)
+_ Zwei Grundtypen von DSLs
+	> external DSLs bzw stand-alone DSLs
+	> internal DSLs bzw embedded DSLs
+		* Artikel unterscheided hier nochmal zwischen shallow and deeply embedded
+		
+Geht danach über zu einer kurzen Einleitung zu Haskell

@@ -1,0 +1,17 @@
+Automatic Documentation Generation via
+Source Code Summarization of Method Context
+Paul W. McBurney and Collin McMillan
+Department of Computer Science and Engineering
+University of Notre Dame
+Notre Dame, IN, USA
+{pmcburne, cmc}@nd.edu
+
+https://www3.nd.edu/~cmc/papers/mcburney_icpc_2014.pdf
+
+Autmatische Generierung von Dokumentation zu Java Code unter Berücksichtigung des Kontextes einer Methode zusätzlich zu ihrem Inhalt.
+=> Hypothese: Doku leichter verständlich.
+	_ Interna der Methode werden besser verstanden
+	_ Existenz der Methode is klarer (Warum existiert sie?)
+	_ Verwendung der Methode klarer
+	
+Prüfung an 12 Probanden

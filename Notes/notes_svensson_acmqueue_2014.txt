@@ -1,0 +1,20 @@
+Zu:
+https://dl.acm.org/citation.cfm?id=2626374&CFID=1003941580&CFTOKEN=79467720
+
+Design Exploration through Code-generating DSLs
+Full Text:	HtmlHtml  PDFPDF
+Authors:	Bo Joel Svensson	Indiana University
+Mary Sheeran	Chalmers University of Technology
+Ryan Newton	Indiana University
+Published in:
+· Magazine
+Queue - Domain-specific Languages Queue Homepage archive
+Volume 12 Issue 4, April 2014 
+pages 40 
+ACM New York, NY, USA 
+table of contents doi>10.1145/2611429.2626374
+
+Allgemeines Thema:
+Diskutiert high-level EDSLs
+	- sind nicht zwingend abstrakt oder mathematisch
+	- Artikel soll aufzeigen, dass diese low-level Programmierung vereinfachen
