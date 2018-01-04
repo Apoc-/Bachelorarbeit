@@ -1,0 +1,26 @@
+class POJO {
+	private int member;
+	
+	public int getMember() {
+		return this.member;
+	}	
+	
+	public void setMember(int value) {
+		this.member = value;
+	}
+}
+
+@JavaClass(unique_type = "PublicPojoClass")
+public class POJO {
+	@JavaMember(unique_type = "PrivateIntMember")
+	private int foo;
+	
+	@JavaMethod(unique_type = "")
+	public int getFoo() {
+		return this.foo;
+	}	
+	
+	public void setFoo(int value) {
+		this.foo = value;
+	}
+}

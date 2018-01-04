@@ -1,0 +1,29 @@
+PublicClassComponentBuilder
+	.createWithName("Person")
+	.withSubComponent(IntFieldComponentBuilder
+		.createWithName("age")
+		.end())
+	.withSubComponent(StringFieldComponentBuilder
+		.createWithName("name")
+		.withModifier("public")
+		.end())
+	.end();
+	
+
+@Component("PublicClass")
+public class RESOURCE {
+	@FixedComponent
+	long id;
+	
+	@Component("IntField")
+	@VariableModifier
+	int age;
+	
+	@Component("StringField")
+	@VariableModifier
+	String name;
+	
+	@Component("PrivateField")
+	@VariableType
+	private Object privateField;
+}
