@@ -1,0 +1,61 @@
+Viel Kontakt mit Papern (Proceedings -> irgendwo veröffentlicht)
+	Qualitativ beste Paper: In Journals, regelmäßige Veröffentlichung, Peer Review 10-50S
+		Geringe Akzeptanzquote
+		Peer wird man nur wenn man fachlich "über" den Themen steht
+		
+		ACM Queue
+		
+	Danach: Konferenzen, nehmen Paper an die mehrere Monate / halbes Jahr / Jahr
+		Am Ende immer physisches Treffen, stellen sich gegenseitig Arbeiten vor,
+			Diskussion
+			Auch Peer Review
+			Man redet von Level A - Level C (Wenn eine Konferenz von einem Berufsverband => warschl ein wenig besser)
+			Vorsicht bei chinesischen Konferenzen / Indien / Afrika 10S
+			
+	Next: Workshops -> WIP Arbeiten 6S
+		
+	
+Über den Konferenzen stehen die Bücher zu Arbeiten
+
+Blogbeiträge; Wikipedia;
+
+
+Genaues Zitieren!
+	Autoren
+	Titel
+	
+	Journalname
+	Volumenumber
+	Issuenumber
+	Pagenumber
+	Year
+
+In der Arbeit: Seitenangabe in eckigen Klammern
+Vornamen Ausschreiben
+keine Abkürzungen
+=> hauptsache einheitlich
+
+Bilder aus anderen Arbeiten dürfen übernommen werden, ist ok, weil nich öffentlich, aber MUSS angegeben werden in der caption;
+
+Jedes Bild hat eine Bild Unterschrift. Bild caption ist ein Satz => Punkt am Ende
+
+Wenn Änderungen: "Dieses Bild zeigt.. angelehnt an."
+
+Plagiate:
+	Bei so ca 4-5 Wörtern
+	
+	
+	
+Wirtschaftlichkeit: Generator teuer => awesome, vll doch lettzen satz erweitern
+vermutlich awesome
+
+
+indirektion <> abstraktion
+
+Generat => Ergebnis oÄ
+
+\, => halbes leerzeichen
+\- => silbentrennung / Was ist \= ??
+
+Projektplan Zeit:
+1/3 recherche - arbeiten - schreiben

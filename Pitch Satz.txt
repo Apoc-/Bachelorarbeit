@@ -1,2 +1,4 @@
-In meiner Bachelorarbeit beschäftige ich mich mit der automatisierten Entwicklung von Code Generatoren,
-um deren
+In meiner Bachelorarbeit beschäftige ich mich mit der Architektur von Codegeneratoren,
+um zu Verstehen wie diese durch Meta-Generatoren automatisiert generiert werden können
+damit die Verwendung von Codegeneratoren, durch diese zusätzliche Ebene der Abstraktion, vereinfacht wird.
+
