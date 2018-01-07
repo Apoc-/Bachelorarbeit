@@ -1,0 +1,33 @@
+To Do:
+
+- Component/Composite umbennennen, wg Verwirrungsgefahr: Generatoren bestehen aus Komponenten, hier jedoch Datenmodell für JCode
+- aufbau:
+	nach Cza2000
+	Domain Engineering (Chapter 2)
+		Analysis
+			Domainscope
+			
+			Domainmodel
+				Domain definition
+				Domain lexicon
+				Domain model(s)
+				Feature models
+				
+			
+		Design
+			Cza 24 "The Purpose of DD is to dev. an architecture for..."
+			Architecture
+				System Family
+			Production Plan (how are concrete systems produced from common architecture and components)
+				Three levels auf automation
+					Manual assembly
+					Automated assembly support
+					Automatic assembly
+			
+		Implementation
+			Dev guides
+			DSLs
+	
+	Generatoren (Chapter 9, S.332)
+		
+			
