@@ -138,7 +138,11 @@ pdfkeywords={Keywords}
 }
 
 
-
+%%%%%%%%%%%%%%%%%%%
+%% custom config
+%%%%%%%%%%%%%%%%%%%
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 
 \begin{document}
 
@@ -236,11 +240,76 @@ Es wird in dieser Arbeit nicht auf die wirtschaftlichen Aspekte bei der Verwendu
 
 \chapter{Grundlagen}
 
+\section{Modellgetriebene Softwareentwicklung (MDSD)}
 
+\subsection{Domäne}
+
+\subsubsection{Definition}
+\subsubsection{Domänenanalyse}
+\subsubsection{Feature Modelling}
+
+\subsection{Metamodell}
+
+\subsubsection{Definition}
+\subsubsection{Abstraktes Modell}
+\subsubsection{Konkretes Modell}
+
+\subsection{Domänenspezifische Sprache (DSL)}
+
+\subsubsection{Definition}
+
+\subsubsection{General Purpose Language (GPL)}
+\subsubsection{Interne DSLs}
+\subsubsection{Externe DSLs}
+\subsubsection{Parser}
+
+\subsection{Code Generator}
+
+\subsubsection{Definition}
+\subsubsection{Techniken zur Generierung von Code}
+\subsubsection{Zusammenhang zu Transformatoren}
+\subsubsection{Abgrenzung zum Compilerbau}
+\subsection{MDSD Entwicklungsprozess}
+
+\section{Software Engineering}
+
+\subsection{Architektur}
+
+\subsubsection{Prinzipien in der Softwaretechnik}
+\subsubsection{Trennung durch Modelle}
+\subsubsection{Modell-Transformations-Pipeline}
+
+\subsection{Design Pattern objektorientierter Programmierung}
+
+\subsubsection{Visitor Pattern}
+\subsubsection{Builder Pattern und Fluent Interfaces}
+\subsubsection{Factory Pattern}
 
 \chapter{Problemstellung}
+\section{Wahl der zu unterstützenden Features}
+\section{Definition der Variabilitäten auf Basis einer Referenzimplementation}
+\section{Verwendung von Zwischenmodellen}
+\section{Entscheidung zwischen Meta-Generator und Transformator}
+\section{Abstrakte Modellierung von Java-Code}
 
-\chapter{Lösung}
+\chapter{Lösung: Spectrum (Proof of Concept)}
+\section{Verwendete Bibliotheken}
+\subsection{JavaParser mit JavaSymbolSolver}
+\subsection{JavaPoet}
+\section{Architekturübersicht}
+\subsection{Amber}
+\subsubsection{Annotationen}
+\subsubsection{Parser}
+\subsubsection{Modell}
+\subsection{Cherry}
+\subsubsection{Generator}
+\subsubsection{Modell}
+\subsubsection{Generierte Builder}
+\subsection{Jade}
+\subsubsection{Transformator}
+\subsection{Scarlet}
+\subsubsection{Generator}
+\subsubsection{Modell}
 
 \begin{lstlisting}[label=lst:java,
 				   language=java,
@@ -262,8 +331,14 @@ Etiam vitae eros erat. Praesent nec accumsan turpis, et mollis eros. Praesent la
 
 Sed in tempus elit, sit amet suscipit quam. Ut suscipit dictum molestie. Etiam quis porta mauris. Cras dapibus sapien eget sem porta, ut congue sapien accumsan. Maecenas hendrerit lobortis mauris ut hendrerit. Suspendisse at aliquet est. Quisque eros est, scelerisque ac orci quis, placerat suscipit lorem. Phasellus rutrum enim non odio ullamcorper, sit amet auctor nulla fringilla. Nunc eleifend vulputate dui, a sollicitudin tellus venenatis non. Cras condimentum lorem at ultricies vestibulum. Vestibulum interdum lobortis commodo. Nullam rhoncus interdum massa, ut varius nisi scelerisque id. Nunc interdum quam in enim bibendum vulputate.
 
-
 \chapter{Evaluierung}
+\section{Softwarequalität}
+Nach Balzert S.111
+\subsection{Functionality}
+\subsection{Maintainability}
+\subsection{Performance}
+\subsection{Usability}
+\section{Grenzen des Lösungsansatzes}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula felis lectus, nec aliquet arcu aliquam vitae. Quisque laoreet consequat ante, eget pretium quam hendrerit at. Pellentesque nec purus eget erat mattis varius. Nullam ut vulputate velit. Suspendisse in dui in eros iaculis tempus. Phasellus vel est arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer elementum, nulla eu faucibus dignissim, orci justo imperdiet lorem, luctus consectetur orci orci a nunc.
 
@@ -275,7 +350,19 @@ Etiam vitae eros erat. Praesent nec accumsan turpis, et mollis eros. Praesent la
 
 Sed in tempus elit, sit amet suscipit quam. Ut suscipit dictum molestie. Etiam quis porta mauris. Cras dapibus sapien eget sem porta, ut congue sapien accumsan. Maecenas hendrerit lobortis mauris ut hendrerit. Suspendisse at aliquet est. Quisque eros est, scelerisque ac orci quis, placerat suscipit lorem. Phasellus rutrum enim non odio ullamcorper, sit amet auctor nulla fringilla. Nunc eleifend vulputate dui, a sollicitudin tellus venenatis non. Cras condimentum lorem at ultricies vestibulum. Vestibulum interdum lobortis commodo. Nullam rhoncus interdum massa, ut varius nisi scelerisque id. Nunc interdum quam in enim bibendum vulputate.
 
-\chapter{Zusammenfassung}
+\chapter{Zusammenfassung und Ausblick}
+\section{Zusammenfassung}
+\section{Ausblick}
+
+\appendix
+\chapter{Dokumentation}
+\section{Verwendung der Annotationen}
+\section{Verwendung der generierten CodeUnit-Builder}
+\section{Klassendokumentation}
+\subsection{Amber}
+\subsection{Cherry}
+\subsection{Jade}
+\subsection{Scarlet}
 
 
 \backmatter
