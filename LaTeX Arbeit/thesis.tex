@@ -295,33 +295,41 @@ Anschließend wird ermittelt, welche Schritte unternommen werden müssen, um die
 \subsubsection{Beschreibung}
 \subsubsection{Anwendbarkeit}
 
-\chapter{Problemstellung}
-\section{Allgemeine Probleme}
-\subsection{Analyse der Domäne}
-\subsubsection{Entwicklung einer Referenzimplementation}
-\subsubsection{Definition von Variabilitäten}
-\subsubsection{Formulierung der Domäne als abstraktes Metamodell}
-\subsection{Anreicherung des Metamodells mit konkreten Daten}
-\subsubsection{Wahl einer geeigneten Schnittstelle}
-\subsubsection{Implementation einer DSL}
-\subsection{Generator vs. Transformator}
-\subsubsection{Eingesetzte Technik}
-\subsubsection{Neuentwicklung}
-\subsubsection{Vorhandene Frameworks als Basis}
-\subsection{Verwendung von Zwischenmodellen}
-\section{Wirtschaftliche Probleme}
-\subsection{Aufwandsvergleich zwischen MDSD und konventioneller Softwareentwicklung}
-\subsection{Erhöhung der Wirtschaftlichkeit durch Verwendung eines Meta-Generators}
-\section{Spezielle Probleme bei der Entwicklung eines Meta-Generators für Java-Code}
-\subsection{Java-Code als Ausgangsmodell}
-\subsubsection{Informationsanreicherung des Java-Code-Modells}
-\subsubsection{Parsen des Codes und Umsetzung in ein neues Modell}
-\subsubsection{Einschränkung auf eine Teilmenge der Java Features}
-\subsection{Modell zur Plattform unabhängigen Abbildung von Code}
-\subsubsection{DSL als beschreibende Schnittstelle für den Entwickler}
-\subsubsection{xxx}
-\subsection{Besonderheiten bei der Abwägung zwischen Generator und Transformator}
+\chapter{Analyse}
+\setcounter{section}{-1}
+\section[Fragestellung]{Fragestellung: Wie kann, ausgehend von bestehendem Java-Code, ein Meta-Generator zur Erhöhung der Wirtschaftlichkeit Modellgetriebener Softwareentwicklung umgesetzt werden?}
+\section{Aufwand eines konventionellen Softwareprojektes im Vergleich zu MDSD}
+\section{Automatisierung der Entwicklung eines Code Generators}
+\subsection{Java Code als Ausgangsmodell}
+\subsubsection{Anreicherung des Java Codes mit Informationen}
+\subsubsection{Parsen des Java Codes}
+\subsection{Abstrakte Darstellung von Java Code als Modell}
+\subsubsection{Anforderungen an das Modell}
+\subsubsection{Schnittstellen zur Befüllung des Modells}
+(DSLs intern / extern)
+\subsection{Generierung von Java Code}
+\subsubsection{Techniken zur Code Generierung}
+\subsubsection{Vorhandene Frameworks zur Java Code Generierung}
 
+\chapter{Konzept}
+\section{Einsparung der Implementation des Code Generators durch einen Meta-Generator}
+\section{Funktionsweise des Meta-Generators}
+\subsection{Von Java Code zum Annotations-Modell}
+\subsubsection{Annotationen als Mittel zur Informationsanreicherung}
+\subsubsection{Parsen des annotierten Codes}
+\subsubsection{Zweck des Annotations-Modells}
+\subsection{Das CodeUnit-Modell}
+\subsubsection{Baumstruktur des Modells}
+\subsubsection{Spezialisierung durch ein Typ-Feld}
+\subsubsection{Parametrisierung durch generische Datenstruktur}
+\subsection{Generierung von Buildern als interne DSL aus dem Annotations-Modell}
+\subsubsection{Komposition der Builder aus benötigten Builder-Methoden}
+\subsubsection{Übertagung vorgegebener Informationen in einen Builder}
+\subsubsection{Verwendung von Plattform Code zur Generierung von vordefinierten CodeUnits}
+\subsubsection{Auflösung von Referenzen in vordefinierten CodeUnits als nachgelagerter Verarbeitungsschritt}
+\subsection{Erzeugung von Java Code aus einem befüllten CodeUnit-Modell}
+\subsubsection{Transformation des CodeUnit-Modells zum JavaFile-Modell}
+\subsubsection{Erzeugung von Quelldateien}
 
 \chapter{Lösung: Spectrum (Proof of Concept)}
 \section{Verwendete Bibliotheken}
@@ -336,12 +344,14 @@ Anschließend wird ermittelt, welche Schritte unternommen werden müssen, um die
 \subsection{Cherry}
 \subsubsection{Generator}
 \subsubsection{Modell}
+\subsubsection{Plattform}
 \subsubsection{Generierte Builder}
 \subsection{Jade}
 \subsubsection{Transformator}
 \subsection{Scarlet}
 \subsubsection{Generator}
 \subsubsection{Modell}
+\subsection{Violet}
 
 \begin{lstlisting}[label=lst:java,
 				   language=java,
@@ -353,17 +363,12 @@ public void foo() {
 }
 \end{lstlisting}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula felis lectus, nec aliquet arcu aliquam vitae. Quisque laoreet consequat ante, eget pretium quam hendrerit at. Pellentesque nec purus eget erat mattis varius. Nullam ut vulputate velit. Suspendisse in dui in eros iaculis tempus. Phasellus vel est arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer elementum, nulla eu faucibus dignissim, orci justo imperdiet lorem, luctus consectetur orci orci a nunc.
-
-Praesent at nunc nec tortor viverra viverra. Morbi in feugiat lectus. Vestibulum iaculis ipsum at eros viverra volutpat in id ipsum. Donec condimentum, ligula viverra pharetra tincidunt, nunc dui malesuada nisi, vitae mollis lacus massa quis velit. Integer feugiat ipsum a volutpat scelerisque. Nulla facilisis augue nunc. Curabitur eget consectetur nulla. Integer accumsan sem non nisi tristique dictum.
-
-Sed lacinia eu dolor sed congue. Ut dui orci, venenatis id interdum rhoncus, mattis elementum massa. Proin venenatis elementum purus ut rutrum. Phasellus sit amet enim porta, commodo mauris a, bibendum tortor. Nulla ut lobortis justo. Aenean auctor mi nec velit fermentum, quis ultricies odio viverra. Maecenas ultrices urna vel erat ornare, quis suscipit odio molestie. Donec vel dapibus orci, vel tincidunt orci.
-
-Etiam vitae eros erat. Praesent nec accumsan turpis, et mollis eros. Praesent lacinia nulla at neque porta aliquam. Quisque elementum neque ac porta suscipit. Nulla volutpat luctus venenatis. Aliquam imperdiet suscipit pretium. Nunc feugiat lacinia aliquet. Mauris ut sapien nec risus porttitor bibendum. Aenean feugiat bibendum lectus, id mattis elit adipiscing at. Pellentesque interdum felis non risus iaculis euismod fermentum nec urna. Nullam lacinia suscipit erat ac ullamcorper. Sed vitae nulla posuere, posuere sem id, ultricies urna. Maecenas eros lorem, tempus non nulla vitae, ullamcorper egestas nibh. Vestibulum facilisis ante vel purus accumsan mattis. Donec molestie tempor eros, a gravida odio congue posuere.
-
-Sed in tempus elit, sit amet suscipit quam. Ut suscipit dictum molestie. Etiam quis porta mauris. Cras dapibus sapien eget sem porta, ut congue sapien accumsan. Maecenas hendrerit lobortis mauris ut hendrerit. Suspendisse at aliquet est. Quisque eros est, scelerisque ac orci quis, placerat suscipit lorem. Phasellus rutrum enim non odio ullamcorper, sit amet auctor nulla fringilla. Nunc eleifend vulputate dui, a sollicitudin tellus venenatis non. Cras condimentum lorem at ultricies vestibulum. Vestibulum interdum lobortis commodo. Nullam rhoncus interdum massa, ut varius nisi scelerisque id. Nunc interdum quam in enim bibendum vulputate.
-
 \chapter{Evaluierung}
+\section{Kozept \& Implementation}
+\subsection{Amber}
+\subsection{Cherry}
+\subsection{Jade}
+\subsection{Scarlet}
 \section{Softwarequalität}
 Nach Balzert S.111
 \subsection{Functionality}
@@ -372,17 +377,7 @@ Nach Balzert S.111
 \subsection{Usability}
 \section{Grenzen des Lösungsansatzes}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vehicula felis lectus, nec aliquet arcu aliquam vitae. Quisque laoreet consequat ante, eget pretium quam hendrerit at. Pellentesque nec purus eget erat mattis varius. Nullam ut vulputate velit. Suspendisse in dui in eros iaculis tempus. Phasellus vel est arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer elementum, nulla eu faucibus dignissim, orci justo imperdiet lorem, luctus consectetur orci orci a nunc.
-
-Praesent at nunc nec tortor viverra viverra. Morbi in feugiat lectus. Vestibulum iaculis ipsum at eros viverra volutpat in id ipsum. Donec condimentum, ligula viverra pharetra tincidunt, nunc dui malesuada nisi, vitae mollis lacus massa quis velit. Integer feugiat ipsum a volutpat scelerisque. Nulla facilisis augue nunc. Curabitur eget consectetur nulla. Integer accumsan sem non nisi tristique dictum.
-
-Sed lacinia eu dolor sed congue. Ut dui orci, venenatis id interdum rhoncus, mattis elementum massa. Proin venenatis elementum purus ut rutrum. Phasellus sit amet enim porta, commodo mauris a, bibendum tortor. Nulla ut lobortis justo. Aenean auctor mi nec velit fermentum, quis ultricies odio viverra. Maecenas ultrices urna vel erat ornare, quis suscipit odio molestie. Donec vel dapibus orci, vel tincidunt orci.
-
-Etiam vitae eros erat. Praesent nec accumsan turpis, et mollis eros. Praesent lacinia nulla at neque porta aliquam. Quisque elementum neque ac porta suscipit. Nulla volutpat luctus venenatis. Aliquam imperdiet suscipit pretium. Nunc feugiat lacinia aliquet. Mauris ut sapien nec risus porttitor bibendum. Aenean feugiat bibendum lectus, id mattis elit adipiscing at. Pellentesque interdum felis non risus iaculis euismod fermentum nec urna. Nullam lacinia suscipit erat ac ullamcorper. Sed vitae nulla posuere, posuere sem id, ultricies urna. Maecenas eros lorem, tempus non nulla vitae, ullamcorper egestas nibh. Vestibulum facilisis ante vel purus accumsan mattis. Donec molestie tempor eros, a gravida odio congue posuere.
-
-Sed in tempus elit, sit amet suscipit quam. Ut suscipit dictum molestie. Etiam quis porta mauris. Cras dapibus sapien eget sem porta, ut congue sapien accumsan. Maecenas hendrerit lobortis mauris ut hendrerit. Suspendisse at aliquet est. Quisque eros est, scelerisque ac orci quis, placerat suscipit lorem. Phasellus rutrum enim non odio ullamcorper, sit amet auctor nulla fringilla. Nunc eleifend vulputate dui, a sollicitudin tellus venenatis non. Cras condimentum lorem at ultricies vestibulum. Vestibulum interdum lobortis commodo. Nullam rhoncus interdum massa, ut varius nisi scelerisque id. Nunc interdum quam in enim bibendum vulputate.
-
-\chapter{Zusammenfassung und Ausblick}
+\chapter{Abschluss}
 \section{Zusammenfassung}
 \section{Ausblick}
 
