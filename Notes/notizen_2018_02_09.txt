@@ -1,0 +1,4 @@
+composite pattern? codeunit in codeunit
+
+eval:
+    POC nachweisen
