@@ -402,29 +402,137 @@ Bei Java wird der Quelltext beispielsweise eingelesen und zu Byte-Code transform
 \subsubsection{Zusammenhang zu Transformatoren}
 \subsubsection{Abgrenzung zum Compilerbau}
 
-\section{Software Architektur}
+\section{Software Engineering}
+
+Software Engineering, auch bekannt unter der deutschen Bezeichnung Softwaretechnik, wird von Helmut Balzert in seinem Lehrbuch der Softwaretechnik folgendermaßen definiert \cite[S.17]{balzert2009a}:
+
+\begin{quote}
+	Softwaretechnik: Zielorientierte Bereitstellung und systematische Verwendung von Prinzipien, Methoden und Werkzeugen für	die arbeitsteilige, ingenieurmäßige Entwicklung und Anwendung von umfangreichen Softwaresystemen. Zielorientiert bedeutet die	Berücksichtigung z. B. von Kosten, Zeit, Qualität.
+\end{quote}
+
+Also geht es um die wirtschaftliche Anwendung von erprobten Lösungen bei der Umsetzung großer Softwaresysteme. Außerdem soll dies systematisch geschehen, es soll begründet werden wieso ein Prinzip, eine Methode oder ein Werkzeug zur Lösung eines bestimmten Problems verwendet wurde. In der Softwaretechnik geht nicht darum das Rad jedes Mal neu zu erfinden, der vorhandene Stand der Technik soll strukturiert angewandt werden.
+
+Für den Bereich der Prinzipien in der Softwaretechnik hat Balzert einige grundlegenden Konzepte zusammengefasst und diese in Relation zueinander gestellt. Da diese Prinzipien einen wichtigen Teil der Softwareentwicklung ausmachen und für diese Arbeit systematisch eine Software entwickelt wurde, sind diese auch hier sehr relevant.
+
 \subsection{Prinzipien der Softwaretechnik}
+
+Ein Prinzip liegt als Basis dem zugrunde was wir tun. Sie sind weder konkret, noch beziehen sie sich auf Spezialfälle \cite[S. 25]{balzert2009a}. 
+
 \subsubsection{Abstraktion}
-\subsubsection{Bindung und Kopplung}
+
+Abstrahieren bedeutet etwas zu verallgemeinern, d. h. sich von besonderen Eigenschaften einer Sache zu lösen und wesentliche Dinge und gleiche Merkmale die mehrere Instanzen dieser Sache haben hervorzuheben. Im Gegensatz zur Abstraktion steht die Konkretisierung \cite[S. 26]{balzert2009a}.
+
+In der Softwareentwicklung ist eine Form der Abstraktion der Aufbau von Vererbungsstrukturen in der objektorientierten Programmierung. Hier werden allgemeine Eigenschaften in eine Oberklasse abstrahiert und andere Klassen erben hiervon und fügen eigene, spezielle Eigenschaften hinzu.
+
+Abstraktion und Modellbildung treten häufig gemeinsam auf. Möchte man in einer Anwendung beispielsweise Personen verwalten, so ist es kaum möglich alle Eigenschaften die eine reale Person mitbringt als Modell abzubilden. 
+
+Bei einer Kundenverwaltung sind für eine Anwendung vermutlich Attribute wie der Name, das Passwort und die Adresse eines Kunden relevant. Zusätzliche Merkmale dieser Person, wie zum Beispiel die die Haarfarbe werden nicht abgebildet. Der Grund hierfür könnte sein, dass dies für eine Kundenverwaltung nicht relevant ist, die Haarfarbe wurde abstrahiert.
+
+Selbst wenn ein Modell so genau wie möglich sein soll, muss an einer Stelle ein Schlussstrich gezogen werden. Die Haarfarbe mag relevant sein, also könnte man hier für die Haarfarbe rot oder blond abbilden, aber dies ginge noch genauer, man könnte noch Abstufungen unterscheiden. Vielleicht sollte man Haarfarbe an sich noch genauer festhalten, denn die Frage aus welchen rot, grün und blau Werten sich die Farbe genau zusammensetzt bleibt trotzdem noch offen. Abstraktion ist also irgendwann notwendig.
+
 \subsubsection{Modularisierung}
-\subsubsection{Weitere Prinzipien}
-\subsubsection{Abhängigkeiten}
-\subsection{Trennung durch Modelle}
-\subsection{Modell-Transformations-Pipeline}
+
+Im direkten Zusammenhang mit Abstraktion steht das Prinzip der Modularisierung. Modularisierung bedeutet ein System in Module zu zerlegen. Dieses Konzept kommt zum Beispiel besonders häufig bei Elektrogeräten vor. Ein Computer hat mehrere, einzeln entwickelte, Bauteile. Der Arbeitsspeicher ist von einem anderen Hersteller als die Grafikkarte. Über eine definierte Schnittstelle, die Anschlüsse auf der Hauptplatine, können Arbeitsspeicher und Grafikkarte gemeinsam in einem System betrieben werden.
+
+Ein Modul stellt eine funktionale Einheit oder eine auf semantische Weise verbundenen Funktionsgruppe dar. Ebenso ist ein Modul weitgehend Kontext unabhängig, d. h. es kann für sich stehend verstanden, entwickelt, geprüft und gewartet werden. Gekoppelt sind die Module über eine klar erkennbare Schnittstelle \cite[S. 41]{balzert2009a}.
+
+\subsubsection{Weitere Prinzipien und Abhängigkeiten zwischen den Prinzipien der Softwaretechnik}
+
+Es gibt neben den genannten Prinzipien noch einige weitere die hier nicht tiefer behandelt werden. Das Prinzip der Strukturierung besagt, dass ein Softwaresystem in einer bestimmten definierten Struktur vorliegt \cite[S. 34ff.]{balzert2009a}. Bindung und Kopplung beschreiben strukturelle Eigenschaften eines Softwaresystems. Bindung bezeichnet hierbei die Kompaktheit einer Systemkomponente. Ist ein System stark gebunden, so haben die einzelnen Komponenten ihre klar definierten Verantwortlichkeiten. Im Gegensatz zur Bindung steht die Kopplung, diese ist die Assoziation und Vererbungsstruktur zwischen verschiedenen Klassen und Paketen. Je höher der Kopplungsgrad ist, desto größere Auswirkungen haben Änderungen in einer Komponente auf andere, hiermit gekoppelte, Komponenten \cite[S. 37f.]{balzert2009a}. Wenn ein System nach einer Rangordnung angeordnet ist, so besitzt es eine Hierarchie. Dies ist eine stärkere Form der Strukturierung und verhindert es, dass ein Softwaresystem eine chaotischer Struktur entwickelt \cite[S. 39ff.]{balzert2009a}. Unter Geheimnisprinzip versteht man eine schärfere Version der Modularisierung, für ein Anwender soll eine Systemkomponente keinen Einblick in die eigene Funktionsweise bieten sondern nur korrekt funktionieren \cite[S. 42ff.]{balzert2009a}. Lokalität bedeutet, dass für eine Aufgabe wichtige Informationen nicht Zusammengesucht werden müssen, sondern zum Beispiel als Felder in einer Klasse bereits vorliegen \cite[S. 45f.]{balzert2009a}. Mit dem Prinzip der Verbalisierung ist unter anderem gemeint, dass Komponenten, wie Klassen, Methoden und Felder eine aussagekräftige Namensgebung haben, da dies bis zu einem gewissen Grad zu einer Selbstdokumentierung des Codes führt \cite[S. 46ff.]{balzert2009a}.
+
+Die Prinzipien der Softwaretechnik stehen nicht losgelöst im Raum, sondern sie bedingen sich teilweise oder stehen zueinander in Wechselwirkung. Bindung und Kopplung benötigt zum Beispiel Modularisierung bzw. Strukturierung das Geheimnisprinzip kann auch nur auf Basis von Modularisierung Anwendung finden. Ein Graph der diese Zusammenhänge abbildet findet sich bei Balzert \cite[S. 49]{balzert2009a}.
+
+\subsubsection{Zusammenhang zwischen den Prinzipien der Softwaretechnik und der Entwicklung von Codegeneratoren}
+
+Wie bereits eingangs erwähnt, haben die in vorherigen Kapiten beschriebenen Prinzipien einen direkten Zusammenhang mit der Entwicklung von Codegeneratoren.
+
+Insbesondere sticht die für die modellgetriebene Software Entwicklung unerlässliche Abstraktion durch Modellbildung heraus. Vor allem ein Metamodell stellt die Verallgemeinerung der relevanten Konzepte eine Domäne dar. Eine verwendete DSL zur Beschreibung des Metamodells abstrahiert demnach Konzepte einer GPL oder einer Domäne.
+
+Modularisierung findet bei MDSD durch die Einteilung der einzelnen Arbeitsschritte in einzelne Softwarekomponenten statt. Ein Metamodell hat eine definierte abstrakte Syntax, eine hieraus gebildete konkrete Syntax ist eine Schnittstelle für das Modul Metamodell. Ein Parser als weitere Komponente liest eigenständig Quelltext ein und bildet diesen auf einen AST ab. Mit einer Schnittstelle kann der eingelesen Quelltext weiterverarbeitet werden. Codegenerator ist hier unabhängig vom konkret gewählten Parser, er verarbeitet nur den AST und ein anderes aus dem Parsing Prozess hervorgegangenes Modell. Auch für den Parser ist es nicht relevant wie der einzulesende Quelltext entstanden ist, er muss lediglich syntaktisch korrekt sein.
 
 \section{Design Pattern objektorientierter Programmierung}
+
+Das viel beachtete Werk Design Patterns: Elements of Reusable Object-Oriented Software stellt einen Katalog auf, welcher Beschreibungen für Muster liefert die allgemeine Designprobleme in ein bestimmten Kontext lösen \cite{gamma1995}. Diese Muster, von den Autoren des Werks Pattern genannt, haben grundsätzlich vier Elemente: 
+
+Zum einen der Name welcher verwendet werden kann um auf das Pattern zu referenzieren. Dies ermöglicht, allein schon durch die Erweiterung des Vokabulars, Software mit erhöhter Abstraktion zu entwerfen. Zum anderen gehört zu jedem dieser Muster eine Beschreibung bei welcher Art von Problem es anwendbar sein könnte. Als dritter Teil eines Patterns werden die Elemente, welche verwendet werden um das beschriebene Problem zu lösen, abstrakt beschrieben. Diese Lösungen beschreiben kein konkretes Design oder eine konkrete Implementation da das Muster in verschiedenen Situation Anwendung finden kann. Jedes Muster bringt Vor- und Nachteile, diese Konsequenzen sind wichtig zum Verständnis eines Patterns und sollten daher explizit aufgeführt werden \cite[S.30 f.]{gamma2015}.
+
+Modellgetriebene Software Entwicklung stellt uns im Zusammenhang mit objektorientierter Programmierung vor Probleme für welche bestimmte Design Pattern hilfreich sein können. Die Beschreibung dieser Entwurfsmuster folgt in dem oben zitierten Werk einem konsistenten Aufbau. Die folgenden Abschnitte dieser Arbeit orientieren sich an dieser Vorlage. Erst wird das Pattern benannt, dann wird kurz der Zweck, also was mit der Verwendung des Patterns erreicht werden soll, zusammengefasst. Dies wird gefolgt von einer Erklärung wann das Pattern anwendbar sein könnte und zum Abschluss wird in Form eines Diagramms das behandelte Muster dargestellt. Erklärungen zur verwendeten Notation können auf den ersten Seiten der aktuellen deutschen Übersetzung des Design Pattern Werkes entnommen werden \cite[S. 8]{gamma2015}. Der genaue Aufbau und der Ablauf der Kommunikation zwischen den Akteuren des Patterns wird in dieser Arbeit nur oberflächlich erläutert. Die Intention dieses Abschnitts ist, dass die aufgezeigten Muster, wenn diese später erwähnt werden, in ihrer grundlegenden Funktion bekannt sind.
+
+Das Factory Method Pattern bezeichnet hier nicht das von Gamma et al. vorgeschlagene Factory Method Muster \cite[S. 173ff.]{gamma2015}, sondern bezieht sich auf die von Bloch in Effective Java beschriebene Static Factory Method \cite[S. 5ff.]{bloch2017}.
+
 \subsection{Visitor Pattern}
+
+Das Visitor Pattern oder auch Besuchermuster ist ein objektbasiertes Verhaltensmuster \cite[S. 480]{gamma2015}.
+
 \subsubsection{Zweck}
-\subsubsection{Beschreibung}
+
+Dieses Muster erlaubt es Operationen auf Elementen einer Objektstruktur zu definieren, ohne die eigentlichen Klassen der Elemente ändern zu müssen \cite[S. 480]{gamma2015}.
+
 \subsubsection{Anwendbarkeit}
-\subsection{Builder Pattern und Fluent Interfaces}
+
+Das Besuchermuster kann sinnvoll Anwendung finden wenn eine Struktur aus Objekten mit unterschiedlichen Schnittstellen vorliegt und auf diesen Objekten, abhängig von ihrer konkreten Klasse, Operationen auszuführen sind. Dies schützt vor allem davor, dass die Klassen dieser Objekte für jede Anwendung die jeweiligen Operationen implementieren müssen. Wird die Objektstruktur verwendet so können die notwendigen Operationen lokalisiert definiert werden. Das Besuchermuster erlaubt es leicht neue Operation hinzuzufügen, sollte sich jedoch die Objektstruktur häufiger ändern, so müssen jedes Mal die Visitor Schnittstellen neu definiert werden. Hier könnte es besser sein die Operationen in den betroffenen Klassen zu definieren \cite[S. 484]{gamma2015}.
+
+Ein Anwendungsbeispiel für das Visitor Pattern bei modellgetriebener Softwareentwicklung ist die Verarbeitung der Nodes eines AST. Der Baum stellt hier die erwähnte Objektstruktur dar und dessen Knoten die Elemente \cite[S. 480]{gamma2015}.
+
+\subsubsection{Struktur}
+
+Abbildung \ref{fig:visitor} zeigt den Aufbau des Visitor Patterns. Sind die entsprechenden Klassen auf diese Weise implementiert, so kann jederzeit, wenn eine Operation auf den Elementen einer Datenstruktur ausführbar gemacht werden soll, ein konkreter Visitor implementiert werden welcher diese Operation ausführt. Traversiert man die einzelnen Objekte der Struktur, kann auf jedem dieser Objekte die Accept Operation aufgerufen werden. Diese führt dann die entsprechende Visit Operation auf dem übergebenen konkretenen Visitor aus. Es ist möglich, dass nicht eine einzigartig benannte Visit Operation für jedes konkrete Element existiert, sondern, dass die Operation durch Funktionsüberladung einer aussagekräftig benannten Visit()-Methode implementiert wird \cite[S.485 ff.]{gamma2015}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{bilder/visitor}
+	\caption{Darstellung der Struktur des Visitor Design Patterns, entnommen aus \cite[S. 485]{gamma2015}}
+	\label{fig:visitor}
+\end{figure}
+
+\subsection{Builder}
+
+Das Pattern Builder oder im deutschen auch Erbauer ist ein objektbasiertes Erzeugungsmuster \cite[S. 159]{gamma2015}.
+
 \subsubsection{Zweck}
-\subsubsection{Beschreibung}
+
+Ein Erbauer soll die Erzeugung eines komplexen Objektes von dessen Repräsentation trennen. Somit ist es möglich unterschiedlich aufgebaute Instanzen einer Klasse zu erzeugen \cite[S. 159]{gamma2015}. Eine spezielle Form des Builders, die Joshua Bloch in Effective Java vorschlägt, dient dazu komplexe Objekte mit vielen optionalen Parametern vereinfacht zu konstruieren \cite[S. 10ff.]{bloch2017}. 
+
 \subsubsection{Anwendbarkeit}
-\subsection{Factory Pattern}
+
+Soll die Logik die bei der Erzeugung eines komplexen Objektes verwendet wird losgelöst sein von dem eigentlichen Objekt oder soll das komplexe Objekt optionale Parameter ermöglichen, könnte man einen Builder verwenden.
+
+Ein Anwendungsfall für die Verwendung eines Builders stellt die Implementation einer internen DSL dar. Das beschriebene komplexe Objekt ist hier die konkrete Instanz des Metamodells \cite[S. 343ff.]{fowler2010}.
+
+\subsubsection{Struktur}
+
+Wie bei vielen der von Gamma et al. beschriebenen Pattern, definiert eine Abst rakte Klasse eine Schnittstelle mit den zur Erzeugung verwendbaren Methoden, welche dann von einer konkreten Klasse implementiert werden. Hier sind das die Klassen Builder und ConcreteBuilder. Ein Director verwendet diese Schnittstelle und erzeugt damit ein konkretes Produkt \cite[S. 162f.]{gamma2015}. Eine mögliche Abwandlung davon wäre die von Bloch beschriebene Erweiterung der BuildPart() Methoden um eine Referenz auf das aktuelle Builder Objekt als Rückgabewert. Der Builder hält den aktuellen Zustand des erzeugten Objekts und erst wenn bei der dadurch entstehenden Methodenkaskade eine abschließende Build() Methode aufgerufen wird, gibt der Builder das erzeugte Objekt zurück \cite[S. 13ff]{bloch2017}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{bilder/builder}
+	\caption{Darstellung der Struktur des Builder Design Patterns, entnommen aus \cite[S. 162]{gamma2015}}
+	\label{fig:builder}
+\end{figure}
+
+\subsection{Factory Method}
+
+Obwohl die Factory Method, oder auch Fabrikmethode, in dieser Form nicht von Gamma et al. in ihrem Katalog beschrieben wurde, könnte man sie als ein objektbasiertes Erzeugungsmuster bezeichnen, da sie ebenfalls Objekte einer Klasse instanziiert.
+
 \subsubsection{Zweck}
-\subsubsection{Beschreibung}
+
+Ziel einer Factory Method ist es, anstelle von speziellen Konstruktoren,  statische Methoden zur Erzeugung von Objekten bereitzustellen. Da eine Methode im Gegensatz zu Konstruktoren benannt werden kann, ist es möglich die erzeugte Instanz eindeutiger zu beschreiben \cite[S. 5f]{bloch2017}. 
+
 \subsubsection{Anwendbarkeit}
+
+Die Verwendung von Fabrikmethoden kann sinnvoll sein wenn die Parameter eines Konstruktors das erzeugte Objekt nicht eindeutig beschreiben. Hier kann eine sprechend benannte statische Fabrikmethode eine genauere Beschreibung bieten und die Lesbarkeit des Quelltextes erhöhen. Es ist nicht möglich Konstruktoren mit gleicher Signatur aber unterschiedlichem Verhalten bereitzustellen, statische Fabrikmethoden können solche Konstruktoren ersetzen. Statische Fabrikmethoden können Objekte eines Subtypen zurückgeben, somit ist es kann die eigentliche instanziierte Klasse versteckt werden \cite[S. 5ff]{bloch2017}.
+
+In Verbindung mit einem Enum oder String als Parameter der statischen Fabrikmethode, kann die Erzeugung eines komplexen Objekts mit einer aussagekräftigen Benennung gesteuert werden.
+
+Eine Möglichkeit zur Erzeugung eines Generats ist die Zusammenstellung aus Komponenten. Man könnte statische Methoden zur Erstellung der jeweiligen Komponenten verwenden.
+
+\subsubsection{Struktur}
+
+Da es für die statische Fabrikmethode nach Bloch kein Gegenstück im Katalog Design Pattern Gamma et al. existiert \cite[S. 5]{bloch2017} und die Struktur lediglich durch das Hinzufügen weiterer Methoden zu einem Objekt besteht, wird hier auf eine Abbildung verzichtet. 
+
+Eine statische Fabrikmethode ist eine von außen zugängliche statische Methode einer Klasse mit beliebigen Parametern die, wie ein Konstruktor, ein Objekt dieser Klasse zurückgibt. Sie kann die Konstruktoren einer Klasse vollständig ersetzen oder die Klasse erweitern \cite[S. 5f]{bloch2017}.
+
+Die statische Fabrikmethode könnte auch in eine extra Fabrik Klasse ausgelagert werden.
 
 \chapter{Analyse}
 \setcounter{section}{-1}
