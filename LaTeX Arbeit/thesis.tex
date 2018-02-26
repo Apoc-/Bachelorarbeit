@@ -397,10 +397,47 @@ Bei Java wird der Quelltext beispielsweise eingelesen und zu Byte-Code transform
 
 \subsection{Code Generator}
 
+Soll der vom Parser eingelesene Quelltext oder das von einer DSL beschriebene Modell nicht interpretiert, d. h. als Anweisungen an den Computer ausgeführt werden, kann ein Code Generator zum Einsatz kommen.
+
 \subsubsection{Definition}
+
+Nach Czarnecki und Eisenecker ist ein Generator ein Programm welches eine Spezifikation von Software auf einer höheren abstrakten Ebene entgegennimmt und dessen Implementation als Artefakt ausgibt \cite[S. 333]{czaeis2000}.
+
+Das ausgegebene Artefakt kann, muss aber nicht zwingend, ein gesamtes lauffähiges Softwaresystem sein. Es könnten auch nur einzelne Klassen oder Funktionen generiert werden \cite[S. 333]{czaeis2000}. Sogar in einem noch kleineren Scope kommt Codegenerierung zum Einsatz, integrierte Entwicklungsumgebungen, wie JetBrains IntelliJ oder Microsofts Visual Studio, erlauben es auf Knopfdruck Code Snippets, wie zum Beispiel Konstruktoren für eine Klasse, zu generieren.
+
+In der modellgetriebenen Softwareentwicklung dreht sich der gesamte Automatisierungsprozess um das Modell. Es bildet den Ausgangspunkt jeder weiteren Umwandlung. Wie bereits im Abschnitt zu MDSD beschrieben, sollen Änderungen nur am zugrunde liegenden Modell vorgenommen werden und nicht an hieraus entstandenen Generaten. Der Einsatz eines Codegenerators setzt dieses Vorgehen jedoch nicht zwingend voraus.
+
 \subsubsection{Techniken zur Generierung von Code}
-\subsubsection{Zusammenhang zu Transformatoren}
-\subsubsection{Abgrenzung zum Compilerbau}
+
+Herrington teilt Codegeneratoren in seinem Buch Codegeneration in Action in die zwei Hauptkategorien aktiv und passiv ein \cite[S. 28]{herrington2003}. 
+
+Passive Codegeneratoren werden eingesetzt um einmal Quelltext zu generieren, zum Beispiel zur Unterstützung des Programmierers in einer integrierten Entwicklungsumgebung. Der Programmierer verarbeitet diesen generierten Code dann nach Belieben weiter. Im Gegensatz hierzu stehen aktive Codegeneratoren, welche immer wieder zur Ausführung kommen und den generierten Quelltext, abhängig von den Eingabeparametern des Generators, immer wieder regenerieren. Die für MDSD verwendeten Generatoren kann man dieser Kategorie zuordnen, die Eingabeparameter sind hier das konkrete Modell. 
+
+Im Zusammenhang mit MDSD gibt es zwei Möglichkeiten der Generierung von Code aus dem konkreten Modell. Fowler nennt diese zwei Formen der Generierung Transformer Generation und Templated Generation \cite[S. 124f.]{fowler2010}.
+
+Bei der Transformer Generation werden aus einem konkreten Modell Statements einer Zielsprache generiert. Hierfür wird das Modell traversiert und der Generator setzt aus den im Modell vorliegenden Informationen zum Aufbau des Codes Ausdrücke zusammen. Templated Generation basiert auf Textersetzung. Es wird eine Codevorlage, das Template, geschrieben in welcher Variabilitäten auf besondere Weise markiert sind. Aus den Daten des konkreten Modells werden konkrete Werte für diese Variabilitäten vom Generator ausgelesen und im Template eingesetzt.
+
+Diese Ansätze sind nicht nur voneinander getrennt verwendbar. Beim Einsatz von Transformer Generation ist es denkbar, dass der Ausgabe Quelltext zwar komplett neu generiert wird, aber einzelne Teile dieses Quelltextes auf Basis von kleinen Templates erstellt werden \cite[S. 125]{fowler2010}.
+
+\subsubsection{Zusammenhang mit Transformatoren}
+
+Es ist denkbar ein von einer DSL beschriebenes Modell durch weitere Umwandlungsschritte weiter zu verarbeiten, bevor abschließend Quelltext generiert wird. Dies kann Sinn machen um ein Modell so aufzubereiten, dass ein bestimmter Generator es verarbeiten kann \cite[S. 195]{stahl2007}. Eine Komponente die diese Transformation durchführt nennt man Transformator. Wird ein Modell zu Text transformiert, so nennt man das Code Generierung, durchgeführt von einem Generator \cite[S. 271]{voelter2013}.
+
+Ein konkreter Anwendungsfall wäre, wenn ein Generator, der eine konkrete Instanz eines bestimmten Metamodells zu Code verarbeiten kann, bereits implementiert vorliegt, jedoch das von einer DSL beschriebene Metamodell von dem für den Generator verständlichen Metamodell abweicht. Eine Modell zu Modell Transformation könnte hier eine Brücke schlagen und somit den bereits vorhandenen Generator nutzbar machen. Dies könnte unter Umständen, vor allem wenn die Metamodelle bereits eine ähnliche Struktur aufweisen, den Arbeitsaufwand reduzieren.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Die Komplexität der Umwandlung von einem Metamodell ins andere könnte durch mehrere Zwischentransformationen reduziert werden. Ein denkbarer Extremfall hierfür wäre die Reduktion der Transformationen auf nur eine einzelne Transformationsregel pro Modell Transformations Schritt.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Abgrenzung zu Compilern}
+
+In der Literatur wird ein Generator stellenweise auch Compiler \cite[S. 26]{voelter2013} bzw. Code generieren auch kompilieren genannt \cite[S. 19]{fowler2010}.
+
+Jedoch kann man bei genauerem hinsehen Generatoren von Compilern im Zusammenhang mit MDSD voneinander gut abgrenzen. Bei der modellgetriebenen Softwareentwicklung wandeln Generatoren DSL Code in konkreten Code einer GPL um. Normalerweise wird aus DSL Code nicht direkt Bytecode oder Maschinencode generiert, da wir durch den Schritt über GPL Code den Compiler der GPL mit all seinen Features verwenden können \cite[S. 11]{voelter2013}.
+	
+Wie beschrieben, wandelt ein Compiler GPL Code zu Bytecode oder Maschinencode um. Dabei nimmt er Optimierungen wie zum Beispiel zur Verbesserung der Geschwindigkeit oder des Speicherverbrauchs eines Programms vor. Das vom Compiler erzeugte Artefakt kann auf der Zielplattform direkt ausgeführt werden \cite[S. 345ff.]{czaeis2000}.
+	
+Da eine Beschreibung des Kompilierprozesses und die verwendeten Techniken im Compilerbau den Rahmen dieser Arbeit sprengen würden, wird hier nicht tiefer auf das Thema eingegangen, sondern auf das \glqq Drachenbuch\grqq\ als weiterführende Literatur verwiesen \cite{aho2006}.
 
 \section{Software Engineering}
 
@@ -520,7 +557,7 @@ Ziel einer Factory Method ist es, anstelle von speziellen Konstruktoren,  statis
 
 \subsubsection{Anwendbarkeit}
 
-Die Verwendung von Fabrikmethoden kann sinnvoll sein wenn die Parameter eines Konstruktors das erzeugte Objekt nicht eindeutig beschreiben. Hier kann eine sprechend benannte statische Fabrikmethode eine genauere Beschreibung bieten und die Lesbarkeit des Quelltextes erhöhen. Es ist nicht möglich Konstruktoren mit gleicher Signatur aber unterschiedlichem Verhalten bereitzustellen, statische Fabrikmethoden können solche Konstruktoren ersetzen. Statische Fabrikmethoden können Objekte eines Subtypen zurückgeben, somit ist es kann die eigentliche instanziierte Klasse versteckt werden \cite[S. 5ff]{bloch2017}.
+Die Verwendung von Fabrikmethoden kann sinnvoll sein wenn die Parameter eines Konstruktors das erzeugte Objekt nicht eindeutig beschreiben. Hier kann eine sprechend benannte statische Fabrikmethode eine genauere Beschreibung bieten und die Lesbarkeit des Quelltextes erhöhen. Es ist nicht möglich Konstruktoren mit gleicher Signatur aber unterschiedlichem Verhalten bereitzustellen, statische Fabrikmethoden können solche Konstruktoren ersetzen. Statische Fabrikmethoden können Objekte eines Subtypen zurückgeben, somit kann die eigentliche instanziierte Klasse versteckt werden \cite[S. 5ff]{bloch2017}.
 
 In Verbindung mit einem Enum oder String als Parameter der statischen Fabrikmethode, kann die Erzeugung eines komplexen Objekts mit einer aussagekräftigen Benennung gesteuert werden.
 
@@ -533,9 +570,17 @@ Da es für die statische Fabrikmethode nach Bloch kein Gegenstück im Katalog De
 Eine statische Fabrikmethode ist eine von außen zugängliche statische Methode einer Klasse mit beliebigen Parametern die, wie ein Konstruktor, ein Objekt dieser Klasse zurückgibt. Sie kann die Konstruktoren einer Klasse vollständig ersetzen oder die Klasse erweitern \cite[S. 5f]{bloch2017}. Die statische Fabrikmethode könnte auch in eine extra Fabrik Klasse ausgelagert werden um so Logik für die Instanziierung verschieden konfigurierter Objekte einer Klasse lokal zu Sammeln.
 
 \chapter{Analyse}
-\setcounter{section}{-1}
-\section[Fragestellung]{Fragestellung: Wie kann, ausgehend von bestehendem Java-Code, ein Meta-Generator zur Erhöhung der Wirtschaftlichkeit Modellgetriebener Softwareentwicklung umgesetzt werden?}
+
+\begin{quote}\glqq Wie kann, ausgehend von bestehendem Java-Code, ein Meta-Generator zur Erhöhung der Wirtschaftlichkeit Modellgetriebener Softwareentwicklung umgesetzt werden?\grqq \end{quote}
+
+Auf Basis der Grundlagen ist es jetzt möglich diese Hauptfragestellung dieser Arbeit eingehend zu analysieren. Das folgende Kapitel wird zuerst auf einen Vergleich des Aufwands bei konventionellen Softwareprojekten und modellgetriebener Softwareentwicklung eingehen. Es soll klargemacht werden wo die wirtschaftlichen Hürden bei MDSD liegen. Der zweite Abschnitt dieser Analyse beschäftigt sich Schritt für Schritt mit den Schwierigkeiten die bei der Umsetzung eines Proof-of-Concept zur Beantwortung der obigen Fragestellung auftreten können.
+
+Zu jedem analysierten Problem werden mögliche Lösungswege aufgeführt und ihre Vor- und Nachteile erörtert. Das Ziel dieses Abschnitts ist es, dass im nachfolgendem Konzept Kapitel auf diese Analyse zurückgegriffen werden kann und somit der im Konzept gewählte Ansatz begründ- und nachvollziehbar ist.
+
 \section{Aufwand eines konventionellen Softwareprojektes im Vergleich zu MDSD}
+
+
+
 \section{Automatisierung der Entwicklung eines Code Generators}
 \subsection{Java Code als Ausgangsmodell}
 \subsubsection{Anreicherung des Java Codes mit Informationen}
