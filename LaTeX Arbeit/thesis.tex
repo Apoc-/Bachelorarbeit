@@ -305,7 +305,7 @@ Neben der Domänendefinition, dem Domänenlexikon welches den verwendeten Glossa
 
 Das Feature Modelling erlaubt es Gemeinsamkeiten und Variabilitäten von Systemen zu dokumentieren. Neben einer genauen Beschreibung aller Features in schriftlicher Form kann man Zusammenhänge und Regeln zur Komposition der Features in einem Featurediagramm darstellen.
 
-Ursprünglich wurde das Featurediagramm als Teil der Feature-Oriented Domain Analysis (FODA) definiert \cite{kang1990}. Es ermöglicht Merkmale hierarchisch darzustellen und erlaubt es Beziehungen zwischen ihnen genauer festzulegen. Weiterhin kann unterschieden werden ob genau eine oder mehrere Eigenschaften der Alternativen darf bzw. dürfen. Zudem können noch weitere Einschränkungen definiert werden welche es erlauben auch weiter voneinander entfernte Knotenpunkte zueinander in Beziehung zu setzen \cite[S. 240f.]{stahl2007}. Die Abbildung \ref{fig:fd} stellt oben genannte Features beispielhaft dar.
+Ursprünglich wurde das Featurediagramm als Teil der Feature-Oriented Domain Analysis (FODA) definiert \cite{kang1990}. Es ermöglicht Merkmale hierarchisch darzustellen und erlaubt es Beziehungen zwischen ihnen genauer festzulegen. Weiterhin kann unterschieden werden ob genau eine oder mehrere Eigenschaften der Alternativen darf bzw. dürfen. Zudem können noch weitere Einschränkungen definiert werden welche es erlauben auch weiter voneinander entfernte Knotenpunkte zueinander in Beziehung zu setzen \cite[S. 240f.]{stahl2007}. Die Abbildung \ref{fig:fd} stellt ein Beispielhaft ein Featurediagramm für einen E-Shop dar.
 
 \begin{figure}[tbp]
 \centering
@@ -342,13 +342,11 @@ Stahl und Völter definieren eine solche Programmiersprache mit: \cite[S. 30]{st
 
 Der Ausdruck \glqq Computer programming language\grqq\ bedeutet, dass eine DSL vom Menschen verwendet wird um einem Computer Befehle zu geben. Also sollte sie wie jede moderne Programmiersprache durch ihre Struktur sowohl vom Menschen leicht verständlich als auch vom Computer ausführbar sein.
 
-Laut Fowler ist ein weiteres Element die \glqq Language nature\grqq. Als Programmiersprache sollte die Ausdrucksstärke einer DSL nicht nur von den einzelnen Ausdrücke kommen, sondern auch wie die Ausdrücke zusammengesetzt werden.
+Laut Fowler ist ein weiteres Element die \glqq Language nature\grqq. Als Programmiersprache sollte die Ausdrucksstärke einer DSL nicht nur von den einzelnen Ausdrücke kommen, sondern auch wie die Ausdrücke zusammengesetzt werden. 
 
 Mit \glqq Limited expressiveness\grqq\ meint Fowler, dass eine DSL im Vergleich zu allgemeinen Programmiersprachen nur das für die Beschreibung der Domäne notwendige Minimum an Funktionalität aufweist. 
 
 Im letzten Teil seiner Ausführung zu dieser Definition geht Fowler auf den \glqq Domain focus\grqq\ ein. Eine beschränkte Sprache sei nur sinnvoll wenn sie klar auf eine Domäne eingegrenzt ist.
-
-DSLs können in zwei Hauptkategorien unterteilt werden, bezeichnet als interne und externe DSLs.
 
 \subsubsection{General Purpose Language (GPL)}
 
@@ -358,9 +356,9 @@ Die von Fowler angesprochenen allgemeinen Programmiersprachen bezeichnet man als
 
 Bettet man die Befehle zur Beschreibung einer Instanz des Metamodells auf geeignete Weise in eine Universalsprache ein, kann man dies interne DSL nennen. Der Aufbau und die Folge von Befehlen soll sich bei einer internen DSL, soweit möglich, wie eine eigene Sprache anfühlen \cite[S 28]{fowler2010}.
 
-Für die Implementation von internen DSLs eignen sich dynamisch zu bezieht Sprachen wie Ruby und Lisp gut, da sie hilfreiche Features wie die Definition von Makros unterstützen. Je mehr in die normale Syntax einer Sprache eingegriffen werden kann, desto eigenständiger lässt sich die Syntax der internen DSL formen \cite[S. 98]{stahl2007}. Hierdurch grenzt sich diese immer weiter von einem einfachen application programming Interface (API) ab. Gerade wenn das Metamodell bei objektorientierter Programmierung in Form von Klassen vorliegt, kann eine interne DSL eher wie eine einfache Schnittstelle wirken. Die Abgrenzung von internal DSL zu API ist nicht eindeutig und stellt eine Grauzone dar \cite[S. 67]{fowler2010}.
+Für die Implementation von internen DSLs eignen sich dynamisch zu bezieht Sprachen wie Ruby und Lisp gut, da sie hilfreiche Features wie die Definition von Makros unterstützen. Je mehr in die normale Syntax einer Sprache eingegriffen werden kann, desto eigenständiger lässt sich die Syntax der internen DSL formen \cite[S. 98]{stahl2007}. Hierdurch grenzt sich diese immer weiter von einem einfachen application programming Interface (API) ab. Gerade wenn das Metamodell bei objektorientierter Programmierung in Form von Klassen vorliegt, kann eine interne DSL eher wie eine einfache Schnittstelle wirken. Die Abgrenzung von internen DSLs zu APIs ist nicht eindeutig und stellt eine Grauzone dar \cite[S. 67]{fowler2010}.
 
-Eine erwähnenswerte Sonderform der intern DSLs sind fragmentierte DSLs. Bei diesem Spezialfall wird die Hostsprache, also die Programmiersprache mit der die interne DSL ausgedrückt wird, an einzelnen Stellen mit Informationen angereichert. Reguläre Ausdrücke die als Bruchstücke in einer GPL verwendet werden oder auch Annotationen in Java kann man hier als Beispiel anführen \cite[S. 32]{fowler2010}.
+Eine erwähnenswerte Sonderform der intern DSLs sind fragmentierte DSLs. Bei diesem Spezialfall wird die Hostsprache, also die Programmiersprache mit der die interne DSL ausgedrückt wird, an einzelnen Stellen mit Informationen angereichert. Reguläre Ausdrücke die als Bruchstücke in einer GPL verwendet werden kann man hier als Beispiel anführen \cite[S. 32]{fowler2010}.
 
 \subsubsection{Externe DSLs}
 
@@ -384,14 +382,14 @@ Zur Verarbeitung liest ein Reader den Quelltext zuerst ein und meist wird dieser
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.7\textwidth]{bilder/euclidean_algorithm_ast}
-	\caption{Darstellung des euklidischen Algorithmus als AST von Dcoetzee (Eigenes Werk) [CC0], via Wikimedia Commons.}
+	\includegraphics[width=0.9\textwidth]{bilder/ast}
+	\caption{Darstellung einer Methode zur Prüfung der Parität einer natürlichen Zahl als AST}
 	\label{fig:ast}
 \end{figure}
 
 \subsubsection{Abstract Syntax Tree (AST)}
 
-Für jeden wichtigen Token wird im AST ein Knotenpunkt, mit für den weiteren Prozess wichtigen Daten, angelegt \cite[S. 23]{parr2009}. Die grafische Darstellung  des AST für den euklidischen Algorithmus auf Abbildung \ref{fig:ast} zeigt diese Knoten-basierte Strukturierung des eingelesenen Codes. Die Knoten eines AST kennen ihre eigene Position im Baum und somit kann dieser mit geeigneten Strategien durchlaufen werden \cite[S. 24]{parr2009}.
+Für jeden wichtigen Token wird im AST ein Knotenpunkt, mit für den weiteren Prozess wichtigen Daten, angelegt \cite[S. 23]{parr2009}. Die grafische Darstellung  des AST für die Prüfung der Parität einer natürlichen Zahl auf Abbildung \ref{fig:ast} zeigt diese Knoten-basierte Strukturierung des eingelesenen Codes. Die Knoten eines AST kennen ihre eigene Position im Baum und somit kann dieser mit geeigneten Strategien durchlaufen werden \cite[S. 24]{parr2009}.
 
 Eine Möglichkeit ist die Anwendung des Visitor Patterns, welches in dieser Arbeit in einem späteren Unterkapitel der Grundlagen behandelt wird.
 
@@ -611,7 +609,7 @@ Im Gegensatz dazu steht die geradezu mechanisch anmutende Generierung von konkre
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.9\textwidth]{bilder/vergleich_2}
-	\caption{Vereinfachte Darstellung des Einsparungspotentials im Generator Implementations-Schritt bei MDSD .}
+	\caption{Vereinfachte Darstellung des Einsparungspotentials im Generator Implementations-Schritt bei MDSD.}
 	\label{fig:vgl2}
 \end{figure}
 
@@ -619,7 +617,7 @@ Der Aufwand des letzten Schritts, der eigentlichen Anwendung des Generators, hä
 
 \section{Automatisierung der Entwicklung eines Code Generators}
 
-Wie aus dem vorherigen Absatz entnommen werden kann, besteht ein großes Automatisierungspotenzial darin den gesamten Generator oder Teile davon automatisiert zu erzeugen, hierbei treten einige Schwierigkeiten auf, welche im folgenden genau analysiert werden. Im Rahmen dieser Arbeit wird davon ausgegangen, dass eine Referenzimplementation bereits in Form von Java Quelltext vorliegt.
+Wie aus dem vorherigen Abschnitt entnommen werden kann, besteht ein großes Automatisierungspotenzial darin den gesamten Generator oder Teile davon automatisiert zu erzeugen, hierbei treten einige Schwierigkeiten auf, welche im folgenden genau analysiert werden. Im Rahmen dieser Arbeit wird davon ausgegangen, dass eine Referenzimplementation bereits in Form von Java Quelltext vorliegt.
 
 \subsection{Java Code als Ausgangsmodell}
 
@@ -627,25 +625,58 @@ Um die existierende Referenzimplementation weiter verarbeiten und hieraus ableit
 
 \subsubsection{Anreicherung des Java Codes mit Informationen}
 
-Es gibt mehrere Möglichkeiten zusätzliche Informationen zum vorhandenen Java Quelltext anzubringen. Eine Möglichkeit hierfür wäre dies in Form eines zusätzlichen Modells, zum Beispiel in einer XML Datei \cite{xml2008}, zu tun. Hier würden dann unter der Verwendung von XML Tags und Attributen Referenzen zu bestehenden Klassen gebildet. Beim einlesen des Java Quelltextes würde dann auch das zugehörige XML Dokument geparsed und nach korrespondierenden Informationen durchsucht werden. Mit XML Schema Definitions Dateien (XSD) \cite{xsd2012} und Unterstützung von geeigneten APIs wie JAXB \cite{jaxb} könnte sehr genau beschrieben werden wie dieses Zusatzinformationsmodell aufgebaut sein dürfte. Alle Informationen zu Erweiterung einer Java Quelltext Datei wären an einer Stelle zu finden. Außerdem müsste ein Benutzer des Metagenerators, anstatt nur einzelne Stellen in seiner Referenzimplementation zu markieren, eine zusätzliche XML Datei nach den Regeln der zugehörigen XSD Datei aufstellen.
+Es gibt mehrere Möglichkeiten zusätzliche Informationen zum vorhandenen Java Quelltext anzubringen. Eine Möglichkeit hierfür wäre dies als zusätzliches Modell, zum Beispiel in einer XML Datei \cite{xml2008}, zu formulieren. Hier würden dann unter der Verwendung von XML Tags und Attributen Referenzen zu bestehenden Klassen gebildet. Beim einlesen des Java Quelltextes würde dann auch das zugehörige XML Dokument geparsed und nach korrespondierenden Informationen durchsucht werden. Mit XML Schema Definitions Dateien (XSD) \cite{xsd2012} und Unterstützung von geeigneten APIs wie JAXB \cite{jaxb} könnte sehr genau beschrieben werden wie dieses Modell aufgebaut sein dürfte. Alle Informationen zu Erweiterung einer Java Quelltext Datei wären an einer Stelle zu finden. Außerdem müsste ein Benutzer des Metagenerators, anstatt nur einzelne Stellen in seiner Referenzimplementation zu markieren, eine zusätzliche XML Datei nach den Regeln der zugehörigen XSD Datei aufstellen.
 
-Als weiterer Ansatz könnten Stellen im Quelltext, die mit Informationen angereichert werden sollen, zeilenweise mit Kommentaren versehen werden. Die genaue textuelle Form der Kommentare ist hier frei wählbar. Der Informationsgehalt und dessen semantische Bedeutung müssten nach dem parsen des Java Quelltextes in einem zusätzlichen Schritt analysiert werden. Kommentare könnten an jeder Stelle des Codes, also auch innerhalb von Methoden, theoretisch sogar innerhalb von einzelnen Ausdrücken, verwendet werden. Eine Einschränkung welcher Kommentar an welche Stelle des Codes gesetzt wird kann jedoch nicht ohne zusätzliche Hilfsmittel gemacht werden.
+Als weiterer Ansatz könnten Stellen im Quelltext, die mit Informationen angereichert werden sollen, zeilenweise mit Kommentaren versehen werden. Die genaue textuelle Form der Kommentare ist hier frei wählbar. Also wäre es sogar denkbar eine hier eigenständige DSL zu verwenden. Der Informationsgehalt und dessen semantische Bedeutung müssten nach oder beim parsen des Java Quelltextes in einem zusätzlichen Schritt analysiert werden. Kommentare könnten an jeder Stelle des Codes, also auch innerhalb von Methoden, theoretisch sogar innerhalb von einzelnen Ausdrücken, verwendet werden. Eine Einschränkung welcher Kommentar an welche Stelle des Codes gesetzt werden darf kann jedoch nicht ohne zusätzliche Hilfsmittel gemacht werden.
 
-Eine dritte Variante wäre es den Quelltext mit Java Annotationen zu versehen. Abhängig von der Information die eine solche Annotation anbringen soll, könnte eine semantisch passende Benennung gewählt werden. Durch zusätzliche Target Annotationen an den an Annotations Definitionen könnte noch genauer bestimmt werden an welcher Stelle im Code welche Annotation angebracht werden kann. Durch Annotation Parameter könnten noch weitere Informationen übergeben werden. Da es nicht möglich ist Quelltext innerhalb von Methoden zu annotieren, könnten dort auf diesem Weg keine zusätzlichen Informationen angegeben werden.
+Eine dritte Variante wäre es den Quelltext mit Java Annotationen zu versehen. Abhängig von der Information die eine solche Annotation anbringen soll, könnte eine semantisch passende Benennung gewählt werden. Durch zusätzliche Target Annotationen an den Annotations Definitionen könnte noch genauer bestimmt werden an welcher Stelle im Code welche Annotation angebracht werden darf. Mit Hilfe von Annotations Parameter könnten noch weitere Informationen übergeben werden. Da es nicht möglich ist Quelltext innerhalb von Methoden zu annotieren, könnten dort auf diesem Weg keine zusätzlichen Informationen angegeben werden.
 
 \subsubsection{Parsen des Java Codes}
 
 Der mit Informationen angereicherte Java Code muss eingelesen werden. Ein Ansatz hierfür wäre es einen Java Parser von Grund auf neu zu implementieren oder auf bereits vorhandene Bibliotheken zurückzugreifen. Eine Neu-Implementation würde volle Kontrolle über das Modell in welches der Java Code eingelesen wird liefern. Wird zur Informationsanreicherung der XML Ansatz verfolgt, könnte die Zusammenführung der Daten in ein gemeinsames Modell dann bereits beim parsen durchgeführt werden. Die im Grundlagen Kapitel beschriebenen Schritte zum parsen von Quelltext müssten implementiert werden. Da Java eine syntaktisch sehr umfangreiche Sprache ist, ist der Aufwand hier sehr groß.  Bei der Verwendung einer externen Bibliothek zum parsen des Codes hat dies meist den Vorteil, dass diese Schritte hinter einer API abstrahiert sind und man ohne Zusatzaufwand Hilfsmittel wie ein implementiertes Visitor Pattern für den AST zur Verfügung hat. Je nach verwendeter Bibliothek kann man auch damit rechnen, dass der Parser weitestgehend fehlerfrei funktioniert und regelmäßig aktualisiert wird.
 
 \subsection{Abstrakte Darstellung von Java Code als Modell}
-\subsubsection{Anforderungen an das Modell}
-\subsubsection{Schnittstellen zur Befüllung des Modells}
-(DSLs intern / extern)
-\subsection{Generierung von Java Code}
-\subsubsection{Techniken zur Code Generierung}
-\subsubsection{Vorhandene Frameworks zur Java Code Generierung}
+
+Wurden Java Quelltext und angebrachte Informationen eingelesen und zusammengeführt, muss eine Möglichkeit gefunden werden konkrete Ausprägungen der Variabilitäten definieren zu können. Das Modell welches diese Daten abbildet, ist das Metamodell auf dessen Basis der Metagenerator Quelltext erzeugt.
+
+\subsubsection{Anforderungen an das Metamodell}
+
+Es gibt mehrere Anforderungen an dieses Metamodell. Grundsätzlich muss es möglich sein die, zur späteren Generierung notwendigen Strukturinformationen aus dem Java Quelltext, zu halten. Außerdem müssen Instanzen dieses Metamodells gebildet werden können, die in ihrem Aufbau die nicht variablen Teile des Ursprungscodes widerspiegeln und über eine Schnittstelle mit Informationen zu den variablen Teilen befüllt werden können.
+
+Da beschreibbar sein muss welche Variabilitäten im Quelltext existieren, reicht die Verwendung des beim parsen entstandenen AST als solcher nicht aus. Es wäre jedoch denkbar das Metamodell des AST zu übernehmen und diesen mit weiteren Informationen zu den Nodes zu versehen. Je nach verwendeter Bibliothek könnte es hier möglich sein diese Erweiterung durch den Aufbau einer Vererbungshierarchie zu den vorhandenen Klassen der Knotenpunkte vorzunehmen. Wird auf den von einer Bibliothek gelieferten AST zurückgegriffen, könnte es sein, dass dieser viel mehr Informationen hält, als für den konkreten Erzeugungsprozess notwendig wären und somit zusätzliche Komplexität einführt.
+
+Eine weitere Möglichkeit wäre es ein eigenes Metamodell zu definieren. Hierdurch können Struktur und Inhalt des Metamodells genau an die Aufgabe des Metagenerators angepasst werden. Mit Einführung eines unabhängigen Metamodells würde die Modularität der Anwendung zusätzlich gesteigert. Dieser Ansatz würde zudem ein iteratives Vorgehen erlauben. Parser, Metamodell und Generator könnten schrittweise gemeinsam um zusätzliche Funktionalität erweitert werden.
+
+\subsubsection{Schnittstellen zur Instanziierung des Metamodells}
+%(DSLs intern / extern)
+Um konkrete Ausprägungen des Metamodells bilden zu können, wird eine Schnittstelle benötigt. Im Zusammenhang mit modellgetriebener Softwareentwicklung ist dies normalerweise eine DSL. Es ist jedoch auch denkbar das auf das Metamodell mit einer Command Query API zuzugreifen \cite[S. 343ff.]{fowler2010}. Das bedeutet, dass die einzelnen Felder einer Instanz des Metamodells mit Methoden wie zum Beispiel klassischen Settern gesetzt werden.
+
+Greift man auf eine domänenspezifische Sprache zurück, könnten hier gleich mehrere Ansätze verfolgt werden. Bei Verwendung einer externen DSL müsste diese entweder selbst definiert und implementiert werden, d. h. auch ein Parser für diese oder auf eine bereits existierende DSL zurückgegriffen werden. In diesem Fall muss dafür Sorge getragen werden, dass das Metamodell und die DSL miteinander kompatibel sind. Zusätzlich hätte die Verwendung einer bereits existierenden DSL den Vorteil, dass normalerweise bereits Hilfsmittel zum parsen und weiterverarbeiten der DSL gegeben sind und somit der Implementationsaufwand reduziert wird. Alternativ könnte auf eine Language Workbench zurückgegriffen werden, dadurch stünde eine Entwicklungsumgebung zum Schreiben von DSL Code zur Verfügung. Dies würde aber die Bindung an ein Tool bedeuten.
+
+Da der Metagenerator, unabhängig von seinem Konzept, in jedem Fall Java Quelltext als Referenzimplementation einliest und nach erfolgter Modellbeschreibung durch die DSL wieder Java Quelltext generiert, könnte die Verwendung einer internen DSL vorteilhaft sein. Ein Anwender der DSL könnte potenziell im Java Sprachraum bleiben und müsste somit, zumindest bezüglich der verwendeten Syntax, weniger neue Grundlagen lernen.
+
+\subsection{Generierung von Java Quelltext}
+
+Eine konkrete Ausprägung des Metamodells soll eingelesen und aus diesem Java Quelltext generiert werden.
+
+\subsubsection{Verwendung vorhandener Bibliotheken zur Java Code Generierung}
+
+Wie auch beim ersten Schritt des Metagenerator Prozesses, dem parsen, muss abermals entschieden werden ob die Komponente welche den Java Quelltext in Form von Zeichenketten generiert, vollständig neu umgesetzt wird oder ob auf vorhandene Bibliotheken zurückgegriffen werden soll. Es gelten die gleichen Vorteile wie schon bezüglich des Parsers erörtert. Verwendet man bereits existierende Komponenten, spart man sich die Implantationsarbeit und hat meist den Vorteil eines zuverlässigeren und aktuell gehaltenen Moduls.
+
+Sowohl bei Verwendung einer externen Bibliothek als auch bei einer Neuimplementation muss die Entscheidung getroffen werden auf welche Weise Code generiert werden soll. Wie bereits im Grundlagen Kapitel erklärt, gibt es hier im allgemeinen zwei Ansätze. Der Quelltext könnte aus Vorlagen heraus generiert werden. Dies ist vor allem dann von Vorteil, wenn große Teile des erzeugten Codes gleich sind und nur Schlüsselelemente wie zum Beispiel Identifier ausgetauscht werden sollen \cite[S. 125]{fowler2010}. Werden die ersetzten Teile des erzeugten Quelltextes zu komplex oder zu umfangreich, so könnte das Generat unüberschaubar werden. Ab einer gewissen geforderten Variabilität des Generats, könnte Template basierte Generierung gar nicht mehr anwendbar sein. In solchen Fällen kann die von Fowler sogenannte Transformer Generation in Betracht gezogen werden \cite[S. 125]{fowler2010}. Sie ermöglicht volle Kontrolle über den erzeugten Code. Da der Ziel Quelltext in diesem Fall mit Java Statements definiert wird, zum Beispiel unter Verwendung eines Builders, ist im Vergleich zu vorlagenbasierte Generierung möglicherweise schwieriger verständlich. Beim vorlagenbasierten generieren liegt der erzeugte Quelltext quasi in seiner endgültigen Form bereits vor und kann somit leichter erfasst werden.
+
+\subsubsection{DSL oder Generator als alternative Erzeugnisse des Metagenerators}
+
+Eine weitere Problemstellung ist die der Wahl welches Artefakt der Metagenerator erzeugen soll. Wie zu Beginn dieses Kapitels beschrieben besteht vor allem in der Phase der Implementation des Generators Einsparungspotenzial durch Automatisierung. Händisch müssen hier normalerweise zwei Bestandteile umgesetzt werden: Die DSL zur Beschreibung des Metamodells und der Generator welcher aus einer Instanz des Metamodells konkreten Java Quelltext erzeugt. 
+
+Das automatische erzeugen der DSL könnte nur eingespart werden wenn das beschriebene Metamodell immer gleich wäre und die DSL von vornherein die gleiche abstrakte und konkrete Syntax hat. In diesem Fall wäre die DSL zwar umfangreicher, da sie grundsätzlich alle möglichen Variabilitäten des Metamodells beschreiben können müsste, müsste aber von einem Anwender nur einmal erlernt werden. Da wir davon ausgehen, dass wir Variabilitäten in der Konfiguration konkreter Java Klassen mit der DSL ausdrücken wollen, sollte diese keine Möglichkeit geben, zum Beispiel den Datentyp eines Feldes zu ändern, wenn dies nicht auch durch die mit Informationen angereicherte Referenzimplementierung vorsieht.
+
+Theoretisch könnte man auch den eigentlichen Quelltextgenerator erzeugen. Abhängig von der konfigurierten Ausprägung des Metamodells, könnte dieser dann nur Java Quelltext mit der dadurch bestimmten Struktur erzeugen. Im Gegensatz hierzu steht eine Variante des Generators der grundsätzlich jede Art von gültigem Java Quelltext erzeugen kann. Auf Basis der Informationen in der Instanz des Metamodells würde dieser dann nur gewünschten Quelltext generieren können. Damit ein solcher Generator funktioniert, müssen die von ihm eingelesenen Daten stets gleich aufgebaut sein, also aus einem gemeinsam Metamodell erzeugt worden sein. Von außen betrachtet würde dies für den Anwender des Metagenerators keinen Unterschied machen. Ein Entwickler würde immer noch sein Metamodell mit der DSL beschreiben und dann würde aus dieser Instanz Quelltext generiert werden.
 
 \chapter{Konzept}
+
+grafik der hauptkomponenten und des informationsflusses
+
 \section{Einsparung der Implementation des Code Generators durch einen Metagenerator}
 \section{Funktionsweise des Metagenerators}
 \subsection{Von Java Code zum Annotations-Modell}
@@ -657,6 +688,9 @@ Der mit Informationen angereicherte Java Code muss eingelesen werden. Ein Ansatz
 \subsubsection{Spezialisierung durch ein Typ-Feld}
 \subsubsection{Parametrisierung durch generische Datenstruktur}
 \subsection{Generierung von Buildern als interne DSL aus dem Annotations-Modell}
+
+Die konkrete Umsetzung einer internen DSL bietet mehrere Ansätze. Zum einen könnte man hier auf Sequenzen aus Funktionen zurückgreifen, hat damit aber keine Kontrolle darüber in welcher Reihenfolge der Entwickler die verschiedenen Statements aufruft. Unter Verwendung eines Kontextobjekts wäre es lediglich möglich bei einer unerlaubten Sequenz Fehler auszugeben oder Ausnahmen zu werfen \cite[S. 351ff.]{fowler2010}. Alternativ hierzu könnte ein Builder Pattern mit Method Chaining zum Einsatz kommen. Dies würde große Kontrolle darüber ermöglichen welche Statements in welcher Reihenfolge ausführbar sind \cite[S. 343ff.]{fowler2010}. Eine weitere Möglichkeit zur Implementation einer internen DSL wäre die Verwendung von geschachtelten Methoden. Hierdurch kann ebenso stark kontrolliert werden in welcher Reihenfolge Methoden einer Sequenz anwendbar sind. Da die verschachtelten Funktionen von innen nach außen evaluiert werden, muss man besondere Rücksicht hierauf nehmen \cite[S. 357ff.]{fowler2010}.
+
 \subsubsection{Komposition der Builder aus benötigten Builder-Methoden}
 \subsubsection{Übertagung vorgegebener Informationen in einen Builder}
 \subsubsection{Verwendung von Plattform Code zur Generierung von vordefinierten CodeUnits}
@@ -666,8 +700,7 @@ Der mit Informationen angereicherte Java Code muss eingelesen werden. Ein Ansatz
 \subsubsection{Erzeugung von Quelldateien}
 
 \chapter{Lösung: Spectrum (Proof of Concept)}
-\section{Verwendete Bibliotheken}
-\section{Verwendeter Glossar}
+\section{Eingesetzte externe Bibliotheken}
 \subsection{JavaParser mit JavaSymbolSolver}
 \subsection{JavaPoet}
 \section{Architekturübersicht}
