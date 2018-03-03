@@ -583,18 +583,18 @@ Zu jedem analysierten Problem werden mögliche Lösungswege aufgeführt und ihre
 
 \section{Aufwand eines konventionellen Softwareprojektes im Vergleich zu MDSD}
 
+Die Umsetzung einer Anwendung hat unterschiedliche Etappen. Zu Beginn der Entwicklung wird spezifiziert was entwickelt werden soll, also welche Anforderungen die Anwendung gestellt werden. Gefolgt von einer Entwurfsphase, in welcher beschrieben wird wie die Anwendung aussieht und aus welchen Bausteinen sie besteht. Als letzter Schritt wird das in Entwurfsphase erarbeitete Konzept implementiert \cite[S. 62]{balzert2009a}. Abhängig vom verwendeten Entwicklungsprozess, wird parallel zu dieser Entwicklung oder im Anschluss daran die Qualität der Anwendung durch Tests gesichert. Sind diese Etappen alle erledigt, kann die App veröffentlicht werden.
+
+Die Idee der modellgetriebenen Software Entwicklung ist es, dass man vereinfacht und ab einem gewissen Punkt wirtschaftlich, ganze Anwendungen oder Teile derer einfacher, schneller und wiederverwertbar generieren kann \cite[S. 14f.]{stahl2007}. Ein Beispiel hierfür wäre die Umsetzung verschieden konfigurierter Ausprägungen einer Anwendung, basierend auf einer Softwarefamilie \cite[S. 237ff.]{stahl2007}. Wie aus den im vorherigen Kapitel beschriebenen Grundlagen hervorgeht, hat auch MDSD grundsätzlich mehrere Entwicklungsschritte. Um Software mit einem Modell beschreiben und daraus generieren zu können, muss bekannt sein wie diese Software aufgebaut ist und funktioniert. Ein erster Schritt bei MDSD kann also sein, eine Ursprungs App zu entwicklen, welche als Referenz für den weiteren Entwicklungsprozess dient. Danach kann diese Referenzimplementation analysiert werden. Hierunter fällt auch das in Grundlagen beschriebene Domain Engineering und die Definition eines Metamodells. Hierauf aufbauend kann zum einen eine domänenspezifische Sprache entwickelt werden, zum anderen ein Generator, welcher aus einer Instanz des Metamodells verschiedene Ausprägungen der Software generieren kann.
+
+Bereits für die Umsetzung einer Referenzimplementation muss der gleiche Prozess durchlaufen werden, wie der für das konventionelle umsetzen einer App \cite[S. 219f.]{stahl2007}. Da bei MDSD noch eine umfangreiche Analysephase und die Entwicklung des Generators durchgeführt werden muss, kann modellgetriebene Softwareentwicklung sich frühestens mit der Entwicklung einer zweiten App einer Softwarefamilie oder vielleicht sogar erst zu einem späteren Zeitpunkt wirtschaftlich rechnen. Abbildung \ref{fig:vgl1} stellt diesen Vergleich grafisch vereinfacht dar.
+
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.9\textwidth]{bilder/vergleich_1}
 	\caption{Vereinfachte Darstellung des Aufwandsvergleichs eines konventionellen Softwareprojektes und MDSD.}
 	\label{fig:vgl1}
 \end{figure}
-
-Abhängig von der gewählten Methode für den Entwicklungsprozess, hat die Umsetzung einer Anwendung unterschiedliche Etappen. Zu Beginn der Entwicklung wird spezifiziert was entwickelt werden soll, also welche Anforderungen die Anwendung gestellt werden. Gefolgt von einer Entwurfsphase, in welcher beschrieben wird wie die Anwendung aussieht und aus welchen Bausteinen sie besteht. Als letzter Schritt wird das in Entwurfsphase erarbeitete Konzept implementiert \cite[S. 62]{balzert2009a}. Abhängig vom verwendeten Prozess, wird parallel zu dieser Entwicklung oder im Anschluss daran die Qualität der Anwendung durch Tests gesichert. Sind diese Etappen alle erledigt, kann die App veröffentlicht werden.
-
-Die Idee der modellgetriebenen Software Entwicklung ist es, dass man vereinfacht und ab einem gewissen Punkt wirtschaftlich, ganze Anwendungen oder Teile derer einfacher, schneller und wiederverwertbar generieren kann \cite[S. 14f.]{stahl2007}. Ein Beispiel hierfür wäre die Umsetzung verschieden konfigurierter Ausprägungen einer Anwendung, basierend auf einer Softwarefamilie \cite[S. 237ff.]{stahl2007}. Wie aus den im vorherigen Kapitel beschriebenen Grundlagen hervorgeht, hat auch MDSD grundsätzlich mehrere Entwicklungsschritte. Um Software mit einem Modell beschreiben und daraus generieren zu können, muss bekannt sein wie diese Software aufgebaut ist und funktioniert. Ein erster Schritt bei MDSD kann also sein, eine Ursprungs App zu entwicklen, welche als Referenz für den weiteren Entwicklungsprozess dient. Danach kann diese Referenzimplementation analysiert werden. Hierunter fällt auch das in Grundlagen beschriebene Domain Engineering und die Definition eines Metamodells. Hierauf aufbauend kann zum einen eine domänenspezifische Sprache entwickelt werden, zum anderen ein Generator, welcher aus einer Instanz des Metamodells verschiedene Ausprägungen der Software generieren kann.
-
-Bereits für die Umsetzung einer Referenzimplementation muss der gleiche Prozess durchlaufen werden, wie der für das konventionelle umsetzen einer App \cite[S. 219f.]{stahl2007}. Da bei MDSD noch eine umfangreiche Analysephase und die Entwicklung des Generators durchgeführt werden muss, kann modellgetriebene Softwareentwicklung sich frühestens mit der Entwicklung einer zweiten App einer Softwarefamilie oder vielleicht sogar erst zu einem späteren Zeitpunkt wirtschaftlich rechnen. Abbildung \ref{fig:vgl1} stellt diesen Vergleich grafisch vereinfacht dar.
 
 Ein zusätzlicher Faktor der die Wirtschaftlichkeit von MDSD beeinträchtigen könnte ist, dass der Entwicklungsprozess bei der Verwendung eines modellgetriebenen Ansatzes ein Entwicklungsteam normalerweise aufteilt. Ein Teil der Entwickler erweitert DSLs und Generatoren und der andere Teil verwendet diese. Diese Abhängigkeit muss in der Ablaufplanung des Projektes berücksichtigt werden. Da sich bei MDSD nicht um konventionelle Softwareentwicklung handelt, kann es zusätzlich sein, dass die Konzepte einem Entwicklungsteam erst nähergebracht und etwaige Kompetenzen erst aufgebaut werden müssen \cite[S. 44ff.]{voelter2013}.
 
@@ -604,7 +604,9 @@ Das umsetzen einer Referenzimplantation kann, wie bereits beschrieben, kaum gek�
 
 Da die Analyse der Domäne und die Entwicklung des Metamodells sich nicht nur auf die Referenzimplementation stützt, sondern sich auch auf semantische, in der Referenzimplementation nicht zwingend festgehaltene, Zusammenhänge bezieht, ist sie nur sehr schwer und wenn überhaupt nur in Teilen automatisierbar. 
 
-Im Gegensatz dazu steht die geradezu mechanisch anmutende Generierung von konkretem Quelltext aus einer Instanz eines beschriebenen Metamodells. Ist durch die Referenzimplementation und Analyse bekannt wie die allgemeine Architektur für eine Anwendung aussieht und durch das Metamodell welche Variabilität vorliegen, so folgt die Erzeugung von Quelltext eindeutig vorher definierbaren Regeln. Konkrete Instanzen von Modellen die für einen solchen Generator verständlich sind, müssten also dann auf dem gleichen Metamodell beruhen. Eine DSL zur Instanziierung eines solchen Metamodells könnte dann entweder immer gleich aussehen oder davon abhängen welche Variabilitäten, basierend auf einer Referenzimplementation, überhaupt beschreibbar sein müssen. Unabhängig hiervon besteht in diesem Schritt somit Potenzial den MDSD Prozess durch Automatisierung zu verkürzen. Die folgende Abbildung \ref{fig:vgl2} zeigt dieses Potenzial in vereinfachter grafischer Darstellung noch einmal auf.
+Im Gegensatz dazu steht die geradezu mechanisch anmutende Generierung von konkretem Quelltext aus einer Instanz eines beschriebenen Metamodells. Ist durch die Referenzimplementation und Analyse bekannt wie die allgemeine Architektur für eine Anwendung aussieht und durch das Metamodell welche Variabilitäten vorliegen, so folgt die Erzeugung von Quelltext eindeutig vorher definierbaren Regeln. Konkrete Instanzen von Modellen die für einen solchen Generator verständlich sind, müssten also dann alle auf dem gleichen Metamodell beruhen. Eine DSL zur Instanziierung eines solchen Metamodells könnte dann entweder immer gleich aussehen oder davon abhängen welche Variabilitäten, basierend auf einer Referenzimplementation, überhaupt beschreibbar sein müssen. Unabhängig hiervon besteht in diesem Schritt somit Potenzial den MDSD Prozess durch Automatisierung zu verkürzen. Die folgende Abbildung \ref{fig:vgl2} zeigt dieses Potenzial in vereinfachter grafischer Darstellung noch einmal auf.
+
+Der Aufwand des letzten Schritts, der eigentlichen Anwendung des Generators, hängt von den oben bereits erwähnten Kompetenzen der Entwickler und vor allem mit der zur Modellbeschreibung verwendeten DSL zusammen. Je einfacher die DSL verwendet werden kann, je eindeutiger und eingängig ihre Syntax und je stärker die durch die DSL ermöglichte Abstraktion ist, desto produktiver kann mit ihr gearbeitet werden. Um dies bei DSLs zu erreichen haben Stahl und Voelter einige Best-Practices zur Definition von DSLs formuliert \cite[S. 113]{stahl2007}. Einsparungen können hier also im Grunde nur im Vorfeld, also bei der Analyse unter Umsetzung des Generators ausgelöst werden. Welche Ausprägung einer Anwendung genau generiert werden soll, muss ein Entwickler immer noch manuell schreiben.
 
 \begin{figure}[htbp]
 	\centering
@@ -613,7 +615,6 @@ Im Gegensatz dazu steht die geradezu mechanisch anmutende Generierung von konkre
 	\label{fig:vgl2}
 \end{figure}
 
-Der Aufwand des letzten Schritts, der eigentlichen Anwendung des Generators, hängt von den oben bereits erwähnten Kompetenzen der Entwickler und vor allem mit der zur Modellbeschreibung verwendeten DSL zusammen. Je einfacher die DSL verwendet werden kann, je eindeutiger und eingängig ihre Syntax und je stärker die durch die DSL ermöglichte Abstraktion ist, desto produktiver kann mit ihr gearbeitet werden. Um dies bei DSLs zu erreichen haben Stahl und Voelter einige Best-Practices zur Definition von DSLs formuliert \cite[S. 113]{stahl2007}. Einsparungen können hier also im Grunde nur im Vorfeld, also bei der Analyse unter Umsetzung des Generators ausgelöst werden. Welche Ausprägung einer Anwendung genau generiert werden soll, muss ein Entwickler immer noch manuell schreiben.
 
 \section{Automatisierung der Entwicklung eines Code Generators}
 
@@ -625,7 +626,7 @@ Um die existierende Referenzimplementation weiter verarbeiten und hieraus ableit
 
 \subsubsection{Anreicherung des Java Codes mit Informationen}
 
-Es gibt mehrere Möglichkeiten zusätzliche Informationen zum vorhandenen Java Quelltext anzubringen. Eine Möglichkeit hierfür wäre dies als zusätzliches Modell, zum Beispiel in einer XML Datei \cite{xml2008}, zu formulieren. Hier würden dann unter der Verwendung von XML Tags und Attributen Referenzen zu bestehenden Klassen gebildet. Beim einlesen des Java Quelltextes würde dann auch das zugehörige XML Dokument geparsed und nach korrespondierenden Informationen durchsucht werden. Mit XML Schema Definitions Dateien (XSD) \cite{xsd2012} und Unterstützung von geeigneten APIs wie JAXB \cite{jaxb} könnte sehr genau beschrieben werden wie dieses Modell aufgebaut sein dürfte. Alle Informationen zu Erweiterung einer Java Quelltext Datei wären an einer Stelle zu finden. Außerdem müsste ein Benutzer des Metagenerators, anstatt nur einzelne Stellen in seiner Referenzimplementation zu markieren, eine zusätzliche XML Datei nach den Regeln der zugehörigen XSD Datei aufstellen.
+Es gibt mehrere Möglichkeiten zusätzliche Informationen zum vorhandenen Java Quelltext anzubringen. Ein Ansatz hierfür wäre dies als zusätzliches Modell, zum Beispiel in einer XML Datei \cite{xml2008}, zu formulieren. Hier könnten dann unter der Verwendung von XML Tags und Attributen Referenzen zu bestehenden Klassen gebildet werden. Beim einlesen des Java Quelltextes würde dann auch das zugehörige XML Dokument geparsed und nach korrespondierenden Informationen durchsucht werden. Mit XML Schema Definitions Dateien (XSD) \cite{xsd2012} und Unterstützung von geeigneten APIs wie JAXB \cite{jaxb} könnte sehr genau beschrieben werden wie dieses Modell aufgebaut sein dürfte. Alle Informationen zu Erweiterung einer Java Quelltext Datei wären an einer Stelle zu finden. Außerdem müsste ein Benutzer des Metagenerators, anstatt nur einzelne Stellen in seiner Referenzimplementation zu markieren, eine zusätzliche XML Datei nach den Regeln der zugehörigen XSD Datei aufstellen.
 
 Als weiterer Ansatz könnten Stellen im Quelltext, die mit Informationen angereichert werden sollen, zeilenweise mit Kommentaren versehen werden. Die genaue textuelle Form der Kommentare ist hier frei wählbar. Also wäre es sogar denkbar eine hier eigenständige DSL zu verwenden. Der Informationsgehalt und dessen semantische Bedeutung müssten nach oder beim parsen des Java Quelltextes in einem zusätzlichen Schritt analysiert werden. Kommentare könnten an jeder Stelle des Codes, also auch innerhalb von Methoden, theoretisch sogar innerhalb von einzelnen Ausdrücken, verwendet werden. Eine Einschränkung welcher Kommentar an welche Stelle des Codes gesetzt werden darf kann jedoch nicht ohne zusätzliche Hilfsmittel gemacht werden.
 
@@ -675,20 +676,85 @@ Theoretisch könnte man auch den eigentlichen Quelltextgenerator erzeugen. Abhä
 
 \chapter{Konzept}
 
-grafik der hauptkomponenten und des informationsflusses
+Ausgehend von dem vorherigen Kapitel durchgeführten Analyse, ist es jetzt möglich ein umfassendes Konzept für die vorliegende Problemstellung zu beschreiben.
 
-\section{Einsparung der Implementation des Code Generators durch einen Metagenerator}
+In den folgenden Abschnitten wird zunächst auf den allgemeinen Aufbau des Metagenerators eingegangen, um nachfolgend dessen Funktionsweise genauer zu erläutern. Die für das Konzept getroffenen Entscheidungen beruhen auf der bereits beschriebenen Analyse und werden auf Basis dieser Untersuchung begründet. Mehrere der Ansätze sind mit einem Blick auf das Prinzip der Modularisierung entstanden. Der Hintergedanke hieran ist, auch wenn ein bestimmter Weg für dieses Konzept gewählt wurde, es leicht möglich sein soll an verschiedenen Stellen des Metagenerators Komponenten zu verändern oder ganz auszutauschen und somit für zukünftige Arbeiten an dem umgesetzten Prototypen so viele Anschlussmöglichkeiten wie möglich bereitzustellen.
+
+Der im vorangegangenen Kapitel durchgeführte Aufwandsvergleich zeigt, dass, wenn die Entwicklung eines Codegenerators durch Automatisierung wirtschaftlicher gemacht werden soll, diese nicht in der Analyse, sondern im eigentlichen Implementations Schritt für den Generator eingeführt werden könnte. Hier setzt auch das Konzept dieses Generators an, durch Verwendung eines einheitlichen Metamodells  kann die Entwicklung der beschreibenden DSL automatisiert werden. Durch dieses Fest definierte Modell kann anstelle eines spezialisierten Generators ein allgemeiner Generator treten.
+
+\section{Allgemeine Struktur}
+
+Wie auf Abbildung \ref{fig:meta1} zu erkennen ist besteht der Java-Metagenerator im Grunde aus zwei Teilen. Der DSL-Generator bietet dem Anwender die Möglichkeit Java-Quelltext durch Annotationen mit Informationen anzureichern. Der annotierte Java-Quelltext wird dann geparsed und daraus ein Annotation-Model instanziiert. Dieses beinhaltet alle nötigen Informationen um daraus eine DSL zur Beschreibung des CodeUnit-Modells zu generieren. Das konkrete Endprodukt des DSL-Generators sind mehrere Builder Klassen die dann als interne DSL verwendet werden können. Der zweite Teil, der Java-Quelltextgenerator, transformiert dann eine Instanz des CodeUnit-Modells in ein allgemeines Java-Modell. Aus einer Instanz des Java-Modells wird dann mit einem allgemeinen Java-Generator konkreter Java Quelltext generiert.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{bilder/metagenProzess}
+	\caption{Darstellung der Prozessstruktur des Java-Metagenerators.}
+	\label{fig:meta1}
+\end{figure}
+
 \section{Funktionsweise des Metagenerators}
-\subsection{Von Java Code zum Annotations-Modell}
+
+Das Konzept der einzelnen Schritte und der hierfür verwendeten Ansätze wird im folgenden, orientiert an der obigen Prozessstruktur, detailliert erläutert.
+
+\subsection{Von Java-Quelltext zum Annotations-Modell}
+
+Ausgehend von einer Referenzimplementation muss diese, wie bereits in der Analyse beschrieben, mit Informationen angereichert werden um Variabilitäten zur Generierung einer DSL ausdrücken zu können.
+
 \subsubsection{Annotationen als Mittel zur Informationsanreicherung}
+
+Im letzten Kapitel wurden drei Ansätze aufgezeigt um Java Quelltext mit zusätzlich Informationen zu hinterlegen. Diese sind die Verwendung einer externen Modelldatei mit Referenzen zum Java Quelltext, Kommentierung von Quelltext Zeilen bzw. Abschnitten mit den zusätzlichen Daten in einer speziellen Syntax oder Markierung von Codeelementen mit Annotationen.
+
+Für dieses Konzept sind Annotationen das Mittel der Wahl. Sie kombinieren einige Vorteile der beiden anderen Ansätze. Da ein Anwender des Metagenerators den Schritt der Informationsanreicherung manuell durchführen muss, bietet ihm die Einschränkungsmöglichkeit der Anwendbarkeit von Annotationen auf bestimmte Elemente des Codes eine Hilfestellung und reduziert mögliche Fehler. Die Annotationen sind hier eine verteilte interne DSL und somit stellt jede Annotationen ein Schlüsselwort dieser internen DSL dar. Im Gegensatz zur Verwendung von Kommentaren hat ein Entwickler also rudimentäre IDE Unterstützung. 
+
+Der Vorteil einer externen XML-Modelldatei mit entsprechender XSD, dass die Struktur klar definiert und eingeschränkt werden kann, kommt nur beim parsen der XML Daten zum tragen, bietet aber keinerlei Hilfe während ein Entwickler die Variabilitäten definiert. Zudem müsste hierfür ein System zur Referenzierung einzelner Code Zeilen eingeführt werden. Durch Annotationen ist die Zugehörigkeit zu einem bestimmten Codeelement eindeutig.
+
+Sowohl bei der Verwendung von Kommentaren, als auch von externen Modell-Dateien müsste ein Entwickler unter Umständen ein komplett neuartiges Konzept lernen. Für Kommentare müsste eine extra Syntax verwendet werden und bei externen Modell-Dateien zum Beispiel XML. Annotationen erlauben es dem Entwickler im Java Sprachraum zu bleiben und reduzieren somit möglicherweise den zusätzlichen Lernaufwand.
+
 \subsubsection{Parsen des annotierten Codes}
+
+Für dieses Konzept wird der annotierte Java-Quelltext mithilfe einer externen Bibliothek geparsed. Diese Entscheidung wurde getroffen, da ein möglichst großer Teil des Java Sprachschatzes vom Metagenerator abgedeckt sein sollte. Während der Entwicklung hätte dies zur Folge, dass der Parser sukzessiv mit dem Metagenerator erweitert werden müsste, welches den Arbeitsaufwand signifikant erhöht hätte.
+
+Die konkrete Wahl ist auf die Bibliothek JavaParser in Kombination mit dessen Erweiterung JavaSymbolSolver in der Version 0.6.3 gefallen. Beides ist unter http://javaparser.org/ zu finden und dort mit Anleitungen und Codebeispielen versehen. Das aktive GitHub-Repository mit mehreren tausend Commits weckt den Anschein, dass JavaParser ständig aktualisiert und weiterentwickelt wird. Außerdem kann der von der Bibliothek bereitgestellte AST leicht mithilfe des Visitor Patterns weiterverarbeitet werden. JavaSymbolSolver kommt zum Einsatz, da an einigen Stellen im Proof-of-Concept voll qualifizierte Datentypen benötigt werden welche aus dem normalen AST nicht ohne Zusatzaufwand gewonnen werden konnten. Genauere Informationen zur Verwendung von JavaParser und JavaSymbolSolver werden im Kapitel zur tatsächlichen Umsetzung dieses Konzepts bereitgestellt.
+
 \subsubsection{Zweck des Annotations-Modells}
+
+Mit dem Visitor Pattern wird der von JavaParser bereitgestellte AST untersucht. Je nach Annotation und annotiertem Java-Ausdruck wird aus diesen gewonnenen Informationen ein oder mehrere Annotations-Modelle instanziiert. Ein Instanz des Annotations Modells hält dabei immer alle Informationen zu den statischen und variablen Bestandteilen die später mit dem CodeUnit-Modell abgebildet werden, bzw. mit den generierten CodeUnit-Buildern beschrieben werden können. 
+
+Das Annotations-Modell wurde als Zwischenschritt von AST zur konkreten DSL konzeptioniert, da dies losgelöst vom Parser im Sinne der Modularisierung ermöglicht, den aktuellen DSL Generator durch eine andere Komponente zu ersetzen. Durch das Annotations-Modell liegen hierfür bereits alle notwendigen Informationen abstrahiert vor und müssen nicht erneut aus dem AST ausgelesen werden.
+
 \subsection{Das CodeUnit-Modell}
-\subsubsection{Baumstruktur des Modells}
+
+Ein wichtiger Teil dieses Konzepts ist das CodeUnit-Modell. Instanzen dieses Modells werden von den generierten CodeUnit-Buildern beschrieben und somit ist es das Metamodell für die vom Metagenerator erzeugte DSL.
+
+\subsubsection{Aufbau des Modells}
+
+Das CodeUnit Modell setzt sich aus einer Struktur mehrerer CodeUnits zusammen, diese sind dabei hierarchisch geordnet. Jede CodeUnit kann SubCodeUnits haben, aber es gibt stets eine CodeUnit welche das Wurzelelement des darunterliegenden Baumes ist. Der Aufbau jedes CodeUnit-Modells ist gleich, einzelne CodeUnits unterscheiden sich nur in ihren konkreten Parametern.
+
+Diese Struktur wurde gewählt, da Quelltext sich in einer solchen hierarchischen Folge gut ausdrücken lässt. Bei Java gibt es beispielsweise Klassen welche Felder und Methoden haben, dies wird im CodeUnit-Modell als eine CodeUnit für die Klasse mit SubCodeUnits für Felder und Methoden abgebildet. Die CodeUnit für eine Methode könnte wiederum SubCodeUnits für Parameter und den Methoden Körper haben. Dieser beschriebene Zusammenhang ist beispielhaft in Abbildung \ref{fig:cu1} dargestellt.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{bilder/cuModelBsp}
+	\caption{Beispielhafte Darstellung der Struktur eines CodeUnit-Modells.}
+	\label{fig:cu1}
+\end{figure}
+
 \subsubsection{Spezialisierung durch ein Typ-Feld}
+
+Um später eine konkrete Instanz des CodeUnit Modells zu einer Java-Modell Instanz transformieren zu können, müssen wichtige semantische Informationen vorliegen. Eine hiervon ist, welche Art von Java Element mit dieser CodeUnit abgebildet wird. Jede CodeUnit hat einen CodeUnit-Typen an welchem der Transformator später erkennt auf welche Weise die spezifische CodeUnit in das Java-Modell transformiert werden muss.
+
+Für das Konzept wurde hierfür kein objektorientierter Ansatz gewählt, bei welchem für jeden CodeUnit Typ eine eigene CodeUnit Klasse implementiert werden würde. Das Argument gegen spezielle CodeUnit Klassen ist, dass die CodeUnit Klasse hier ein Datenmodell darstellt welches kein eigenes Verhalten hat. Somit wäre jede abgeleitete Klasse von CodeUnit nur eine, durch ihre Benennung, semantische Erweiterung, aber ansonsten funktionslos. Zudem reduziert der gewählte Ansatz den Aufwand bei der Erweiterung der CodeUnit-Struktur um neue CodeUnit-Typen.
+
 \subsubsection{Parametrisierung durch generische Datenstruktur}
+
+Wie beschrieben wird jeder CodeUnit-Typ in seiner Struktur gleich dargestellt. Konfigurationsdaten zu einer CodeUnit werden in einer allgemein gehaltenen Datenstruktur gespeichert. Dies ermöglicht es jede Art von Datum in einer CodeUnit zu hinterlegen. Mögliche Daten wären hier zum Beispiel der Identifier einer Klasse oder der Java-Datentyp eines Feldes.
+
+Durch diesen Ansatz, in Kombination mit dem Typ der CodeUnit, kann das CodeUnit-Modell sehr einfach erweitert oder abgeändert werden ohne in dessen zugrunde liegende Struktur eingreifen zu müssen. Änderungen an den Schnittstellen für Transformator und DSLs werden vermieden.
+
 \subsection{Generierung von Buildern als interne DSL aus dem Annotations-Modell}
 
+%%%
 Die konkrete Umsetzung einer internen DSL bietet mehrere Ansätze. Zum einen könnte man hier auf Sequenzen aus Funktionen zurückgreifen, hat damit aber keine Kontrolle darüber in welcher Reihenfolge der Entwickler die verschiedenen Statements aufruft. Unter Verwendung eines Kontextobjekts wäre es lediglich möglich bei einer unerlaubten Sequenz Fehler auszugeben oder Ausnahmen zu werfen \cite[S. 351ff.]{fowler2010}. Alternativ hierzu könnte ein Builder Pattern mit Method Chaining zum Einsatz kommen. Dies würde große Kontrolle darüber ermöglichen welche Statements in welcher Reihenfolge ausführbar sind \cite[S. 343ff.]{fowler2010}. Eine weitere Möglichkeit zur Implementation einer internen DSL wäre die Verwendung von geschachtelten Methoden. Hierdurch kann ebenso stark kontrolliert werden in welcher Reihenfolge Methoden einer Sequenz anwendbar sind. Da die verschachtelten Funktionen von innen nach außen evaluiert werden, muss man besondere Rücksicht hierauf nehmen \cite[S. 357ff.]{fowler2010}.
 
 \subsubsection{Komposition der Builder aus benötigten Builder-Methoden}
