@@ -701,6 +701,10 @@ Das Konzept der einzelnen Schritte und der hierfür verwendeten Ansätze wird im
 
 Ausgehend von einer Referenzimplementation muss diese, wie bereits in der Analyse beschrieben, mit Informationen angereichert werden um Variabilitäten zur Generierung einer DSL ausdrücken zu können.
 
+Das Konzept sieht vor, dass Java Elemente entweder als statisches oder als variables Element markiert werden können. Da nur für variable Elemente ein Builder erzeugt wird, müssen statische Elemente stets innerhalb eines variablen Elements stehen. Das bedeutet beispielsweise, dass eine Klasse als variabel gekennzeichnet wird und dadurch einzelne Felder innerhalb der Klasse als statisch oder variabel markiert werden können. Elemente die weder als statisch noch als variabel gekennzeichnet wurden und nicht implizit zu einem übergeordneten Element gehören, werden beim parsen nicht beachtet. Ein statisches Java Element soll hierbei als vordefiniert verstanden werden, ein Beispiel hierfür wäre ein ID Feld einer Klasse.
+
+Als Alternative zur expliziten Markierung einzelner Elemente als statisch, wäre es stattdessen denkbar gewesen alle nicht markierten Elemente als statisch zu interpretieren. Dies hätte zur Folge gehabt, dass es nicht möglich gewesen wäre Elemente der Referenzimplementation zu ignorieren. Damit wären Fälle in denen zwei gleichartige Elemente unter einer CodeUnit mit einer bestimmten Variabilität zusammengefasst werden sollen nicht ohne weiteres umsetzbar. Es sei denn es würde eine weitere Markierung eingeführt welche dafür sorgt das an Element explizit ignoriert wird. Hierunter könnte die Lesbarkeit des markierten Quelltextes leiden und für die Markierung hätte ein zusätzliches Schlüsselwort eingeführt werden müssen.
+
 \subsubsection{Annotationen als Mittel zur Informationsanreicherung}
 
 Im letzten Kapitel wurden drei Ansätze aufgezeigt um Java Quelltext mit zusätzlich Informationen zu hinterlegen. Diese sind die Verwendung einer externen Modelldatei mit Referenzen zum Java Quelltext, Kommentierung von Quelltext Zeilen bzw. Abschnitten mit den zusätzlichen Daten in einer speziellen Syntax oder Markierung von Codeelementen mit Annotationen.
@@ -725,11 +729,11 @@ Das Annotations-Modell wurde als Zwischenschritt von AST zur konkreten DSL konze
 
 \subsection{Das CodeUnit-Modell}
 
-Ein wichtiger Teil dieses Konzepts ist das CodeUnit-Modell. Instanzen dieses Modells werden von den generierten CodeUnit-Buildern beschrieben und somit ist es das Metamodell für die vom Metagenerator erzeugte DSL.
+Ein wichtiger Teil dieses Konzepts ist das CodeUnit-Modell. Instanzen dieses Modells werden von den generierten CodeUnit-Buildern beschrieben und somit ist es das Metamodell für die vom Metagenerator erzeugte DSL. Mit einer spezifischen CodeUnit-Annotation und unter Angabe einer Benennung, kann ein Java Element so markiert werden, dass hieraus ein Annotations-Modell geparsed wird. Aus den so entstandenen Annotations-Modellen wird in einem nachgelagerten Schritt die interne DSL erzeugt.
 
 \subsubsection{Aufbau des Modells}
 
-Das CodeUnit Modell setzt sich aus einer Struktur mehrerer CodeUnits zusammen, diese sind dabei hierarchisch geordnet. Jede CodeUnit kann SubCodeUnits haben, aber es gibt stets eine CodeUnit welche das Wurzelelement des darunterliegenden Baumes ist. Der Aufbau jedes CodeUnit-Modells ist gleich, einzelne CodeUnits unterscheiden sich nur in ihren konkreten Parametern.
+Das CodeUnit Modell setzt sich aus einer Struktur mehrerer CodeUnits zusammen, diese sind dabei hierarchisch geordnet. An jede CodeUnit können SubCodeUnits angehängt werden, aber es gibt stets genau eine CodeUnit welche das Wurzelelement des darunterliegenden Baumes ist. Der Aufbau jedes CodeUnit-Modells ist gleich, einzelne CodeUnits unterscheiden sich nur in ihren konkreten Parametern.
 
 Diese Struktur wurde gewählt, da Quelltext sich in einer solchen hierarchischen Folge gut ausdrücken lässt. Bei Java gibt es beispielsweise Klassen welche Felder und Methoden haben, dies wird im CodeUnit-Modell als eine CodeUnit für die Klasse mit SubCodeUnits für Felder und Methoden abgebildet. Die CodeUnit für eine Methode könnte wiederum SubCodeUnits für Parameter und den Methoden Körper haben. Dieser beschriebene Zusammenhang ist beispielhaft in Abbildung \ref{fig:cu1} dargestellt.
 
@@ -746,21 +750,64 @@ Um später eine konkrete Instanz des CodeUnit Modells zu einer Java-Modell Insta
 
 Für das Konzept wurde hierfür kein objektorientierter Ansatz gewählt, bei welchem für jeden CodeUnit Typ eine eigene CodeUnit Klasse implementiert werden würde. Das Argument gegen spezielle CodeUnit Klassen ist, dass die CodeUnit Klasse hier ein Datenmodell darstellt welches kein eigenes Verhalten hat. Somit wäre jede abgeleitete Klasse von CodeUnit nur eine, durch ihre Benennung, semantische Erweiterung, aber ansonsten funktionslos. Zudem reduziert der gewählte Ansatz den Aufwand bei der Erweiterung der CodeUnit-Struktur um neue CodeUnit-Typen.
 
+Als Ausnahme könnte man CodeUnits welche mit Buildern beschreibbar sind zählen. Da mit einem Builder für eine Klassen-CodeUnit unter Umständen eine Feld-CodeUnit als SubCodeUnit angehängt wird, hätte man hier durch die Einführung von eigenen Datentypen die Möglichkeit einzuschränken welche Typen von CodeUnits als SubCodeUnits verwendbar sind. Diese Klassen würden dann nur für diese Eigenschaft existieren keine weiteren Funktionen haben.
+
 \subsubsection{Parametrisierung durch generische Datenstruktur}
 
 Wie beschrieben wird jeder CodeUnit-Typ in seiner Struktur gleich dargestellt. Konfigurationsdaten zu einer CodeUnit werden in einer allgemein gehaltenen Datenstruktur gespeichert. Dies ermöglicht es jede Art von Datum in einer CodeUnit zu hinterlegen. Mögliche Daten wären hier zum Beispiel der Identifier einer Klasse oder der Java-Datentyp eines Feldes.
 
 Durch diesen Ansatz, in Kombination mit dem Typ der CodeUnit, kann das CodeUnit-Modell sehr einfach erweitert oder abgeändert werden ohne in dessen zugrunde liegende Struktur eingreifen zu müssen. Änderungen an den Schnittstellen für Transformator und DSLs werden vermieden.
 
+Beispiele für solche Parameter wären der Identifier Parameter welchem als Datum eine Zeichenkette zugeordnet ist und der Modifier Parameter zu welchem ein Array aus Java Modell Feuer Schlüsselwörtern angegeben wird. Ein solches Datum kann auch zur Markierung einer Eigenschaft der zugehörigen CodeUnit verwendet werden, in dem, unter einer geeigneten Parameter Benennung, zum Beispiel ein Bool'scher Wert hinterlegt wird.
+
 \subsection{Generierung von Buildern als interne DSL aus dem Annotations-Modell}
 
-%%%
+Grundsätzlich wäre, wie in der Analyse beschrieben,  für dieses Konzept sowohl eine externe DSL als auch eine interne DSL denkbar gewesen. Der für eine externe DSL notwendige Mehraufwand bzw. die Toolbindung bei Verwendung einer Language Workbench waren hier jedoch ausschlaggebend für die Entscheidung zur internen DSL. Außerdem gilt, genau wie bei dem Argument für Annotationen, dass bei der Verwendung einer internen DSL auf Java Basis die Anwendung potentiell einfacher ausfällt. Durch das Annotations-Modell wäre es jedoch denkbar aus diesem eine externe DSL zu generieren.
+
 Die konkrete Umsetzung einer internen DSL bietet mehrere Ansätze. Zum einen könnte man hier auf Sequenzen aus Funktionen zurückgreifen, hat damit aber keine Kontrolle darüber in welcher Reihenfolge der Entwickler die verschiedenen Statements aufruft. Unter Verwendung eines Kontextobjekts wäre es lediglich möglich bei einer unerlaubten Sequenz Fehler auszugeben oder Ausnahmen zu werfen \cite[S. 351ff.]{fowler2010}. Alternativ hierzu könnte ein Builder Pattern mit Method Chaining zum Einsatz kommen. Dies würde große Kontrolle darüber ermöglichen welche Statements in welcher Reihenfolge ausführbar sind \cite[S. 343ff.]{fowler2010}. Eine weitere Möglichkeit zur Implementation einer internen DSL wäre die Verwendung von geschachtelten Methoden. Hierdurch kann ebenso stark kontrolliert werden in welcher Reihenfolge Methoden einer Sequenz anwendbar sind. Da die verschachtelten Funktionen von innen nach außen evaluiert werden, muss man besondere Rücksicht hierauf nehmen \cite[S. 357ff.]{fowler2010}.
 
+Für dieses Konzept wurde, wie schon mehrfach erwähnt, auf ein Builder Pattern mit Method Chaining zurückgegriffen. Hauptargument hierfür war die mögliche Kontrolle über die Reihenfolge der ausführbaren Statements. Da sowohl verschachtelte Methoden als auch Builder ähnliche Vorteile haben wurde zwischen diesen auf Basis persönlicher Präferenz entschieden. Wird an eine CodeUnit eine SubCodeUnit angehängt, ist diese ein Parameter der aufgerufenen Builder Methode und somit handelt es sich hier im kleinen Rahmen um eine Verschachtelung.
+
+\subsubsection{Erzeugte Builder als Schlüsselwörter der internen DSL}
+
+Aus jedem Annotations Modell wird ein konkreter Builder erzeugt. Jedes dieser Modelle ist ursprünglich durch eine spezifische CodeUnit Annotationen entstanden und hat hierdurch auch eine Benennung erhalten. Die Idee dahinter ist, dass es möglich sein soll, bestimmte Attribute eines Java Elements nicht variabel zu machen und somit eine gewisse Form der Abstraktion zu bieten. Mit einer aussagekräftigen Benennung der beschreibbaren CodeUnit, kann hieraus auch ein eindeutig identifizierbarer Builder generiert werden.
+
+Man nehme beispielsweise den Fall, dass ein Java Feld als CodeUnit mit einem Builder beschreibbar sein soll. Unter Verwendung entsprechender Annotationen könnte diese CodeUnit immer als öffentlich mit variablem Datentyp markiert werden. Hinzu käme eine sprechende Benennung wie zum Beispiel PublicVar. Hieraus könnte dann ein PublicVarBuilder generiert werden, welcher immer eine öffentliches Feld erzeugt und die Fähigkeit hat dessen Datentyp zu setzen.
+
+Werden auf diese Weise mehrere Builder zur Beschreibung unterschiedlich konfigurierter CodeUnits mit unterschiedlichem CodeUnit Typ erzeugt, so entwickelt sich dadurch ein DSL Sprachraum mit konkreter Semantik. Die einzelnen Builder könnte man in diesem Sprachraum als Schlüsselwörter der internen DSL betrachten.
+
 \subsubsection{Komposition der Builder aus benötigten Builder-Methoden}
-\subsubsection{Übertagung vorgegebener Informationen in einen Builder}
+
+Abhängig davon welcher CodeUnit Typ von einem konkreten Builder beschrieben werden kann und welche Variabilitäten in Form von Annotationen in der Referenzimplementation definiert wurden, hat ein CodeUnit Builder unterschiedliche Methoden. 
+
+Ein Builder zur Beschreibung des im letzten Abschnitt gegebenen Beispiels eines öffentlichen Feldes mit variablem Datentyp, benötigt beispielsweise keine Methode zum setzen eines Parameters für den Java-Modifier. Jedoch benötigt jeder Builder eine Methode zum Starten der Method Chain und eine um die Kette abzuschließen.
+
+Der Ansatz hierfür ist Komponenten basiert. Die unterschiedlichen Methoden die ein konkreter Builder haben kann werden diesem Komponentenweise während der Erzeugung hinzugefügt. Dieses Konzept wurde gewählt, da die Alternative hierfür wäre, dass jeder Builder genau die gleichen Methoden implementiert. Hierbei müsste, um das Setzen bestimmter Werte zu verbieten, spezielles Error Handling betrieben werden. Der komponentenbasierte Ansatz schränkt die konkrete Syntax der internen DSL weiter ein und bietet somit dem Anwender eine Hilfestellung bei der Formulierung von Ausdrücken.
+
+\subsubsection{Übertragung vorgegebener Informationen in einen Builder}
+
+Einige der in der Referenzimplementation vorliegenden Daten müssen als solches in den am Ende der Kette generierten Java Quelltext übertragen werden. Hierunter fallen alle unveränderlichen Parameter eines als CodeUnit annotierten Java Elements die nicht durch den Typen oder den Kontext der CodeUnit impliziert werden und jedes als statisch annotierte Java Element.
+
+Hierfür sieht dieses Konzept vor bereits beim parsen des annotierten Java Quelltextes eine Ursprungs-CodeUnit zu jedem Annotations Modell zu erzeugen. Diese CodeUnit dient dann dem aus dem Annotations Modell generierten Builder als Ausgangspunkt bei der Beschreibung einer konkreten CodeUnit.
+
+Ein alternativer Ansatz wäre gewesen, eine zusätzliche Datenstruktur zum Halten dieser Informationen zu verwenden. Im Aufbau würde dieses zusätzliche Modell jedoch sehr dem der CodeUnit ähneln, da gleichartige Daten hinterlegt werden würden. Daher kann auch direkt und ohne Mehraufwand das bereits bestehende CodeUnit Modell verwendet werden.
+
 \subsubsection{Verwendung von Plattform Code zur Generierung von vordefinierten CodeUnits}
+
+Bei der Anwendung eines Builders kann es vorkommen, dass vordefinierte CodeUnits in das vom Builder beschriebene CodeUnit Modell eingefügt werden müssen. Als konkretes Beispiel dienen hier Getter und Setter Methoden für ein Feld. Ein solches könnte mit einer CodeUnit und einer HasGetter Annotation versehen werden. Dies würde semantisch bedeuten, dass immer, wenn diese Feld-CodeUnit mit einem Builder beschrieben und an eine Klassen-CodeUnit angehängt wird, ebenfalls eine auf dieses Feld zugreifende Getter-CodeUnit erzeugt werden soll.
+
+Auf solche vordefinierten CodeUnits kann aus vielen Buildern zugegriffen werden. Sie unterscheiden sich teilweise gar nicht oder nur in einzelnen Parametern, wie zum Beispiel bei einem Getter dem Feldnamen. Deswegen kommt hier Plattform Code zum erzeugen dieser CodeUnits zum Einsatz. Dieser bildet folglich eine Abhängigkeit zur Verwendung von generierten Buildern.
+
 \subsubsection{Auflösung von Referenzen in vordefinierten CodeUnits als nachgelagerter Verarbeitungsschritt}
+
+Es kann vorkommen, dass ein als statisch annotierte des Feld den selben Datentyp hat, wie dessen zugehörige Klasse. Eine solche Referenz auf den eigenen Typen kommt zum Beispiel beim Instanz Feld eines Singleton vor. Wird jetzt eine CodeUnit basierend auf einer solchen Situation beschrieben, sollte auch die entsprechende Referenz auf den angegebenen neuen Identifier der zugehörigen Klasse verweisen.
+
+Der früheste Zeitpunkt, an dem bei der Verwendung eines Builders für eine Klassen-CodeUnit klar ist welche SubCodeUnits diese hat, ist wenn die Method Chain explizit beendet wird. Bevor die endgültige CodeUnit zurückgegeben wird ist ein letzter Verarbeitungsschritt vorgesehen. 
+
+Jede SubCodeUnit der Klasse wird nach Referenzen auf den ursprünglichen Datentyp aus der Referenzimplementation durchsucht und an dessen Stelle tritt durch Textersetzung der neue tatsächliche Identifier der erzeugten Klassen-CodeUnit. Die Information hierzu wird, wenn benötigt, bei der Erzeugung des Annotations Modells in der Ursprungs-CodeUnit als Parameter hinterlegt.
+
+Der aktuelle Proof of Concept ersetzt in diesem Nachbearbeitungsschritt nur Referenzen auf die Ursprungsklasse und erzeugt Standard CodeUnits, wie zum Beispiel Getter und Setter. Erweiterungen dieser nachgelagerten Phase sind jedoch durchaus denkbar.
+
 \subsection{Erzeugung von Java Code aus einem befüllten CodeUnit-Modell}
 \subsubsection{Transformation des CodeUnit-Modells zum JavaFile-Modell}
 \subsubsection{Erzeugung von Quelldateien}
