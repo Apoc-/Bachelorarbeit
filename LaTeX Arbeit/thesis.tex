@@ -886,7 +886,7 @@ Der genaue Typ des TypeSolvers steuert wo genau nach Typ Referenzen gesucht wird
 \begin{lstlisting}[label=lst:jpmaven,
 language=HTML,
 firstnumber=1,
-caption=XML-Code zum Einbinden von JavaParser und JavaSymbolSolver als Maven-Dependency]
+caption=XML-Code zum Einbinden von JavaParser und JavaSymbolSolver als Maven-Dependency.]
 <dependency>
 	<groupId>com.github.javaparser</groupId>
 	<artifactId>java-symbol-solver-core</artifactId>
@@ -947,7 +947,7 @@ Soll in einzelnen Ausdrücken ein bestimmtes Datum in einer Zeichenkette verwend
 \begin{lstlisting}[label=lst:jpoetmaven,
 language=HTML,
 firstnumber=1,
-caption=XML-Code zum Einbinden von JavaPoet als Maven-Dependency]
+caption=XML-Code zum Einbinden von JavaPoet als Maven-Dependency.]
 <dependency>
 	<groupId>com.squareup</groupId>
 	<artifactId>javapoet</artifactId>
@@ -994,24 +994,24 @@ Alle zur Informationsanreicherung verfügbaren Annotationen sind im Package anno
 
 \subsubsection{Bedeutung und Limitationen der Annotationen und deren Auswirkung auf die erzeugten Builder}
 
-In den nachfolgenden Absätzen werden die unterschiedlichen Annotations Ziele und die Wirkung einer bestimmten Annotationen hierauf zusammengefasst. Zudem wird auf Einschränkungen eingegangen.
+In den nachfolgenden Absätzen werden die unterschiedlichen Annotations Ziele und die Wirkung einer bestimmten Annotationen hierauf zusammengefasst. Zudem wird auf, durch den aktuellen Stand der Implementation bedingte, Einschränkungen eingegangen.
 
 \begin{lstlisting}[label=lst:classanno,
 language=java,
 firstnumber=1,
-caption=Ausschnitthafte Darstellung der Annotationsmöglichkeiten an einer Klasse]
+caption=Darstellung der Annotationsmöglichkeiten an einer Klasse.]
 @CodeUnit("ExampleClass") @VariableModifier
 public class ExampleRef {
 //...
 }
 \end{lstlisting}
 
-Listing~\ref{lst:classanno} zeigt die Annotationsmöglichkeiten an einer Klasse. Eine Klasse kann nur als CodeUnit und optional mit VariableModifier markiert werden. Hierdurch wird ein Builder für die Klasse mit dem in der CodeUnit übergebenen Namen erzeugt. Eine Klasse darf dabei jede legale Kombination der Java-Modifiern haben. Liegt eine VariableModifier Annotation vor, müssen gewünschte Modifier explizit mit dem später erzeugten Builder gesetzt werden, an der Referenzklasse vorhandene Modifier werden standardmäßig ignoriert. Es werden keine weiteren Informationen der Klasse, zum Beispiel Interfaces und generische Typparameter, berücksichtigt. Diese müssten jedoch lediglich im Nachgang implementiert werden. Details zum Erweiterungsprozess werden zum Abschluss dieses Kapitels beschrieben. 
+Listing~\ref{lst:classanno} zeigt die Annotationsmöglichkeiten an einer Klasse. Eine Klasse kann nur als CodeUnit und optional mit VariableModifier markiert werden. Hierdurch wird ein Builder für die Klasse mit dem in der CodeUnit übergebenen Namen erzeugt. Eine Klasse darf dabei jede Kombination von Java-Modifiern haben. Liegt eine VariableModifier Annotation vor, müssen gewünschte Modifier explizit mit dem später erzeugten Builder gesetzt werden, an der Referenzklasse vorhandene Modifier werden standardmäßig ignoriert. Es werden keine weiteren Informationen der Klasse, zum Beispiel Interfaces und generische Typparameter, berücksichtigt. Diese müssten jedoch lediglich im Nachgang implementiert werden. Details zum Erweiterungsprozess werden im Anschluss an dieses Kapitel beschrieben.
 
 \begin{lstlisting}[label=lst:fieldanno,
 language=java,
 firstnumber=1,
-caption=Ausschnitthafte Darstellung der Annotationsmöglichkeiten an einer Klasse]
+caption=Darstellung der Annotationsmöglichkeiten an einer Klasse.]
 @CodeUnit("ExampleClass")
 public class ExampleRef {
 	@FixedCodeUnit @HasGetter @HasSetter
@@ -1028,32 +1028,270 @@ public class ExampleRef {
 }
 \end{lstlisting}
 
-Das Listing~\ref{lst:fieldanno} zeigt die Annotationsmöglichkeiten an einem Feld, fast jede der Annotationen, außer VariableParams, kann hier angebracht werden. Genau wie bei einer Klasse wird aus einem Feld welches als CodeUnit annotiert ist ein Annotations Modell gebildet, ist es als FixedCodeUnit markiert, wird das Feld in die Ursprungs-CodeUnit des zugehörigen Klassen Annotations Modells übernommen. Bei einer Annotation mit HasGetter oder HasSetter in Kombination mit FixedCodeUnit wird automatisch zum Feld noch ein Getter bzw. Setter erzeugt. Werden die beiden Annotationen zusammen mit CodeUnit verwendet, so wird jedes Mal wenn der für die CodeUnit generierte Builder genutzt wird auch ein, dem beschriebenen Feld entsprechender, Getter bzw. Setter generiert. Wird für das Feld ein VariableModifier oder ein variabler Typ annotiert, so verhält sich das wie die VariableType Annotation an einer Klasse. Vorhandene Daten werden übernommen. Wird eine Variabilität annotiert, müssen Werte hierfür später explizit gesetzt werden. Wurde ein variabler Datentyp nicht im Builder gesetzt, so wird bei der abschließenden Prüfung der CodeUnit ein Fehler ausgegeben und als Standardwert der Datentyp Object benutzt.
+Das Listing~\ref{lst:fieldanno} zeigt die Annotationsmöglichkeiten an einem Feld, fast jede der Annotationen, außer VariableParams, kann hier angebracht werden. Genau wie bei einer Klasse wird aus einem Feld welches als CodeUnit annotiert ist ein Annotations Modell gebildet, ist es als FixedCodeUnit markiert, wird das Feld in die Ursprungs-CodeUnit des zugehörigen Klassen Annotations Modells übernommen. Bei einer Annotation mit HasGetter oder HasSetter in Kombination mit FixedCodeUnit wird automatisch zum Feld noch ein Getter bzw. Setter erzeugt. Werden die beiden Annotationen zusammen mit CodeUnit verwendet, so wird jedes Mal wenn der für die CodeUnit generierte Builder genutzt wird auch ein, dem beschriebenen Feld entsprechender, Getter bzw. Setter generiert. 
+
+Wird für das Feld ein VariableModifier oder ein variabler Typ annotiert, so verhält sich das wie die VariableType Annotation an einer Klasse: Vorhandene Daten werden ignoriert, wird eine Variabilität annotiert, müssen Werte hierfür später explizit gesetzt werden. Wurde ein variabler Datentyp nicht im Builder gesetzt, so wird bei der abschließenden Prüfung der CodeUnit ein Fehler ausgegeben und als Standardwert der Datentyp Object benutzt.
 
 Bezüglich der Annotation von Feldern gibt es noch nicht implementierte Features. Werden in einer Zeile mehrere Felder in der Form "int a, b, c;" deklariert, wird nur das erste dieser Felder beachtet. Genauso wird eine Initialisierung bei Deklaration eines Feldes im aktuellen Proof of Concept ignoriert. Wird ein Feld als Array deklariert, wird die Deklaration als einfaches nicht-Array Feld interpretiert.
 
+\begin{lstlisting}[label=lst:constrmethoanno,
+language=java,
+firstnumber=1,
+caption=Darstellung der Annotationsmöglichkeiten von Konstruktoren und Methoden.]
+@CodeUnit("ExampleClass")
+public class ExampleRef {
+	@FixedCodeUnit
+	private ExampleRef() {
+		//...
+	}
+	
+	@CodeUnit("Constructor") @VariableModifier @VariableParams
+	public ExampleRef(int i) {
+		//...
+	}
+	
+	@FixedCodeUnit
+	public static void ExampleStaticMethod() {
+		//...
+	}
+	
+	@CodeUnit("Method") @VariableModifier @VariableParams
+	void ExampleMethod() {
+		//..
+	}
+}
+\end{lstlisting}
 
-
-Methoden und Konstruktoren können beide als CodeUnit oder FixedCodeUnit markiert werden. Bei einer Annotation als FixedCodeUnit wird die Methode oder der Konstruktor, genau wie bei einem Feld, in die Default-CodeUnit des Annotations Modells der übergeordneten Klasse übernommen. Entsprechend wird bei der Verwendung der CodeUnit Annotation ein Annotations Modell für die Methode oder den Konstruktor gebildet. Der Körper der Methode oder des Konstruktors muss beim Bauen immer gesetzt werden, ansonsten wird ein leerer Standard-Körper verwendet. Der Rückgabewert kann ebenso nicht als Variabilität annotiert werden, da dieser als standardmäßig variabel angesehen wird. Als Defaultwert wird hier, bei fehlender Angabe, void angenommen.
+Methoden und Konstruktoren können beide als CodeUnit oder FixedCodeUnit markiert werden. Bei einer Annotation als FixedCodeUnit wird die Methode oder der Konstruktor, genau wie bei einem Feld, in die Default-CodeUnit des Annotations Modells der übergeordneten Klasse übernommen. Entsprechend wird bei der Verwendung der CodeUnit Annotation ein Annotations Modell für die Methode oder den Konstruktor gebildet. Der Körper der Methode oder des Konstruktors muss beim Bauen immer gesetzt werden, ansonsten wird ein leerer Standard-Körper verwendet. Der Rückgabewert kann ebenso nicht als Variabilität annotiert werden, da dieser als standardmäßig variabel angesehen wird. Als Defaultwert wird hier, bei fehlender Angabe, void angenommen. Listing~\ref{lst:constrmethoanno} zeigt die unterschiedlichen Annotations Möglichkeiten für Methoden und Konstruktoren auf.
 
 Da vor dem parsen der Referenzimplementation keine Prüfung der Annotationen durchgeführt wird, sind Kombinationen wie ein static Feld mit einer HasGetter Annotation möglich. In der aktuellen Version wird in diesem Fall ein Getter erzeugt welcher auf eine nicht vorhandene Instanz Variable verweist. Es gibt mehrere solcher potentieller Fehlerquellen. Es macht jedoch keinen Sinn diese Fehler an andere späteren Stelle des Erzeugungsprozesses zu handhaben. Wenn dann müsste für die verteilte interne DSL aus Annotationen im Vorfeld eine Syntaxprüfung erfolgen. Dies wurde in diesem Proof of Concept aus Aufwandsgründen nicht umgesetzt.
 
 \subsubsection{Visitor \& Parser}
 
-\subsubsection{Modell}
-\subsection{Cherry}
-\subsubsection{Generator}
-\subsubsection{Modell}
-\subsubsection{Plattform}
-\subsubsection{Generierte Builder}
-\subsection{Jade}
-\subsubsection{Transformator}
-\subsection{Scarlet}
-\subsubsection{Generator}
-\subsubsection{Modell}
-\subsection{Violet}
-\subsection{Erweiterung von Spectrum}
+Mithilfe von Visitor-Klassen werden die Knotenpunkte des als AST eingelesenen Quelltextes verarbeitet. Aabhängig vom Typ des Knotenpunkt wird ein Parser aufgerufen welcher prüft ob eine CodeUnit oder FixedCodeUnit Annotation angebracht wurde. Die jeweiligen Parser Klassen Steuern die weitere Verarbeitung der Node im entsprechenden Kontext. Neben der Verarbeitung der Konkreten Information zur Annotierten Klasse ruft der ClassAnnotationParser noch weitere Visitor auf. Diese sorgen dann für die Verarbeitung etwaiger innerhalb der annotierten Klasse befindlicher FixedCodeUnits. Der Umkehrschluss hieraus ist, dass FixedCodeUnit Annotationen nur dann berücksichtigt werden wenn diese innerhalb einer als CodeUnit annotierten Klasse stehen.
 
+\subsubsection{Annotation Modell}
+
+Für jede CodeUnit Annotation erzeugt Amber ein AnnotationModel. Neben einem Identifier und der im Konzept bereits erläuterten Ursprungs CodeUnit, hält dieses zusätzlich zwei Sets aus AnnotationType Einträgen. AnnotationType ist hier ein Enum zur Identifikation von in der Referenzimplementierung gemachten Annotationen. Eines der Sets hält Informationen zu Variabilitäten, d. h. ob beispielsweise der Modifier veränderlich ist. Das andere beinhaltet Daten zu Erweiterungen. Mit Erweiterung ist hier gemeint, dass es zu einem Feld automatisch einen Getter oder Setter gibt. Momentan sind dies die einzigen Erweiterungen die durch Annotationen getätigt werden können, jedoch wäre es auch denkbar zum Beispiel eine IsSingleton Annotation einzuführen welche dann eine Erweiterung der Klasse wäre.
+
+Im Generator für die Builder werden abhängig von den Variabilitäts Annotationen passende Builder-Methoden als Komponenten ausgewählt und an den Builder angehängt. Zudem wird die Information welche Erweiterung Annotationen existieren in den Builder übertragen, damit bei der Anwendung des Buildes später entsprechende Verarbeitungsschritte durchgeführt werden können.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{bilder/cherry}
+	\caption{Darstellung der Unter-Packages im cherry Package.}
+	\label{fig:cherryPackages}
+\end{figure}
+
+\subsection{Cherry}
+
+Aus den aus der Referenzimplementation entstandenen Annotations Modellen werden von Cherry im darauffolgenden Schritt die später verwendbaren Builder erzeugt. Zudem ist im Package model das von dieser generierten internen DSL beschriebene CodeUnit Modell definiert. Der im Konzept erwähnte Plattform Code ist in Cherry im Package platform zu finden. Abbildung~\ref{fig:cherryPackages} zeigt noch einmal die erwähnten Packages.
+
+In den folgenden Abschnitten werden die Funktionsweise und Aufgabe von Cherry genau erläutert. Im Anschluss daran wird die Verwendung der erzeugten Bilder noch einmal erläutert und mit Beispiel verdeutlicht.
+
+\subsubsection{CodeUnit Modell}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1.0\textwidth]{bilder/classCu}
+	\caption{Klassen Diagramm des CodeUnit Modells.}
+	\label{fig:classcu}
+\end{figure}
+
+Wie bereits zuvor erwähnt, könnte man das CodeUnit Modell als das Kernstück von Spectrum ansehen. Eine Instanz des CodeUnit Modells wird durch Verwendung der erzeugten internen DSL beschrieben und aus dieser kann dann zum Beispiel wieder konkreter Java Quelltext erzeugt werden.
+
+Das Diagramm auf Abbildung~\ref{fig:classcu} zeigt das CodeUnitModell und seine Hilfsklassen.
+Die Grundidee des CodeUnit Modells wurde im Konzeptkapitel bereits erläutert. Konkret wird der Zusammenhang zwischen CodeUnit und SubCodeUnits dadurch dargestellt, dass eine CodeUnit eine Liste mit weiteren CodeUnits hält. Der Typ der CodeUnit wird in einem Feld eines Wertes des CodeUnitType Enums gehalten. Es gibt nicht immer zwingend zu jedem CodeUnitType auch einen möglichen Builder. Die CodeUnitTypes METHOD\_BODY und METHOD\_PARAM existieren nur als SubCodeUnits des CodeUnitTypes METHOD.
+
+Besonderes Augenmerk fällt hier darauf, dass in der Implementation, entgegen dem Konzept, von CodeUnit abgeleitete Klassen existieren. Wie bereits beschrieben, wird die Identifikation des Typs einer CodeUnit anhand des CodeUnitType durchgeführt. Die Ableitungen von CodeUnit haben keine eigene Funktion und dienen nur zur Fehlerreduzierung bei der Verwendung der Builder. Durch spezielle CodeUnit Klassen ist es möglich Builder Methoden zu generieren welche einschränken welche Art von CodeUnit als SubCodeUnit übergeben werden darf. Beispielsweise kann mithilfe der MethodCodeUnit Klasse eine Methode für ein Builder der eine ClassCodeUnit beschreibt erzeugt werden welche ausschließlich die Übergabe einer MethodCodeUnit erlaubt. Konkret wäre das die Methode withMethod.
+
+Das Konzept der Parametrisierung durch eine generische Datenstruktur wurde als Map mit dem Schlüssel CodeUnitDatumType Einträgen des Typs CodeUnitDatum realisiert. CodeUnitDatumType ist abermals ein Enum welche später die semantische Information was der hinterlegte Parameter bedeutet. Der Parameter selbst, also das CodeUnitDatum, ist generisch Parametrisiert und kann somit einzelne Werte oder auch Arrays halten. Allgemein kann hier jedoch jeder Datentyp stehen, für den CodeUnitDatumType Identifier wird hier beispielsweise ein String als Typparameter verwendet. Zur Verdeutlichung zeigt Listing~\ref{lst:cud} die Implementation von CodeUnitDatum und exemplarisch wird in Listing~\ref{lst:cudex} dargestellt, wie einer CodeUnit ein CodeUnit Datum hinzugefügt werden kann und wie dieses später ausgelesen werden muss. 
+
+Die Methode addCodeUnitDatum folgert den hinterlegten Datentyp anhand des als zweiten Parameter übergebenen Datums. Mit der Methode getCodeUnitDatum kann das unter einem CodeUnitDatumType hinterlegte Datum wieder ausgelesen werden. Da die Information welcher generische Typparameter in der Map hinterlegt wurde verloren geht, muss stets explizit auf den korrekten Typ umgewandelt werden. Dies stellte kein Problem dar, da unter einem bestimmten CodeUnitDatumType mit ein bestimmten Datentyp zu rechnen ist.
+
+\begin{lstlisting}[label=lst:cud,
+language=java,
+firstnumber=1,
+caption=Implementation der Klasse CodeUnitDatum.]
+public class CodeUnitDatum<T> implements Serializable {
+	private final T datumData;
+
+	public CodeUnitDatum(T datumData) {
+		this.datumData = datumData;
+	}
+
+	public T getDatumData() {
+		return datumData;
+	}
+
+	@Override
+	public String toString() {
+	if(datumData.getClass().isArray())
+		return Arrays.toString((Object[]) datumData);
+
+	return datumData.toString();
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[label=lst:cudex,
+language=java,
+firstnumber=1,
+caption=Beispiel zum konkreten hinterlegen und auslesen eines CodeUnitDatums.]
+void exampleDatumWriter(String identifier) {
+	CodeUnit cu = new CodeUnit();
+	cu.addCodeUnitDatum(CodeUnitDatumType.IDENTIFIER, identifier);
+}
+
+String exampleDatumReader(CodeUnit cu) {
+	return (String) cu.getCodeUnitDatum(CodeUnitDatumType.IDENTIFIER).getDatumData(); 
+}
+\end{lstlisting}
+
+\subsubsection{DSL Generator}
+
+Der BuilderGenerator folgt dem Konzept, dass jeder Builder Komponenten basiert ist. Die Komponenten hierbei sind die Builder Methoden. Zum einen sind diese durch die im Annotations Modell hinterlegten Variabilitäten vorgegeben und zum anderen aus dem Typ der von dem Builder beschriebenen CodeUnit ableitbar. Im Generator wird ein Builder dementsprechend auf Grundlage dieser Daten Stück für Stück zusammengebaut.
+
+Im ersten Schritt wird die Referenzimplementation zu einer CompilationUnit geparsed. Diese wird dann von Amber verarbeitet, woraus eine Liste von Annotations Modellen entsteht. Aus jedem dieser Modelle wird dann ein Builder erzeugt. Der Klassenname des Builder setzt sich aus dem Identifier des Annotations Modells und dem Suffix UnitBuilder zusammen. Im Anschluss hieran werden, abhängig von der zu beschreibenden CodeUnit, aus einer Hilfsklasse, dem BuilderMethodTypeProvider, die Informationen abgefragt welche Standardmethoden der Builder benötigt. Mit der BuilderMethodFactory wird aus dieser BuilderMethodType Information eine entsprechender JavaPoet MethodSpec eurzeugt. Danach werden auf gleichem Weg die MethodSpecs zur Beschreibung der Variabilitäten erzeugt und angehängt.
+
+Um die in der defaultCodeUnit hinterlegten Daten in die Ursprungs CodeUnit des Builders zu übertragen wird die Default CodeUnit zu einem Byte Array serialisiert. Dieses Byte Array wird als Literal in der erzeugten initializeDefaultCodeUnit Methode hinterlegt. Diese Methode wird im Konstruktor des erzeugten Builders aufgerufen und sorgt dafür das, dass aus dem Byte Array wieder ein CodeUnit Objekt deserialisiert wird. Die Erzeugung dieses MethodSpecs und die von JavaParser aus dem MethodSpec erzeugte Builder Methode werden in Listing~\ref{lst:defcu} gezeigt.
+
+\begin{lstlisting}[label=lst:defcu,
+language=java,
+firstnumber=1,
+caption=Quelltext zur Erzeugung des MethodSpecs für die Builder-Methode initializeDefaultCodeUnit und die daraus resultierende konrekte Methode in einem Builder.]
+
+//Erzeugung des MethodSpec in der BuilderMethodFactory
+private MethodSpec createInitDefCodeUnitMethod() {
+	CodeUnit sourceCodeUnit = annotationModel.getDefaultCodeUnit();
+
+	byte[] serializedCodeUnit = SerializationUtils.serialize(sourceCodeUnit);
+
+	String codeUnitArrayLiteral = Arrays
+		.toString(serializedCodeUnit)
+		.replace("[","{")
+		.replace("]","}");
+
+	return MethodSpec.methodBuilder("initializeDefaultCodeUnit")
+			.addComment("Initializes this builder's data with default data encoded into a byte[]")
+			.addModifiers(Modifier.PRIVATE)
+			.addStatement("byte[] serializedCodeUnit = new byte[] $L", codeUnitArrayLiteral)
+			.addStatement("this.codeUnit = $T.deserialize(serializedCodeUnit)", SerializationUtils.class)
+			.build();
+}
+
+//Erzeugte konrete Methode in einem Builder
+private void initializeDefaultCodeUnit() {
+	// Initializes this builder's data with default data encoded into a byte[]
+	byte[] serializedCodeUnit = new byte[] {-84, -19, 0/* more data */};
+	this.codeUnit = SerializationUtils.deserialize(serializedCodeUnit);
+}
+\end{lstlisting}
+
+\subsubsection{Abhängigkeit der erzeugten Builder zu Plattform Code}
+
+Um die erzeugte DSL verwenden zu können, muss das Package platform zur Verfügung stehen. Hierin befinden sich Klassen zur Auflösung von Referenzen und zur Fehlerbehandlung. Da Getter und Setter erst zur Laufzeit, während die Builder bereits im Einsatz sind, erzeugt werden können, findet sich hier auch der DefaultCodeUnitProvider. Im aktuellen Stand von Spectrum ist die Funktionalität der Plattform Klassen noch sehr beschränkt. Vor allem die Fehler Handhabung ist nur exemplarisch implementiert. Momentan werden nur Klassen Referenzen auf die beschriebene Klasse selbst aufgelöst, um für den Proof of Concept die Definition von Singletons mithilfe der internen DSL möglich zu machen. Da die Referenz auf Basis eines CodeUnitDatums aufgelöst wird, könnten selbst verständlich noch weitere Referenzen im Parse Prozess hinterlegt werden und somit auch vom CodeUnitReferenzResolver gehandhabt werden.
+
+\subsubsection{Verwendung der erzeugten Builder}
+
+Listing~\ref{lst:exb} stellt die Anwendung der generierten Builder dar. Anzumerken ist, dass dieses Beispiel eine kaum sinnhafte CodeUnit beschreibt und lediglich die verschiedenen Möglichkeiten und wie man die einzelnen Builder Methoden anwendet aufzeigt.
+
+Modifier werden mit einem Enum gehandhabt. Methoden welche einen Datentypen als Parameter erwarten bekommen diesen als String übergeben. Ein einfacher Weg diesen zu erhalten ist über die Klasse mit .class auf die Methode getName zuzugreifen. Der Körper einer Methode wird hier, genau wie bei JavaPoet, als String übergeben.
+
+Ein zusammenhängendes Beispiel wie aus einer Referenzimplementation mit Annotationen Builder generiert werden, wie man diese dann benutzen kann und wie daraus generierter Java Quelltext aussieht, folgt am Ende dieses Kapitels.
+
+\begin{lstlisting}[label=lst:exb,
+language=java,
+firstnumber=1,
+caption=Quelltext zur Verwendung verschiedener erzeugter Builder.]
+CodeUnit cu = ExampleClassUnitBuilder
+				.createWithIdentifier("ExampleIdentifier")
+				.withModifiers(CodeUnitModifier.PROTECTED)
+				.withField(VarUnitBuilder
+					.createWithIdentifier("exampleField")
+					.withModifiers(CodeUnitModifier.PRIVATE)
+					.withDataType(Object.class.getName())
+					.end())
+				.withMethod(MethodUnitBuilder
+					.createWithIdentifier("exampleMethod")
+					.withModifiers(CodeUnitModifier.PUBLIC)
+					.withParameter("param", String.class.getName())
+					.withMethodBody("return param")
+					.withReturnType(String.class.getName())
+					.end())
+				.withConstructor(ConstructorUnitBuilder
+					.create()
+					.withParameter("param", String.class.getName())
+					.withModifiers(CodeUnitModifier.PUBLIC)
+					.withMethodBody("//body als String")
+					.end())
+				.end();
+\end{lstlisting}
+
+\subsection{Jade}
+
+Die eher kleine Komponente Jade hat zur Aufgabe fertig beschriebene CodeUnits in ein für Scarlet verarbeitetbares Modell zu transformieren. Jade umfasst nur das Package transformator, in welchem auch nur die Klasse CodeUnitTransformator liegt.
+
+\subsubsection{Transformator}
+
+Für die unterschiedlichen Elemente in Scarlet's Java Modell sind im CodeUnitTransformator Transformationsregeln in Form von Methoden definiert. Da das CodeUnitModell und somit auch die CodeUnitTypes ursprünglich aus Java Quelltext abgeleitet wurden, ist die Umwandlung vergleichsweise unkompliziert. Dies ist am Beispiel der Transformation von Feldern in Listing~\ref{lst:trans} gut zu sehen. Mithilfe von Java-Streams werden hier die SubCodeUnits einer Klassen CodeUnit gefiltert und dann die einzelnen Felder umgewandelt.
+
+\begin{lstlisting}[label=lst:trans,
+language=java,
+firstnumber=1,
+caption=Umwandlung der Felder in den SubCodeUnits einer CodeUnit. Auszug aus der Klasse CodeUnitTransformator.]
+private List<JavaField> transformFields(CodeUnit cu) {
+	return cu.getSubCodeUnits()
+				.stream()
+				.filter(this::isField)
+				.map(this::transformField)
+				.collect(Collectors.toList());
+}
+
+private JavaField transformField(CodeUnit cu) {
+	JavaField jField = new JavaField();
+	jField.modifiers = this.transformModifier(cu);
+	jField.identifier = this.transformIdentifier(cu);
+	jField.type = this.transformType(cu);
+	jField.typeParams = this.transformTypeArguments(cu);
+	
+	return jField;
+}
+\end{lstlisting}
+
+\subsection{Scarlet}
+
+Die Komponente Scarlet stellt ein Modell zur Verfügung welches die Struktur und den Aufbau einer Java Klasse widerspiegelt. Die zweite Aufgabe von Scarlet ist es aus diesem Java Modell konkreten Java Quelltext zu erzeugen. Die in Scarlet definierten Visitor finden keine Verwendung mehr, ursprünglich haben diese Java Quelltext eingelesen und in das Java Modell überführt.
+
+\subsubsection{Allgemeiner Java Klassen Generator}
+
+Der Generator ist vergleichsweise einfach aufgebaut. Der konkrete Quelltext wird abermals mit Java Poet erzeugt. Für die unterschiedlichen im Java Modell darstellbaren Java Elemente sind in der Klasse JavaClassGenerator jeweils generate Methoden implementiert. Diese Methoden erzeugen die für JavaPoet notwendigen Objekte. Mithilfe des JavaPoetTypeMappers werden die als Zeichenketten vorliegenden Klassennamen zu einem JavaPoet Type umgewandelt.
+
+\subsubsection{Modell zur Abbildung von Java Klassen}
+
+Das Modell auf dessen Basis Scarlet den Java Quelltext erzeugt, ist ein Teilmodell des Java Metamodells. Soll Spectrum um neue generier Möglichkeiten erweitert werden, so werden auch meist das Scarlet Java Modell und der Java Klassengenerator ergänzt.
+
+\subsection{Violet}
+
+Als letzte und auch kleinste Komponente stellt Violet einen Logger zur Verfügung. Dies ermöglicht es vereinfacht eine Info- oder Fehlernachricht auf der Konsole auszugeben. Er sollte leicht um Ausgabe in einer Log-Datei erweiterbar sein.
+
+\section{Erweiterung von Spectrum}
+
+Im letzten Abschnitt dieses Kapitels wird beschrieben wie ein beispielhafter Erweiterungsprozess für Spectrum aussehen könnte. Hierdurch sollen Anhaltspunkte gegeben werden welche Komponenten und Klassen für eine Ausweitung des Funktionsumfangs bearbeitet werden müssen.
+
+Allgemein gilt bei der Erweiterung von Spectrum immer das gleiche Prinzip. Soll eine neue Annotation hinzugefügt werden muss in Amber diese Annotation definiert werden und im Modell muss das Annotation Type Enum erweitert werden. In jedem Fall muss der entsprechende Annotation Parser die gewünschten neuen Daten aus dem AST in das Annotations Modell übertragen. 
+
+Der einfachste Fall ist die Erweiterung der möglichen Ziele für FixedCodeUnit. Zuerst müssen die möglichen Targets der FixedCodeUnit entsprechend erweitert werden. Dies geschehen sollten ein neuer Visitor und ein neuer Parser für das neue Ziel erstellt werden, hierbei kann man sich gut an der vorhandenen Struktur orientieren. Intern sind die Parser sehr ähnlich aufgebaut, für die Annotation direkt und Annotationen die in Abhängigkeit der Haupt Annotation stehen, gibt es jeweils parse Methoden. Für die FixedCodeUnit wird eine parseFixedCodeUnitAnnotation Methode implementiert welche prüft ob die entsprechende Annotation vorhanden ist und wenn ja, die vorhandene defaultCodeUnit des Modells um die neuen FixedCodeUnit Daten erweitert. Bei Bedarf können neue CodeUnitTypes und CodeUnitDatumTypes angelegt werden. 
+
+Da es sich hier um eine FixedCodeUnit handelt müssen keine neuen Builder Methoden erzeugt werden. Um später Java Quelltext erzeugen zu können muss zuerst das Java Modell von Scarlet um entsprechende Klassen oder Felder erweitert werden. Danach können im JavaClassGenerator neue generate Methoden implementiert werden. Der letzte Schritt ist dann in Jade neue Transformationsregeln zu definieren, welche die Daten der CodeUnit in Java Modell Daten umwandeln.
+
+Bei der Entwicklung von Spectrum wurde die Erfahrung gemacht, dass eine Erweiterung fast jedes Mal ein Element sowohl als FixedCodeUnit Annotierbar sein soll, als auch als Variabilität von einem Builder beschreibbar. Da, wie oben beschrieben, bei einer FixedCodeUnit keine Erweiterung des BuilderGenerators notwendig ist, ist es sehr hilfreich zuerst den gesamten Erweiterungsprozess für eine FixedCodeUnit durchzuführen und sich dann erst um die Implementation der fehlenden Teile für die CodeUnit Annotation kümmert.
+
+Handelt es sich um eine neue Variabilität die mit der internen DSL ausgedrückt werden können soll, muss zuerst die BuilderMethodFactory um die neue Methode erweitert werden. Parallel dazu wird ein neuer BuilderMethodType hinzugefügt. Jetzt kann dafür Sorge getragen werden dass Amber im entsprechenden Parser die für den Generator notwendige Information, dass eine entsprechende Methode generiert werden soll, als Variabilitäts Annotation aufnimmt. Wurden die oben erwähnten Schritte für die FixedCodeUnit bereits einmal implementiert, wäre die Erweiterung jetzt abgeschlossen.
+
+Natürlich, vor allem Zusammenhang mit Erweiterungs Annotationen, können die einzelnen Schritte mehr oder weniger komplex ausfallen oder es könnten grundsätzliche Änderungen an Spectrum notwendig sein. Diese Fälle können in dieser Arbeit jedoch nicht alle abgehandelt werden, der diese kaum absehbar sind.
+
+\section{Zusammenhängendes Beispiel: Von der Referenzimplementation zum erzeugten Java Quelltext}
 
 \begin{lstlisting}[label=lst:java,
 				   language=java,
