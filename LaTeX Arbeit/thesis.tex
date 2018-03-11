@@ -569,7 +569,7 @@ Eine Möglichkeit zur Erzeugung eines Generats ist die Zusammenstellung aus Komp
 
 \subsubsection{Struktur}
 
-Da es für die statische Fabrikmethode nach Bloch kein Gegenstück im Katalog Design Pattern Gamma et al. existiert\,\cite[S. 5]{bloch2017} und die Struktur lediglich durch das Hinzufügen weiterer Methoden zu einem Objekt besteht, wird hier auf eine Abbildung verzichtet. 
+Da für die statische Fabrikmethode nach Bloch kein Gegenstück im Katalog Design Pattern Gamma et al. existiert\,\cite[S. 5]{bloch2017} und die Struktur lediglich durch das Hinzufügen weiterer Methoden zu einem Objekt besteht, wird hier auf eine Abbildung verzichtet. 
 
 Eine statische Fabrikmethode ist eine von außen zugängliche statische Methode einer Klasse mit beliebigen Parametern die, wie ein Konstruktor, ein Objekt dieser Klasse zurückgibt. Sie kann die Konstruktoren einer Klasse vollständig ersetzen oder die Klasse erweitern\,\cite[S. 5f]{bloch2017}. Die statische Fabrikmethode könnte auch in eine extra Fabrik Klasse ausgelagert werden um so Logik für die Instanziierung verschieden konfigurierter Objekte einer Klasse lokal zu Sammeln.
 
@@ -585,7 +585,7 @@ Zu jedem analysierten Problem werden mögliche Lösungswege aufgeführt und ihre
 
 Die Umsetzung einer Anwendung hat unterschiedliche Etappen. Zu Beginn der Entwicklung wird spezifiziert was entwickelt werden soll, also welche Anforderungen die Anwendung gestellt werden. Gefolgt von einer Entwurfsphase, in welcher beschrieben wird wie die Anwendung aussieht und aus welchen Bausteinen sie besteht. Als letzter Schritt wird das in Entwurfsphase erarbeitete Konzept implementiert\,\cite[S. 62]{balzert2009a}. Abhängig vom verwendeten Entwicklungsprozess, wird parallel zu dieser Entwicklung oder im Anschluss daran die Qualität der Anwendung durch Tests gesichert. Sind diese Etappen alle erledigt, kann die App veröffentlicht werden.
 
-Die Idee der modellgetriebenen Software Entwicklung ist es, dass man vereinfacht und ab einem gewissen Punkt wirtschaftlich, ganze Anwendungen oder Teile derer einfacher, schneller und wiederverwertbar generieren kann\,\cite[S. 14f.]{stahl2007}. Ein Beispiel hierfür wäre die Umsetzung verschieden konfigurierter Ausprägungen einer Anwendung, basierend auf einer Softwarefamilie\,\cite[S. 237ff.]{stahl2007}. Wie aus den im vorherigen Kapitel beschriebenen Grundlagen hervorgeht, hat auch MDSD grundsätzlich mehrere Entwicklungsschritte. Um Software mit einem Modell beschreiben und daraus generieren zu können, muss bekannt sein wie diese Software aufgebaut ist und funktioniert. Ein erster Schritt bei MDSD kann also sein, eine Ursprungs App zu entwicklen, welche als Referenz für den weiteren Entwicklungsprozess dient. Danach kann diese Referenzimplementation analysiert werden. Hierunter fällt auch das in Grundlagen beschriebene Domain Engineering und die Definition eines Metamodells. Hierauf aufbauend kann zum einen eine domänenspezifische Sprache entwickelt werden, zum anderen ein Generator, welcher aus einer Instanz des Metamodells verschiedene Ausprägungen der Software generieren kann.
+Die Idee der modellgetriebenen Software Entwicklung ist es, dass man vereinfacht und ab einem gewissen Punkt wirtschaftlich, ganze Anwendungen oder Teile derer einfacher, schneller und wiederverwertbar generieren kann\,\cite[S. 14f.]{stahl2007}. Ein Beispiel hierfür wäre die Umsetzung verschieden konfigurierter Ausprägungen einer Anwendung, basierend auf einer Softwarefamilie\,\cite[S. 237ff.]{stahl2007}. Wie aus den im vorherigen Kapitel beschriebenen Grundlagen hervorgeht, hat auch MDSD grundsätzlich mehrere Entwicklungsschritte. Um Software mit einem Modell beschreiben und daraus generieren zu können, muss bekannt sein wie diese Software aufgebaut ist und funktioniert. Ein erster Schritt bei MDSD kann also sein, eine Ursprungs-App zu entwicklen, welche als Referenz für den weiteren Entwicklungsprozess dient. Danach kann diese Referenzimplementation analysiert werden. Hierunter fällt auch das in Grundlagen beschriebene Domain Engineering und die Definition eines Metamodells. Hierauf aufbauend kann zum einen eine domänenspezifische Sprache entwickelt werden, zum anderen ein Generator, welcher aus einer Instanz des Metamodells verschiedene Ausprägungen der Software generieren kann.
 
 Bereits für die Umsetzung einer Referenzimplementation muss der gleiche Prozess durchlaufen werden, wie der für das konventionelle umsetzen einer App\,\cite[S. 219f.]{stahl2007}. Da bei MDSD noch eine umfangreiche Analysephase und die Entwicklung des Generators durchgeführt werden muss, kann modellgetriebene Softwareentwicklung sich frühestens mit der Entwicklung einer zweiten App einer Softwarefamilie oder vielleicht sogar erst zu einem späteren Zeitpunkt wirtschaftlich rechnen. Abbildung ~\ref{fig:vgl1} stellt diesen Vergleich grafisch vereinfacht dar.
 
@@ -636,13 +636,13 @@ Eine dritte Variante wäre es den Quelltext mit Java Annotationen zu versehen. A
 
 Der mit Informationen angereicherte Java Code muss eingelesen werden. Ein Ansatz hierfür wäre es einen Java Parser von Grund auf neu zu implementieren oder auf bereits vorhandene Bibliotheken zurückzugreifen. Eine Neu-Implementation würde volle Kontrolle über das Modell in welches der Java Code eingelesen wird liefern. Wird zur Informationsanreicherung der XML Ansatz verfolgt, könnte die Zusammenführung der Daten in ein gemeinsames Modell dann bereits beim parsen durchgeführt werden. Die im Grundlagen Kapitel beschriebenen Schritte zum parsen von Quelltext müssten implementiert werden. Da Java eine syntaktisch sehr umfangreiche Sprache ist, ist der Aufwand hier sehr groß.  Bei der Verwendung einer externen Bibliothek zum parsen des Codes hat dies meist den Vorteil, dass diese Schritte hinter einer API abstrahiert sind und man ohne Zusatzaufwand Hilfsmittel wie ein implementiertes Visitor Pattern für den AST zur Verfügung hat. Je nach verwendeter Bibliothek kann man auch damit rechnen, dass der Parser weitestgehend fehlerfrei funktioniert und regelmäßig aktualisiert wird.
 
-\subsection{Abstrakte Darstellung von Java Code als Modell}
+\subsection{Abstrakte Darstellung von Java Code als Modell}\label{sec:codeasmodel}
 
 Wurden Java Quelltext und angebrachte Informationen eingelesen und zusammengeführt, muss eine Möglichkeit gefunden werden konkrete Ausprägungen der Variabilitäten definieren zu können. Das Modell welches diese Daten abbildet, ist das Metamodell auf dessen Basis der Metagenerator Quelltext erzeugt.
 
 \subsubsection{Anforderungen an das Metamodell}
 
-Es gibt mehrere Anforderungen an dieses Metamodell. Grundsätzlich muss es möglich sein die, zur späteren Generierung notwendigen Strukturinformationen aus dem Java Quelltext, zu halten. Außerdem müssen Instanzen dieses Metamodells gebildet werden können, die in ihrem Aufbau die nicht variablen Teile des Ursprungscodes widerspiegeln und über eine Schnittstelle mit Informationen zu den variablen Teilen befüllt werden können.
+Es gibt mehrere Anforderungen an dieses Metamodell. Grundsätzlich muss es möglich sein die, zur späteren Generierung notwendigen Strukturinformationen aus dem Java Quelltext, zu halten. Außerdem müssen Instanzen dieses Metamodells gebildet werden können, die in ihrem Aufbau die nicht variablen Teile des Ursprungs-Codes widerspiegeln und über eine Schnittstelle mit Informationen zu den variablen Teilen befüllt werden können.
 
 Da beschreibbar sein muss welche Variabilitäten im Quelltext existieren, reicht die Verwendung des beim parsen entstandenen AST als solcher nicht aus. Es wäre jedoch denkbar das Metamodell des AST zu übernehmen und diesen mit weiteren Informationen zu den Nodes zu versehen. Je nach verwendeter Bibliothek könnte es hier möglich sein diese Erweiterung durch den Aufbau einer Vererbungshierarchie zu den vorhandenen Klassen der Knotenpunkte vorzunehmen. Wird auf den von einer Bibliothek gelieferten AST zurückgegriffen, könnte es sein, dass dieser viel mehr Informationen hält, als für den konkreten Erzeugungsprozess notwendig wären und somit zusätzliche Komplexität einführt.
 
@@ -697,7 +697,7 @@ Wie auf Abbildung ~\ref{fig:meta1} zu erkennen ist besteht der Java-Metagenerato
 
 Das Konzept der einzelnen Schritte und der hierfür verwendeten Ansätze wird im folgenden, orientiert an der obigen Prozessstruktur, detailliert erläutert.
 
-\subsection{Von Java-Quelltext zum Annotations-Modell}
+\subsection{Von Java-Quelltext zum Annotations-Modell}\label{sec:sourcetomodel}
 
 Ausgehend von einer Referenzimplementation muss diese, wie bereits in der Analyse beschrieben, mit Informationen angereichert werden um Variabilitäten zur Generierung einer DSL ausdrücken zu können.
 
@@ -806,9 +806,9 @@ Es ist möglich, dass ein als statisch annotiertes Feld den selben Datentyp hat 
 
 Der früheste Zeitpunkt an dem bei der Verwendung eines Builders für eine Klassen-CodeUnit klar ist welche SubCodeUnits diese hat, ist wenn die Method Chain explizit beendet wird. Bevor die endgültige CodeUnit zurückgegeben wird ist ein letzter Verarbeitungsschritt vorgesehen. 
 
-Jede SubCodeUnit der Klasse wird nach Referenzen auf den ursprünglichen Datentyp aus der Referenzimplementation durchsucht und an dessen Stelle tritt durch Textersetzung der neue, tatsächliche Identifier der erzeugten Klassen-CodeUnit. Die Information hierzu wird, wenn benötigt, bei der Erzeugung des Annotations Modells in der Ursprungs-CodeUnit als Parameter hinterlegt.
+Jede SubCodeUnit der Klasse wird nach Referenzen auf den ursprünglichen Datentyp aus der Referenzimplementation durchsucht und an dessen Stelle tritt durch Textersetzung der neue, tatsächliche Identifier der erzeugten Klassen-CodeUnit. Die Information hierzu wird, wenn benötigt, bei der Erzeugung des Annotations Modells in der Ursprungs--CodeUnit als Parameter hinterlegt.
 
-Der aktuelle Proof of Concept ersetzt in diesem Nachbearbeitungsschritt nur Referenzen auf die Ursprungsklasse und erzeugt Standard CodeUnits, wie zum Beispiel Getter und Setter. Erweiterungen dieser nachgelagerten Phase sind jedoch durchaus denkbar.
+Der aktuelle Proof of Concept ersetzt in diesem Nachbearbeitungsschritt nur Referenzen auf die Ursprungs-Klasse und erzeugt Standard CodeUnits, wie zum Beispiel Getter und Setter. Erweiterungen dieser nachgelagerten Phase sind jedoch durchaus denkbar.
 
 \subsection{Erzeugung von Java Code aus einem befüllten CodeUnit-Modell}
 
@@ -820,7 +820,7 @@ Für die Umwandlung des CodeUnit Modells zum Java Modell wird, ausgehend vom Wur
 
 Das verwendete Java Modell stellt nur eine Teilmenge des Java Metamodells dar und bildet nur Java sprach Features ab welche mit den generierten DSLs in einer CodeUnit beschreibbar sind. Mit jeder Funktionserweiterung des Proof-of-Concept, geht auch eine Erweiterung des verwendeten Java Modells einher. Das Java Modell soll jetzt keine abstrakte Darstellung von Quelltext mehr sein sondern gezielt und so genau wie möglich die Struktur von Java Quelltext abbilden.
 
-\subsubsection{Erzeugung von Quelldateien}
+\subsubsection{Erzeugung von Quelldateien}\label{sec:javagen}
 
 Zur Generierung von Java Quelltext wird bei diesem Konzept Transformer Generation verwendet. Der Vorteil Template basierter Quelltexterzeugung des reduzierten Aufwands, wenn sich viele Teile des Generats wiederholen, kann bei der vorliegenden Problemstellung nicht ausgenutzt werden. Die vom Metagenerator erzeugten Java Quelltext Dateien können in ihrem Inhalt praktisch vollständig voneinander abweichen.
 
@@ -1028,7 +1028,7 @@ public class ExampleRef {
 }
 \end{lstlisting}
 
-Das Listing~\ref{lst:fieldanno} zeigt die Annotationsmöglichkeiten an einem Feld, fast jede der Annotationen, außer VariableParams, kann hier angebracht werden. Genau wie bei einer Klasse wird aus einem Feld welches als CodeUnit annotiert ist ein Annotations Modell gebildet, ist es als FixedCodeUnit markiert, wird das Feld in die Ursprungs-CodeUnit des zugehörigen Klassen Annotations Modells übernommen. Bei einer Annotation mit HasGetter oder HasSetter in Kombination mit FixedCodeUnit wird automatisch zum Feld noch ein Getter bzw. Setter erzeugt. Werden die beiden Annotationen zusammen mit CodeUnit verwendet, so wird jedes Mal wenn der für die CodeUnit generierte Builder genutzt wird auch ein, dem beschriebenen Feld entsprechender, Getter bzw. Setter generiert. 
+Das Listing~\ref{lst:fieldanno} zeigt die Annotationsmöglichkeiten an einem Feld, fast jede der Annotationen, außer VariableParams, kann hier angebracht werden. Genau wie bei einer Klasse wird aus einem Feld welches als CodeUnit annotiert ist ein Annotations Modell gebildet, ist es als FixedCodeUnit markiert, wird das Feld in die Ursprungs--CodeUnit des zugehörigen Klassen Annotations Modells übernommen. Bei einer Annotation mit HasGetter oder HasSetter in Kombination mit FixedCodeUnit wird automatisch zum Feld noch ein Getter bzw. Setter erzeugt. Werden die beiden Annotationen zusammen mit CodeUnit verwendet, so wird jedes Mal wenn der für die CodeUnit generierte Builder genutzt wird auch ein, dem beschriebenen Feld entsprechender, Getter bzw. Setter generiert. 
 
 Wird für das Feld ein VariableModifier oder ein variabler Typ annotiert, so verhält sich das wie die VariableType Annotation an einer Klasse: Vorhandene Daten werden ignoriert, wird eine Variabilität annotiert, müssen Werte hierfür später explizit gesetzt werden. Wurde ein variabler Datentyp nicht im Builder gesetzt, so wird bei der abschließenden Prüfung der CodeUnit ein Fehler ausgegeben und als Standardwert der Datentyp Object benutzt.
 
@@ -1072,7 +1072,7 @@ Mithilfe von Visitor-Klassen werden die Knotenpunkte des als AST eingelesenen Qu
 
 \subsubsection{Annotation Modell}
 
-Für jede CodeUnit Annotation erzeugt Amber ein AnnotationModel. Neben einem Identifier und der im Konzept bereits erläuterten Ursprungs CodeUnit, hält dieses zusätzlich zwei Sets aus AnnotationType Einträgen. AnnotationType ist hier ein Enum zur Identifikation von in der Referenzimplementierung gemachten Annotationen. Eines der Sets hält Informationen zu Variabilitäten, d. h. ob beispielsweise der Modifier veränderlich ist. Das andere beinhaltet Daten zu Erweiterungen. Mit Erweiterung ist hier gemeint, dass es zu einem Feld automatisch einen Getter oder Setter gibt. Momentan sind dies die einzigen Erweiterungen die durch Annotationen getätigt werden können, jedoch wäre es auch denkbar zum Beispiel eine IsSingleton Annotation einzuführen welche dann eine Erweiterung der Klasse wäre.
+Für jede CodeUnit Annotation erzeugt Amber ein AnnotationModel. Neben einem Identifier und der im Konzept bereits erläuterten Ursprungs-CodeUnit, hält dieses zusätzlich zwei Sets aus AnnotationType Einträgen. AnnotationType ist hier ein Enum zur Identifikation von in der Referenzimplementierung gemachten Annotationen. Eines der Sets hält Informationen zu Variabilitäten, d. h. ob beispielsweise der Modifier veränderlich ist. Das andere beinhaltet Daten zu Erweiterungen. Mit Erweiterung ist hier gemeint, dass es zu einem Feld automatisch einen Getter oder Setter gibt. Momentan sind dies die einzigen Erweiterungen die durch Annotationen getätigt werden können, jedoch wäre es auch denkbar zum Beispiel eine IsSingleton Annotation einzuführen welche dann eine Erweiterung der Klasse wäre.
 
 Im Generator für die Builder werden abhängig von den Variabilitäts Annotationen passende Builder-Methoden als Komponenten ausgewählt und an den Builder angehängt. Zudem wird die Information welche Erweiterung Annotationen existieren in den Builder übertragen, damit bei der Anwendung des Buildes später entsprechende Verarbeitungsschritte durchgeführt werden können.
 
@@ -1148,13 +1148,13 @@ String exampleDatumReader(CodeUnit cu) {
 }
 \end{lstlisting}
 
-\subsubsection{DSL Generator}
+\subsubsection{DSL Generator}\label{sec:dslgen}
 
 Der BuilderGenerator folgt dem Konzept, dass jeder Builder Komponenten basiert ist. Die Komponenten hierbei sind die Builder Methoden. Zum einen sind diese durch die im Annotations Modell hinterlegten Variabilitäten vorgegeben und zum anderen aus dem Typ der von dem Builder beschriebenen CodeUnit ableitbar. Im Generator wird ein Builder dementsprechend auf Grundlage dieser Daten Stück für Stück zusammengebaut.
 
-Im ersten Schritt wird die Referenzimplementation zu einer CompilationUnit geparsed. Diese wird dann von Amber verarbeitet, woraus eine Liste von Annotations Modellen entsteht. Aus jedem dieser Modelle wird dann ein Builder erzeugt. Der Klassenname des Builder setzt sich aus dem Identifier des Annotations Modells und dem Suffix UnitBuilder zusammen. Im Anschluss hieran werden, abhängig von der zu beschreibenden CodeUnit, aus einer Hilfsklasse, dem BuilderMethodTypeProvider, die Informationen abgefragt welche Standardmethoden der Builder benötigt. Mit der BuilderMethodFactory wird aus dieser BuilderMethodType Information eine entsprechender JavaPoet MethodSpec eurzeugt. Danach werden auf gleichem Weg die MethodSpecs zur Beschreibung der Variabilitäten erzeugt und angehängt.
+Im ersten Schritt wird die Referenzimplementation zu einer CompilationUnit geparsed. Diese wird dann von Amber verarbeitet, woraus eine Liste von Annotations Modellen entsteht. Aus jedem dieser Modelle wird dann ein Builder erzeugt. Der Klassenname des Builder setzt sich aus dem Identifier des Annotations Modells und dem Suffix UnitBuilder zusammen. Im Anschluss hieran werden, abhängig von der zu beschreibenden CodeUnit, aus einer Hilfsklasse, dem BuilderMethodTypeProvider, die Informationen abgefragt welche Standardmethoden der Builder benötigt. Mit der BuilderMethodFactory wird aus dieser BuilderMethodType Information eine entsprechender JavaPoet MethodSpec erzeugt. Danach werden auf gleichem Weg die MethodSpecs zur Beschreibung der Variabilitäten erzeugt und angehängt. Der Identifier der generierten Methode ist im BuilderMethodType Enum als methodName hinterlegt und kann hier auch angepasst werden.
 
-Um die in der defaultCodeUnit hinterlegten Daten in die Ursprungs CodeUnit des Builders zu übertragen wird die Default CodeUnit zu einem Byte Array serialisiert. Dieses Byte Array wird als Literal in der erzeugten initializeDefaultCodeUnit Methode hinterlegt. Diese Methode wird im Konstruktor des erzeugten Builders aufgerufen und sorgt dafür das, dass aus dem Byte Array wieder ein CodeUnit Objekt deserialisiert wird. Die Erzeugung dieses MethodSpecs und die von JavaParser aus dem MethodSpec erzeugte Builder Methode werden in Listing~\ref{lst:defcu} gezeigt.
+Um die in der defaultCodeUnit hinterlegten Daten in die Ursprungs-CodeUnit des Builders zu übertragen wird die Default CodeUnit zu einem Byte Array serialisiert. Dieses Byte Array wird als Literal in der erzeugten initializeDefaultCodeUnit Methode hinterlegt. Diese Methode wird im Konstruktor des erzeugten Builders aufgerufen und sorgt dafür das, dass aus dem Byte Array wieder ein CodeUnit Objekt deserialisiert wird. Die Erzeugung dieses MethodSpecs und die von JavaParser aus dem MethodSpec erzeugte Builder Methode werden in Listing~\ref{lst:defcu} gezeigt.
 
 \begin{lstlisting}[label=lst:defcu,
 language=java,
@@ -1188,7 +1188,7 @@ private void initializeDefaultCodeUnit() {
 }
 \end{lstlisting}
 
-\subsubsection{Abhängigkeit der erzeugten Builder zu Plattform Code}
+\subsubsection{Abhängigkeit der erzeugten Builder zu Plattform Code}\label{sec:plattform}
 
 Um die erzeugte DSL verwenden zu können, muss das Package platform zur Verfügung stehen. Hierin befinden sich Klassen zur Auflösung von Referenzen und zur Fehlerbehandlung. Da Getter und Setter erst zur Laufzeit, während die Builder bereits im Einsatz sind, erzeugt werden können, findet sich hier auch der DefaultCodeUnitProvider. Im aktuellen Stand von Spectrum ist die Funktionalität der Plattform Klassen noch sehr beschränkt. Vor allem die Fehler Handhabung ist nur exemplarisch implementiert. Momentan werden nur Klassen Referenzen auf die beschriebene Klasse selbst aufgelöst, um für den Proof of Concept die Definition von Singletons mithilfe der internen DSL möglich zu machen. Da die Referenz auf Basis eines CodeUnitDatums aufgelöst wird, könnten selbst verständlich noch weitere Referenzen im Parse Prozess hinterlegt werden und somit auch vom CodeUnitReferenzResolver gehandhabt werden.
 
@@ -1230,7 +1230,14 @@ CodeUnit cu = ExampleClassUnitBuilder
 
 \subsection{Jade}
 
-Die eher kleine Komponente Jade hat zur Aufgabe fertig beschriebene CodeUnits in ein für Scarlet verarbeitetbares Modell zu transformieren. Jade umfasst nur das Package transformator, in welchem auch nur die Klasse CodeUnitTransformator liegt.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{bilder/jade}
+	\caption{Darstellung des Unter-Packages im jade Package.}
+	\label{fig:jadePackages}
+\end{figure}
+
+Die eher kleine Komponente Jade hat zur Aufgabe fertig beschriebene CodeUnits in ein für Scarlet verarbeitetbares Modell zu transformieren. Jade umfasst nur das Package transformator, in welchem auch nur die Klasse CodeUnitTransformator liegt, dies ist auf Abbildung~\ref{fig:jadePackages} zu sehen.
 
 \subsubsection{Transformator}
 
@@ -1259,9 +1266,16 @@ private JavaField transformField(CodeUnit cu) {
 }
 \end{lstlisting}
 
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{bilder/scarlet}
+	\caption{Darstellung des Unter-Packages im scarlet Package.}
+	\label{fig:scarletPackages}
+\end{figure}
+
 \subsection{Scarlet}
 
-Die Komponente Scarlet stellt ein Modell zur Verfügung welches die Struktur und den Aufbau einer Java Klasse widerspiegelt. Die zweite Aufgabe von Scarlet ist es aus diesem Java Modell konkreten Java Quelltext zu erzeugen. Die in Scarlet definierten Visitor finden keine Verwendung mehr, ursprünglich haben diese Java Quelltext eingelesen und in das Java Modell überführt.
+Die Komponente Scarlet stellt ein Modell zur Verfügung welches die Struktur und den Aufbau einer Java Klasse widerspiegelt. Die zweite Aufgabe von Scarlet ist es aus diesem Java Modell konkreten Java Quelltext zu erzeugen. Die in Scarlet definierten Visitor finden keine Verwendung mehr, ursprünglich haben diese Java Quelltext eingelesen und in das Java Modell überführt. Alle Unter-Packages von Scarlet sind auf Abbildung~\ref{fig:scarletPackages} dargestellt.
 
 \subsubsection{Allgemeiner Java Klassen Generator}
 
@@ -1293,32 +1307,299 @@ Natürlich, vor allem Zusammenhang mit Erweiterungs Annotationen, können die ei
 
 \section{Zusammenhängendes Beispiel: Von der Referenzimplementation zum erzeugten Java Quelltext}
 
-\begin{lstlisting}[label=lst:java,
+Die folgenden Quelltextausschnitte sollen als zusammenhängendes Beispiel verdeutlichen welche Builder aus einer bzw. mehrerer Referenzimplementationen erzeugt werden, wie diese Bilder dann beispielsweise eingesetzt werden können und wie der aus diesem Einsatz resultierende erzeugte Quelltext konkret aussieht.
+
+Listing~\ref{lst:singletonref} und~\ref{lst:clazzref} zeigen zwei Referenzimplementationen mit Annotationen. Die Annotationen wurden so gewählt, dass mit der erzeugten DSL ein Logger beschrieben werden kann. Cherry erzeugt aus diesen annotierten Referenzimplementationen für jede CodeUnit einen Builder. Zum Einsatz kommen diese Builder im Listing~\ref{lst:dataloggergen}. Hier werden ein Logger und ein rudimentärer Logger Tester beschrieben. Mit Jade werden die konkreten Instanzen der CodeUnits dann zu Javamodellen transformiert und abschließend erzeugt Scarlet daraus den in Listing~\ref{lst:datalogger} und~\ref{lst:dataloggertester} gezeigten Java Quelltext.
+
+\begin{lstlisting}[label=lst:singletonref,
+language=java,
+firstnumber=1,
+caption={Quelltext einer annotierten Referenzimplementation für eine Singleton Klasse}.]
+@CodeUnit("Singleton")
+public class SingletonClass {
+	@FixedCodeUnit
+	private static SingletonClass instance;
+	
+	@FixedCodeUnit
+	private SingletonClass() { }
+	
+	@FixedCodeUnit
+	public static SingletonClass getInstance() {
+		if(instance == null) {
+			instance = new SingletonClass();
+		}
+		
+		return instance;
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[label=lst:clazzref,
+language=java,
+firstnumber=1,
+caption={Quelltext einer annotierten Referenzimplementation für eine Klasse mit den für den Logger benötigten Annotationen}.]
+@CodeUnit("Clazz")
+public class ReferenceClass {
+	@CodeUnit("GetVar") @HasGetter @VariableType
+	private int getvar;
+	
+	@CodeUnit("PublicMethod") @VariableParams
+	public void publicMethod() {}
+	
+	@CodeUnit("PrivateMethod") @VariableParams
+	private void privateMethod() {}
+	
+	@CodeUnit("PublicStaticMethod") @VariableParams
+	public static void publicStaticMethod() {}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[label=lst:dataloggergen,
 				   language=java,
 				   firstnumber=1,
-				   caption=Beispiel für einen Quelltext]
+				   caption=Quelltext zur Erzeugung des DataLoggers und des zugehörigen Testers.]
+void GenerateDataLogger() {
+	CodeUnit dataLogger = BuildDataLogger();
+	CodeUnit dataLoggerTester = BuildDataLoggerTester();
+	
+	System.out.println(dataLogger);
+	System.out.println(dataLoggerTester);
+	
+	WriteToFile(dataLogger);
+	WriteToFile(dataLoggerTester);
+}
 
-public void foo() {
-	// Kommentar
+private CodeUnit BuildDataLogger() throws IOException {
+	return SingletonUnitBuilder
+		.createWithIdentifier("DataLogger")
+		.withField(GetVarUnitBuilder
+			.createWithIdentifier("logCount")
+			.withDataType(int.class.getName())
+			.end())
+		.withMethod(PublicMethodUnitBuilder
+			.createWithIdentifier("logInfo")
+			.withParameter("message", String.class.getName())
+			.withMethodBody("this.log(\"[info]\", message);")
+			.end())
+		.withMethod(PublicMethodUnitBuilder
+			.createWithIdentifier("logError")
+			.withParameter("message", String.class.getName())
+			.withMethodBody("this.log(\"[error]\", message);")
+			.end())
+		.withMethod(PrivateMethodUnitBuilder
+			.createWithIdentifier("log")
+			.withParameter("prefix", String.class.getName())
+			.withParameter("message", String.class.getName())
+			.withMethodBody("System.out.println(prefix + \" \" + message);\n" +
+			"logCount++;")
+			.end())
+	.end();
+}
+
+private CodeUnit BuildDataLoggerTester() {
+	return ClazzUnitBuilder
+		.createWithIdentifier("DataLoggerTester")
+		.withMethod(PublicStaticMethodUnitBuilder
+			.createWithIdentifier("main")
+			.withMethodBody("DataLogger logger = DataLogger.getInstance();\n" +
+				"logger.logInfo(\"Hello, World!\");\n" +
+				"logger.logError(\"Don't Panic!\");\n" +
+				"int c = logger.getLogCount();\n" +
+				"logger.logInfo(\"Logged Messages: \" + c);")
+			.end())
+		.end();
+}
+
+private void WriteToFile(CodeUnit cu) throws IOException {
+	JavaFile jf = TransformToJavaFile(cu, "scarlet.generated");
+	jf.writeTo(new File("src-generated/"));
+}
+
+private JavaFile TransformToJavaFile(CodeUnit cu, String packageName) throws IOException {
+	CodeUnitTransformator cut = new CodeUnitTransformator();
+	JavaClassFile j = new JavaClassFile();
+	j.javaClass = cut.transformClassCodeUnit(cu);
+	j.packageName = packageName;
+	
+	JavaClassGenerator jcg = new JavaClassGenerator();
+	return jcg.generateJavaFileFromModel(j);
+}
+\end{lstlisting}
+
+\begin{lstlisting}[label=lst:datalogger,
+language=java,
+firstnumber=1,
+caption={Quelltext der erzeugten DataLogger Klasse}.]
+package scarlet.generated;
+
+import java.lang.String;
+
+public class DataLogger {
+	private static DataLogger instance;
+	
+	private int logCount;
+	
+	private DataLogger() {
+	
+	}
+	
+	public static DataLogger getInstance() {
+		if (instance == null) {
+			instance = new DataLogger();
+		}
+		
+		return instance;
+	}
+	
+	public void logInfo(String message) {
+		this.log("[info]", message);
+	}
+	
+	public void logError(String message) {
+		this.log("[error]", message);
+	}
+	
+	private void log(String prefix, String message) {
+		System.out.println(prefix + " " + message);
+		logCount++;
+	}
+	
+	public int getLogCount() {
+		return logCount;
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}[label=lst:dataloggertester,
+language=java,
+firstnumber=1,
+caption={Quelltext der erzeugten DataLoggerTester Klasse}.]
+package scarlet.generated;
+
+class DataLoggerTester {
+	private int id;
+	
+	private DataLoggerTester() {
+	
+	}
+	
+	public DataLoggerTester(int id) {
+		this.id = id;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int value) {
+		this.id = value;
+	}
+	
+	//String[] args fehlt, da Arrays noch nicht implementiert sind
+	public static void main() {
+		DataLogger logger = DataLogger.getInstance();
+		logger.logInfo("Hello, World!");
+		logger.logError("Don't Panic!");
+		int c = logger.getLogCount();
+		logger.logInfo("Logged Messages: " + c);
+	}
 }
 \end{lstlisting}
 
 \chapter{Evaluierung}
-\section{Kozept \& Implementation}
-\subsection{Amber}
-\subsection{Cherry}
-\subsection{Jade}
-\subsection{Scarlet}
-\section{Softwarequalität}
-Nach Balzert S.111
-\subsection{Functionality}
-\subsection{Maintainability}
-\subsection{Performance}
-\subsection{Usability}
+
+In den folgenden Absätzen wird das Konzept und die Implementation des Proof of Concept evaluiert. Zudem ist ein Abschnitt der Beurteilung der Wirtschaftlichkeit des Ansatzes gewidmet. Für jede Komponente von Spectrum wird noch einmal auf das Konzept Bezug genommen und bewertet ob dieses grundlegend implementiert wurde. Bei Bedarf wird das Konzept oder die Implementation einzelner Teile der Komponenten noch einmal genauer diskutiert. Abgeschlossen für dieses Kapitel mit einer Erläuterung der bisher bekannten vermutlichen Grenzen des Lösungsansatzes.
+
+\section{Wirtschaftlichkeit}
+
+Spectrum ermöglicht es mit der aktuellen Implementation die Entwicklung eines speziellen Generators einzusparen. Ob die Definition einer Referenzimplementation mit Annotationen und die anschließende Formulierung der konkreten Klassen mit der erzeugten DSL tatsächlich messbare Vorteile bringt, kann im Rahmen dieser Arbeit nur schwer festgestellt werden. Dies liegt zum einen daran, dass zur Umsetzung kompletter Projekte noch viele Features von Spectrum fehlen. Zum anderen müssen hierfür verschiedene Projekte miteinander verglichen werden. Dies wäre Gegenstand einer eigenen weiterführenden Arbeit. Im Rahmen dieser Arbeit kann nur die Aussage getroffen werden, dass eine Einsparung zu vermuten ist.
+
+\section{Amber}
+
+Amber erfüllt die im Konzept in Abschnitt~\ref{sec:sourcetomodel} beschriebenen Aufgaben. Das Konzept sieht vor, dass in einer Referenzimplementation durch Annotationen Variabilitäten definiert werden können. Zudem ist es möglich nicht variable, im Konzept sogenannte statische Elemente, zu annotieren, welche als Standarddaten beispielsweise einer Klasse übernommen werden. Das Annotations Modell wurde als Abstraktionsschicht zur Vereinfachung eingeführt.
+
+Das bedeutet, dass die in diesem Teil des Konzepts beschriebenen Ansätze grundsätzlich umsetzbar waren. Trotzdem gibt es noch einige Punkte im Konzept und Implementation die auf andere Weise angegangen werden könnten und hierdurch potenziell verbesserbar wären.
+
+\subsection{Namenskonflikt der CodeUnit Annotation}
+
+Die Annotation erfüllen ihren Zweck und scheinen in ihrer Benennung verständlich zu sein. Ein Problem könnte hier die Annotationen CodeUnit bzw. FixedCodeUnit darstellen, da hier eine Art Namenskonflikt vorliegt. Auf der einen Seite bedeutet die Annotation CodeUnit, dass aus einem Java Element im Verlauf des Erzeugungsprozesses ein Builder generiert wird, auf der anderen Seite hat auch das von einem solchen Builder beschriebene Modell den Namen CodeUnit. Dies könnte im Sprachgebrauch für Verwirrungen sorgen.
+
+Abhilfe würde hier grundsätzlich eine Umbenennung entweder des Metamodells von Cherry oder der Annotationen von Amber schaffen. Einfacher wäre es vermutlich die Annotationen umzubenennen und für das Modell scheint die bestehende Namenswahl zutreffend zu sein.
+
+Eventuell wäre hier auch der richtige Weg die CodeUnit Annotation vollständig zu kürzen. Informationen zum Identifier des erzeugten Builders würden dann aus dem bestehenden Namen des annotierten Elements gewonnen werden. Sobald ein Element mit einer Variabilität gekennzeichnet wurde, so würde für dieses dann auch ein Builder erzeugt. Die FixedCodeUnit Annotation könnte dann zum Beispiel, passend zu den anderen Annotationen, zu IsFixed umbenannt werden.
+
+\subsection{Ursprungs-CodeUnit im Annotations Modell}
+
+Auch das momentane Verfahren zur Übergabe von Standarddaten der CodeUnit eines Builders ist aktuell zweckmäßig, sollte jedoch auch noch einmal genau auf den Prüfstand gestellt werden. Aktuell werden besagte Standarddaten in Form eines CodeUnit Objekts im Annotations Modell gehalten und dann als serialisierter Byte-Array bei Verwendung eines erzeugten Builders wieder initialisiert. Dieser Vorgang wird in Abschnitt~\ref{sec:dslgen} beschrieben und anhand eines Listings erläutert.
+
+In diesem Abschnitt geht es erst einmal grundsätzlich darum, dass durch die Verwendung eines CodeUnit Objektes für das Halten dieser Ursprungs-daten das Annotations Modell mit dem CodeUnit Modell gekoppelt wird. Insbesondere mit Blick auf eine sauberere und leichter verständlichere Lösung zum späteren re-initialisieren der CodeUnit, sollte überlegt werden ob hier nicht eine andere zusätzliche Datenstruktur im Annotations Modell hinterlegt werden könnte. Dies würde die Modularisierung der Komponenten von Spectrum noch weiter erhöhen und somit die Schnittstelle von Amber zu Cherry weiter schärfen.
+
+\subsection{Verbesserte Strukturierung des Parsers durch Vererbung oder Generics}
+
+Große Quelltextanteile innerhalb der verschiedenen Parser wiederholen sich. Grundsätzlich sollte hier durch Refaktorierung sich wiederholender Code in eine Basisklasse übertragen werden. Der von JavaParser ausgegebene AST basiert auf einem Baum aus Knotenpunkten, welche keine eigenen Klassen haben. Stattdessen implementieren die Knotenpunkte Interfaces mit generischen Typparametern. Daher kann nicht ohne weiteres in den Parse Methoden von Amber auf gemeinsame Basistypen zurückgegriffen werden. Ein möglicher Lösungsansatz könnte hier sein die AnnotationParser ebenfalls mit Java Generics zu versehen und auf diese Weise eine Verallgemeinerung zu ermöglichen.
+
+\section{Cherry}
+
+Das Konzept zur Komposition und Erzeugung der Builder wurde im Proof of Concept umgesetzt und hat sich auch während des Entwicklungsprozesses als gut erweiterbar herausgestellt. Die im Konzept beschriebenen Funktionen konnten gut umgesetzt werden. Die erzeugte interne DSL scheint praktikabel zu sein. 
+
+\subsection{Objektorientierter Ansatz für das CodeUnit Modell}
+
+Obwohl das CodeUnit Modell den Anforderungen im Abschnitt~\ref{sec:codeasmodel} der Analyse genügt und entsprechend dem Konzept in Abschnitt umgesetzt wurde, sollte der nicht verwendete objektorientierte Ansatz trotzdem für eine zukünftige, alternative Umsetzung des Konzeptes in Betracht gezogen werden.
+
+Das CodeUnit Modell würde als vollständige objektorientierte Struktur implementiert werden. Für jeden CodeUnit Typen wären dies eine eigene CodeUnit Klasse und für dessen Parameter keine generische Datenstruktur, sondern spezifische Felder. Der größte Vorteil hieran wäre, dass der Aufbau des CodeUnit Metamodells leichter nachzuvollziehen wären. Dies würde potenziell den gesamten Erweiterungsprozess von Spectrum vereinfachen. Der Arbeitsaufwand ist vermutlich vergleichbar, müsste aber in einem konkreten Projekt gemessen werden.
+
+\subsection{Verwendung von Plattform Code zur Übertragung der Urspungs-CodeUnit in einen Builder}
+
+Wie in der Evaluierung zu Amber erwähnt, wird die Ursprungs-CodeUnit innerhalb des Builders durch Deserialisierung aus einem Byte-Array Instanziiert. Dieser Lösungsansatz ist äußerst undurchsichtig und erlaubt praktisch keine Möglichkeit im Nachhinein festzustellen welche Daten genau für einen Builder initialisiert werden. Der größte Vorteil an diesem Ansatz war, dass jede Art von CodeUnit, unabhängig von der genauen Zusammensetzung, Instanziiert werden konnte. Somit musste auch bei jede Erweiterung von Spectrum keine Rücksicht auf diese Initialisierung genommen werden und somit wurde auch Arbeitsaufwand eingespart.
+
+Entgegen dem ursprünglichen Konzept, wurde in der Implementation, wie in Abschnitt~\ref{sec:plattform} beschrieben, auf Plattform Code zurückgegriffen. Wenn es gelingt die Initialisierung einer CodeUnit allgemein zu formulieren könnte auch hierfür Plattform Code angelegt werden. Dieser würde dann aus einer konkreten CodeUnit Instanz eine Reihe von Statements erzeugen. Die Statements würden den Java Code beinhalten, der notwendig wäre die CodeUnit zu initialisieren. Erzeugte Java Code würde dann als weitere Komponente in den Builder Quelltext einfließen.
+
+\section{Jade}
+
+Der implementierte Transformator erfüllt seine Aufgaben und ist dadurch, dass er für jedes Modellelement eine eindeutige Transformationsfunktion angibt leicht wart- und erweiterbar. 
+
+\subsection{Verarbeitung des CodeUnit Modells mit einem Visitor Pattern}
+
+Das CodeUnit Modell wird mit Java-Streams traversiert und ermöglicht auf diese Weise potenziell eine einfache Umstellung auf parallelisierte Verarbeitung. Selbstverständlich müsste hierfür noch eine genaue Analyse der Daten Abhängigkeiten innerhalb des Modells durchgeführt werden um herauszufinden an welcher Stelle eine Parallelisierung überhaupt machbar ist. Unter Umständen ist eine Anpassung des momentan sequentielle Algorithmus notwendig. Zudem ist allgemein fraglich ob eine Parallelisierung in diesem Anwendungsfall überhaupt Performancegewinne zur Folge hätte, da die Menge der verarbeiteten CodeUnits vermutlich eher gering bleibt.
+
+Sollte das CodeUnit Modell umgestellt werden und der in in der Evaluierung von Cherry erwähnte Objekt montierte Ansatz zur Anwendung kommen, könnte für die Verarbeitung des CodeUnit Modells auch ein Visitor Pattern in Betracht kommen. Gerade wenn immer mehr Transformationsregeln implementiert werden müssen, könnte dieses Muster an dieser Stelle den Quelltext strukturierter und übersichtlicher machen.
+
+\section{Scarlet \& Violet}
+
+Genau wie im Konzept in Abschnitt~\ref{sec:javagen} beschrieben erzeugt Scarlet aus dem Java Modell konkreten Java Quelltext. Auch hier lassen sich Erweiterungen, durch die im Lösungskapitel beschriebene Struktur, mit geringem Aufwand einpflegen.
+
+Violet war im ursprünglichen Konzept nicht vorgesehen, erfüllt die Aufgabe des Loggings als Querschnittsfunktion aber einwandfrei.
+
+%\section{Softwarequalität}
+
+%Nach Balzert S.111
+%\subsection{Functionality}
+%\subsection{Maintainability}
+%\subsection{Performance}
+%\subsection{Usability}
+
 \section{Grenzen des Lösungsansatzes}
+
+Für diesen Abschnitt muss eine klare Trennung vollzogen werden. Der erste Teil wird sich mit Grenzen der aktuellen Implementation von Spectrum beschäftigen. Diese Limitationen können vollständig aufgelöst werden, wenn die entsprechende Arbeitskraft zu Erweiterung von Spectrum aufgebracht wird. Im zweiten Teil dieses Abschnittes werden Themen angesprochen, welche sich nur in Teilen oder vielleicht gar nicht realisieren lassen.
+
+\subsection{Limitationen aufgrund des aktuellen Implementationsstandes}
+
+Viele Sprachfeatures von Java können von Spectrum noch nicht annotiert oder geparsed werden. In den meisten Fällen liegt dies daran, dass die Implementation dieser Funktionen mit Arbeitsaufwand verbunden ist der zeitlich nicht mehr im Rahmen dieser Thesis machbar war. Im Lösungs Kapitel nicht erwähnt, aber in Teilen implementiert ist der Support für generische Typparameter. Felder die als FixedCodeUnit annotiert sind, können bereits mit Parametern versehen werden und werden dann von Scarlet auch als Java Quelltext erzeugt.
+
+Zu den noch nicht unterstützten Features gehören unter anderem der Support für Arrays, die Verarbeitung von Informationen zur Vererbung, die Initialisierung von Feldern bei Deklaration und die Verarbeitung von bestehenden Annotationen die nicht zu Spectrum gehören. Natürlich ist dies nur ein kleiner Auszug der möglichen Erweiterungen. Allgemein gilt durch die CodeUnit Struktur, dass fast alles als CodeUnit mit Parametern darstellbar ist. Voraussetzung hierfür ist, dass die notwendigen Daten im AST liegen oder auf andere Weise beschafft werden können.
+
+\subsection{Allgemeine Limitationen des Konzepts}
+
+Da dieses Konzept auf ein Informationsanreicherung mithilfe von Annotation baut also davon ausgeht, dass die Referenzimplementation in Java geschrieben ist, gibt es hier einige grundsätzliche Limitationen. Einige Teile des Java Quelltextes können einfach nicht annotiert werden, dazu gehören Lambdas und einzelne Ausdrücke im Körper einer Methode. Somit ist es zum Beispiel nicht möglich eine lokale Variable gezielt zu annotieren. Natürlich sind hierfür Workarounds denkbar, wie zum Beispiel eine Annotation mit einer Zeichenkette als Parameter. Als Parameter könnte dann beispielsweise der Name der zu referenzieren Variable übergeben werden. Hier müsste dann der Annotations Parser den Teil AST der Methode ablaufen und die entsprechende Variablendeklaration suchen und anschließend verarbeiten.
+
+Sicherlich gibt es noch weitere Limitationen welche sich erst im Laufe der Zeit bzw. wenn die Notwendigkeit für ein bestimmtes Feature entsteht zeigen. Aber wie oben bereits beschrieben sind beispielsweise Probleme die auf der Annotierbarkeit von einem Teil des Java Quelltextes beruhen vermutlich, wenn auch mit Umständlichkeiten verbunden, lösbar. Nach dem auf dieser Arbeit beruhenden bisherigen Kenntnisstand scheinen die meisten Java Features umsetzbar oder zumindest durch einen Workaround ersetzbar.
 
 \chapter{Abschluss}
 \section{Zusammenfassung}
+\begin{quote}\glqq Wie kann, ausgehend von bestehendem Java-Code, die Entwicklung eines Generators zur Erhöhung der Wirtschaftlichkeit Modellgetriebener Softwareentwicklung automatisiert werden?\grqq \end{quote}
+
+Zusammenfassend muss noch geklärt werden ob die obige, zu Beginn des Analysekapitels bereits schon einmal gestellte Frage, im Rahmen dieser Arbeit beantwortet wurde.
+
 \section{Ausblick}
 
 \appendix
@@ -1348,8 +1629,8 @@ Nach Balzert S.111
 %%%%%%%%%%%%%%%%%%%
 %% create listings list
 %%%%%%%%%%%%%%%%%%%
-%\lstlistoflistings
-%\addcontentsline{toc}{chapter}{Listings}
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{Listings}
 
 \printbibliography
 \addcontentsline{toc}{chapter}{Literatur}
