@@ -1011,7 +1011,7 @@ Listing~\ref{lst:classanno} zeigt die Annotationsmöglichkeiten an einer Klasse.
 \begin{lstlisting}[label=lst:fieldanno,
 language=java,
 firstnumber=1,
-caption=Darstellung der Annotationsmöglichkeiten an einer Klasse.]
+caption=Darstellung der Annotationsmöglichkeiten an einem Feld.]
 @CodeUnit("ExampleClass")
 public class ExampleRef {
 	@FixedCodeUnit @HasGetter @HasSetter
@@ -1595,23 +1595,45 @@ Da dieses Konzept auf ein Informationsanreicherung mithilfe von Annotation baut 
 Sicherlich gibt es noch weitere Limitationen welche sich erst im Laufe der Zeit bzw. wenn die Notwendigkeit für ein bestimmtes Feature entsteht zeigen. Aber wie oben bereits beschrieben sind beispielsweise Probleme die auf der Annotierbarkeit von einem Teil des Java Quelltextes beruhen vermutlich, wenn auch mit Umständlichkeiten verbunden, lösbar. Nach dem auf dieser Arbeit beruhenden bisherigen Kenntnisstand scheinen die meisten Java Features umsetzbar oder zumindest durch einen Workaround ersetzbar.
 
 \chapter{Abschluss}
+
+Zum Abschluss dieser Bachelorthesis werden im folgenden Kapitel die aus dieser Arbeit gewonnenen Erkenntnisse noch einmal zusammengefasst und ein Ausblick auf die mögliche zukünftige Weiterentwicklung dieses Konzepts gegeben. Außerdem werden mögliche Schnittstellen für potentielle nachfolgende Arbeiten umrissen.
+
 \section{Zusammenfassung}
+
 \begin{quote}\glqq Wie kann, ausgehend von bestehendem Java-Code, die Entwicklung eines Generators zur Erhöhung der Wirtschaftlichkeit Modellgetriebener Softwareentwicklung automatisiert werden?\grqq \end{quote}
 
-Zusammenfassend muss noch geklärt werden ob die obige, zu Beginn des Analysekapitels bereits schon einmal gestellte Frage, im Rahmen dieser Arbeit beantwortet wurde.
+Auf Basis der ausführlichen Einführung in die Grundlagen der modellgetriebenen Softwareentwicklung in Kapitel 2 und den damit zusammenhängenden Themen aus dem Software Engineering wurden im Analyse Kapitel die mit der zu Beginn des Kapitels gestellten Frage verbundenen Problemstellungen untersucht. Die aufgezeigten Optionen wurden ausführlich diskutiert. Fußend auf dieser Diskussion wurde im vierten Kapitel ein umfassendes Konzept erarbeitet und beschrieben. Im fünften Kapitel wurde die konkrete Umsetzung im Detail erläutert, um dann im sechsten Kapitel evaluiert zu werden.
+
+Im Rahmen dieser Arbeit wurde festgestellt, dass das generieren einer internen DSL aus annotiertem Java Quelltext unter Verwendung eines allgemeinen Metamodells möglich ist. Zudem konnte gezeigt werden, dass eine Instanz dieses Metamodells geeignet ist um wieder konfigurierten, konkreten Java Quelltext zu erzeugen. Unter der Annahme, dass das Konzept vollständig für alle Features der Programmiersprache Java implementiert wird, könnte es möglich sein den Implementationsaufwand eines Generators vollständig einzusparen.
+
+Lediglich der Arbeitsaufwand für die Definition der Variabilitäten einer Referenzimplementation, also im weitesten Sinne eine Domänenanalyse, und die Konfiguration an sich, d. h. das Schreiben des DSL Codes zur Definition konkreter Ausprägungen konnte nicht reduziert werden. Im Rückblick auf das Analysekapitel zeigt Abbildung~\ref{fig:vgl3} noch einmal zusammengefasst die vereinfachte Darstellung des Aufwandsvergleich von konventioneller Softwareentwicklung, modellgetriebene Softwareentwicklung und MDSD in Kombination mit dem in dieser Thesis erarbeiteten Konzept.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{bilder/vergleich_3}
+	\caption{Zusammengefasste vereinfachte Darstellung des Einsparungspotentials von Spectrum im Vergleich zu konventioneller und modellgetriebener Softwareentwicklung.}
+	\label{fig:vgl3}
+\end{figure}
+
+Zusammenfassend kann die Aussage getroffen werden, dass eine mögliche Antwort auf die obige Frage gefunden wurde. Wie auch schon in der Evaluierung beschrieben, können die tatsächlichen wirtschaftlichen Auswirkungen von Spectrum zu diesem Zeitpunkt nur vermutet, jedoch noch nicht validiert werden.
 
 \section{Ausblick}
 
-\appendix
-\chapter{Dokumentation}
-\section{Verwendung der Annotationen}
-\section{Verwendung der generierten CodeUnit-Builder}
-\section{Klassendokumentation}
-\subsection{Amber}
-\subsection{Cherry}
-\subsection{Jade}
-\subsection{Scarlet}
+Spectrum bietet eine Vielzahl möglicher Anknüpfungspunkte für zukünftige Arbeiten. An erster Stelle stünde die offensichtliche Erweiterung des Funktionsumfangs. Wie bei der Evaluierung bereits beschrieben wurde, fehlen noch fundamentale Features. Allein um vergleichweise einfache Java POJOs vollständig beschreiben zu können, fehlt zum Beispiel der Support für Arrays und Feldern mit generischen Typparametern.
 
+Um den Aufwand bei der Verwendung der erzeugten DSL weiter zu reduzieren, könnten zudem weitere abstrahierende Annotationen eingeführt werden. Die HasGetter und HasSetter Annotationen stellen hier nur den Anfang des machbaren dar. Man könnte beispielsweise eine IsSingleton Annotation definieren, mit welcher eine Klasse annotiert würde. Bei der späteren Erzeugung dieser Klasse könnten automatisiert die fehlenden Bestandteile für das Singleton Pattern generiert werden. Aufwendiger, aber vermutlich ebenso machbar, wäre eine IsBuildable Annotation für Felder. Bei Erzeugung eines so markierten Feldes, könnte eine zugehörige Builder Methode, die zum setzen des Feldes verwendet werden kann und die Instanz des zu zugehörigen Klassenobjektes zurückgibt, generiert werden.
+
+Zur Reduktion von Fehlern bei der Verwendung der Annotationen, könnte ein Werkzeug zur statischen Codeanalyse implementiert werden. Hiermit könnten Fehler, wie beispielsweise die Annotation eines static Feldes mit einer HasSetter Methode, frühzeitig erkannt werden.
+
+Anstelle einer internen DSL könnte aus der annotierten Referenzimplantation eine externe DSL erzeugt werden. Hierdurch wäre es möglich die auf die Syntax von Java zurück zu führenden Störelemente zu reduzieren. 
+
+Auch Jade und daraus folgend Scarlet könnten ausgetauscht werden. An deren Stelle wäre es beispielsweise möglich aus Instanzen des CodeUnit Modells Quelltext anderer Programmiersprachen zu erzeugen. Somit könnte Spectrum möglicherweise als Crosscompiler Anwendung finden.
+
+Allgemein stellt sich natürlich auch die Frage, ob es nicht angebracht wäre, mit den durch diese Arbeit gewonnenen Erkenntnissen, Spectrum von Grund auf neu zu implementieren. Da auf diese Weise ein stellenweise sicherlich notwendiges Refactoring und weitere Abstrahierung vermutlich sauberer erzielt werden können.
+
+Abseits der genannten Punkte wäre es auch denkbar eine Reihe kleinerer Untersuchungen um Spectrum aufzubauen um herauszufinden was bereits jetzt alles mit Spectrum möglich ist oder wie es genau erweitert werden müsste um eine bestimmte Aufgabe zu erfüllen. Zum Beispiel könnten die Pattern objektorientierter Programmierung von Gamma et al. als Referenzimplementation verwendet werden um zu analysieren wie diese zu annotieren wären um daraus eine möglichst komfortable interne DSL zu erzeugen. Hierdurch würden auch weitere Imitationen des Konzepts oder Spektrums erkannt und dadurch potenziell behebbar.
+
+\appendix
 
 \backmatter
 %%%%%%%%%%%%%%%%%%%
@@ -1624,7 +1646,7 @@ Zusammenfassend muss noch geklärt werden ob die obige, zu Beginn des Analysekap
 %%%%%%%%%%%%%%%%%%%
 %% create tables list
 %%%%%%%%%%%%%%%%%%%
-\listoftables
+%\listoftables
 
 %%%%%%%%%%%%%%%%%%%
 %% create listings list
