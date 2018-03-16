@@ -182,7 +182,7 @@ Automatisierung hat in vielen Bereichen, wie zum Beispiel der Automobilindustrie
 
 \section*{Abstract}
 
-In many areas, such as the automotve industry, automation has led to an increase in quality and cost effectiveness in production. The model-driven software development approach could bring these benefits as well. One major obstacle to its success is the complexity of developing code generators. In the context of this thesis a concept, based on an in-depth analysis, was developed that reduces this complexity by partial automated generation of a code generator. Based on this concept, the Metagenerator Spectrum was implemented as a proof of concept. It has been shown that it is possible to generate a domain-specific language from a reference implementation to describe defined variabilities, thus reducing the effort develping a code generator.
+In many areas, such as the automotve industry, automation has led to an increase in quality and cost effectiveness in production. The model-driven software development approach could bring these benefits as well. One major obstacle to its success is the complexity of developing code generators. In the context of this thesis a concept, based on an in-depth analysis, was developed that reduces this complexity by partial automated generation of a code generator. Based on this concept, the metagenerator Spectrum was implemented as a proof of concept. It has been shown that it is possible to generate a domain-specific language from a reference implementation to describe defined variabilities, thus reducing the effort develping a code generator.
 
 \newpage
 \chapter*{Danksagung}
@@ -1432,7 +1432,7 @@ private JavaFile TransformToJavaFile(CodeUnit cu, String packageName) throws IOE
 \begin{lstlisting}[label=lst:datalogger,
 language=java,
 firstnumber=1,
-caption={Quelltext der erzeugten DataLogger Klasse}.]
+caption={Quelltext der erzeugten DataLogger-Klasse}.]
 package scarlet.generated;
 
 import java.lang.String;
@@ -1476,28 +1476,10 @@ public class DataLogger {
 \begin{lstlisting}[label=lst:dataloggertester,
 language=java,
 firstnumber=1,
-caption={Quelltext der erzeugten DataLoggerTester Klasse}.]
+caption={Quelltext der erzeugten DataLoggerTester-Klasse}.]
 package scarlet.generated;
 
-class DataLoggerTester {
-	private int id;
-	
-	private DataLoggerTester() {
-	
-	}
-	
-	public DataLoggerTester(int id) {
-		this.id = id;
-	}
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int value) {
-		this.id = value;
-	}
-	
+class DataLoggerTester {	
 	//String[] args fehlt, da Arrays noch nicht implementiert sind
 	public static void main() {
 		DataLogger logger = DataLogger.getInstance();
