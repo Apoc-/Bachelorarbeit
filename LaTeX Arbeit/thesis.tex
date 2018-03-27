@@ -29,6 +29,9 @@
 \usepackage{booktabs}
 \usepackage{hyperref}
 \usepackage{enumitem}
+
+\usepackage[tracking=true]{microtype}
+
 \usepackage[style=numeric,backend=bibtex]{biblatex}
 \bibliography{literatur}
 
@@ -37,10 +40,10 @@
 %% definitions
 %%%%%%%%%%%%%%%%%%%
 \def\BaAuthor{René Ziegler}
-\def\BaTitle{Über die Automatisierung der Entwicklung von Software Generatoren}
+\def\BaTitle{Über die Automatisierung der Entwicklung von Softwaregeneratoren}
 \def\BaSupervisorOne{Prof.\ Dr.\ Peter Braun}
 \def\BaSupervisorTwo{M.Sc. Tobias Fertig}
-\def\BaDeadline{\today}
+\def\BaDeadline{27.03.2018}
 
 \hypersetup{
 pdfauthor={\BaAuthor},
@@ -144,6 +147,10 @@ backgroundcolor=\color{background},
 %%%%%%%%%%%%%%%%%%%
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
+\widowpenalty10000
+\clubpenalty10000
+
+
 \begin{document}
 
 
@@ -230,7 +237,7 @@ Das hervorgehobene Zitat nennen Czarnecki und Eisenecker die Automation Assumpti
 
 Konkret bedeutet dies, dass entweder eine vorhandene Implementation in Komponenten zerlegt oder eine für die Zwecke der Codegenerierung vorgesehene Referenzimplementation geschrieben werden muss. Codeabschnitte, die in Ihrer Struktur gleich sind, sich jedoch inhaltlich unterscheiden, müssen formal beschrieben werden\,\cite{stahl2007}. Ein solches abstraktes Modell wird dann mit Daten befüllt. Schlussendlich wird ein Generator implementiert, der den Quellcode für unterschiedliche Ausprägungen eines Programms einer Software-Familie, auf Basis des konkreten Modells, generieren kann\,\cite{fowler2010}.
 
-Sowohl bei der Umsetzung von einzigartigen Anwendungen, als auch bei der Verwirklichung von Software mit mehreren Varianten, kann die Verwendung von bereits verfügbaren oder die Entwicklung eigener Codegeneratoren vorteilhaft sein. Die Entwicklungsgeschwindigkeit könnte erhöht, die Softwarequalität gesteigert und Komplexität durch Abstraktion reduziert werden\,\cite{stahl2007}. Allgemein wird weniger Zeit benötigt, um eine größere Vielfalt an ähnlichen Programmen zu entwickeln\,\cite{czaeis2000}.
+Sowohl bei der Umsetzung von einzigartigen Anwendungen, als auch bei der Verwirklichung von Software mit mehreren Varianten, kann die Verwendung von bereits ver"-füg"-baren oder die Entwicklung eigener Codegeneratoren vorteilhaft sein. Die Entwicklungsgeschwindigkeit könnte erhöht, die Softwarequalität gesteigert und Komplexität durch Abstraktion reduziert werden\,\cite{stahl2007}. Allgemein wird weniger Zeit benötigt, um eine größere Vielfalt an ähnlichen Programmen zu entwickeln\,\cite{czaeis2000}.
 
 Bisher müssen fast alle Teilaufgaben bei der Umsetzung eines Codegenerators manuell durchgeführt werden. Werkzeuge wie Language Workbenches können Quelltext bis zu einem gewissen Grad automatisiert generieren oder interpretieren. Sie haben aber in erster Linie die Aufgabe, den Entwickler beim Design von externen domänenspezifischen Sprachen zu unterstützen und dienen als Entwicklungsumgebung für die Arbeit mit der Sprache\,\cite{fowler2010}.
 
@@ -248,7 +255,7 @@ Die sieben Kapitel dieser Bachelorarbeit sollen Stück für Stück an das komple
 
 Eingeleitet wird diese Arbeit mit einem Kapitel zur Motivation und Zielsetzung, in welchem aufgezeigt werden soll, warum es sinnvoll ist, sich mit dem Thema der modellgetriebenen Softwareentwicklung zu beschäftigen.
 
-Das zweite Kapitel behandelt die erweiterten, grundlegenden Kenntnisse, die zum Verständnis des Textes notwendig sind. Hier wird sowohl auf die modellgetriebene Softwareentwicklung, als auch auf die Softwarearchitektur und die Verwendung von Design Pattern objektorientierter Programmierung eingegangen.
+Das zweite Kapitel behandelt die erweiterten, grundlegenden Kenntnisse, die zum Ver"-ständnis des Textes notwendig sind. Hier wird sowohl auf die modellgetriebene Softwareentwicklung, als auch auf die Softwarearchitektur und die Verwendung von Design Pattern objektorientierter Programmierung eingegangen.
 
 Aufbauend auf dem vorhergehenden Abschnitt sollte das dritte Kapitel, die Analyse, gut verständlich sein. Hier wird zuerst der wirtschaftliche Aufwand konventioneller Softwareprojekte mit dem Aufwand von Projekten, welche ein modellgetriebenen Ansatz verfolgen, verglichen. Danach werden die Probleme der einzelnen Teilschritte bei der Automatisierung der Entwicklung eines Codegenerators untersucht.
 
@@ -258,7 +265,7 @@ Im fünften Kapitel werden zum einen die verwendeten externen Bibliotheken kurz 
 
 Das vorletzte Kapitel der Arbeit evaluiert sowohl das Konzept als auch die Umsetzung der Module. Die Grenzen des Lösungsansatzes werden umfassend diskutiert und mögliche Antworten auf die hieraus entstehenden Fragen angesprochen.
 
-Im siebten Kapitel werden Inhalt und Erkenntnisse der Arbeit noch einmal in gebündelter Form zusammengefasst. Ein ausführlicher Ausblick soll die vielen möglichen Anknüpfungspunkte dieser Thesis aufzeigen.
+Im siebten Kapitel werden Inhalt und Erkenntnisse der Arbeit noch einmal in gebündelter Form zusammengefasst. Ein ausführlicher Ausblick soll die vielen möglichen An"-knüp"-fungs"-punkte dieser Thesis aufzeigen.
 
 \chapter{Grundlagen}
 
@@ -268,27 +275,27 @@ Um die grundlegenden Zusammenhänge zu verstehen, wird im folgenden auf die vers
 
 \begin{quote}\glqq Modellgetriebene Softwareentwicklung (Model Driven Software Development, MDSD) ist ein Oberbegriff für Techniken, die aus formalen Modellen automatisiert lauffähige Software erzeugen.\grqq \end{quote}
 
-Die obige Definition stammt aus dem Buch \textit{Modellgetriebene Softwareentwicklung} von Thomas Stahl und Markus Völter\,\cite[S. 11]{stahl2007}. Sie lässt sich gut erläutern, wenn man sie in drei Teile zerlegt.
+Die obige Definition stammt aus dem Buch \textit{Modellgetriebene Softwareentwicklung} von Thomas Stahl und Markus Völter\,\cite[S.\,11]{stahl2007}. Sie lässt sich gut erläutern, wenn man sie in drei Teile zerlegt.
 
-Zunächst einmal ist der Ausdruck formales Modell zu erläutern. Damit ist ein Modell gemeint, welches einen Teil einer Software vollständig beschreibt. Jedoch soll das nicht heißen, dass dieses Modell allumfassend ist. Es muss eindeutig reguliert sein, was genau von diesem Modell beschrieben wird\,\cite[S. 11f.]{stahl2007}. Weiterhin bezieht sich die Definition darauf, dass lauffähige Software erzeugt wird. Wird das formale Modell nur zur Dokumentation verwendet oder dient es als Information zur händischen Umsetzung, so kann man das laut Stahl und Völter nicht als modellgetriebene Softwareentwicklung bezeichnen\,\cite[S. 12]{stahl2007}. Der letzte Teil der Definition, den die Autoren explizit erläutern, ist, dass die Umwandlung von Modell zu ausführbar Software automatisiert erfolgen soll. Insbesondere soll der Quelltext nicht nur einmal generiert und dann manuell verändert und weiterentwickelt werden, sondern das Modell soll anstelle des Quelltextes treten. Der Quelltext wird aus den geänderten Modellen generiert, dadurch kann aktueller und einheitlicher Quellcode gewährleistet werden\,\cite[S. 13]{stahl2007}.
+Zunächst einmal ist der Ausdruck formales Modell zu erläutern. Damit ist ein Modell gemeint, welches einen Teil einer Software vollständig beschreibt. Jedoch soll das nicht heißen, dass dieses Modell allumfassend ist. Es muss eindeutig reguliert sein, was genau von diesem Modell beschrieben wird\,\cite[S.\,11f.]{stahl2007}. Weiterhin bezieht sich die Definition darauf, dass lauffähige Software erzeugt wird. Wird das formale Modell nur zur Dokumentation verwendet oder dient es als Information zur händischen Umsetzung, so kann man das laut Stahl und Völter nicht als modellgetriebene Softwareentwicklung bezeichnen\,\cite[S.\,12]{stahl2007}. Der letzte Teil der Definition, den die Autoren explizit erläutern, ist, dass die Umwandlung von Modell zu ausführbar Software automatisiert erfolgen soll. Insbesondere soll der Quelltext nicht nur einmal generiert und dann manuell verändert und weiterentwickelt werden, sondern das Modell soll anstelle des Quelltextes treten. Der Quelltext wird aus den geänderten Modellen generiert, dadurch kann aktueller und einheitlicher Quellcode gewährleistet werden\,\cite[S.\,13]{stahl2007}.
 
 In der Literatur findet sich auch die alternative Bezeichnung Model Driven Development (MDD)\,\cite{selic2003,atkinson2003}. Diese Thesis wird jedoch durchgängig die Bezeichnung MDSD verwenden.
 
 Auch der Model Driven Architecture (MDA) Ansatz der Object Management Group (OMG) beschäftigt sich mit modellgetriebener Softwareentwicklung\,\cite{mdaguide}. Dieser Ansatz beschreibt detailliert und umfassend den Gesamtprozess von der Analyse bis hin zur Implementation und führt eigene Standards ein.
 
-Czarnecki und Eisenecker verwenden den Ausdruck Generative Programming, definieren ihn jedoch in den wesentlichen Punkten vergleichbar zu MDSD. Generative Programming strebt nach Czarnecki und Eisenecker nach vollständiger Automation und soll ein vollständiges Zwischen- oder Endprodukt erzeugen\,\cite[S. 5]{czaeis2000}. Für MDSD merken Stahl und Völter an, dass die verwendeten Modelle nicht unbedingt das vollständige System abbilden. Ein komplettes System enthalte sowohl manuell implementierte als auch automatisch generierte Anteile\,\cite[S. 13]{stahl2007}.
+Czarnecki und Eisenecker verwenden den Ausdruck Generative Programming, definieren ihn jedoch in den wesentlichen Punkten vergleichbar zu MDSD. Generative Programming strebt nach Czarnecki und Eisenecker nach vollständiger Automation und soll ein vollständiges Zwischen- oder Endprodukt erzeugen\,\cite[S.\,5]{czaeis2000}. Für MDSD merken Stahl und Völter an, dass die verwendeten Modelle nicht unbedingt das vollständige System abbilden. Ein komplettes System enthalte sowohl manuell implementierte als auch automatisch generierte Anteile\,\cite[S.\,13]{stahl2007}.
 
-Durch MDSD soll, wie bereits in der Einleitung dieser Arbeit beschrieben, die Qualität der entstandenen Software gesteigert werden. Dies wird durch den resultierenden einheitlichen Code und die erhöhte Wiederverwertbarkeit erreicht. Außerdem kann potentiell mithilfe der zusätzlichen Abstraktion eine erhöhte Entwicklungsgeschwindigkeit erzielt werden. Ein Bonus von MDSD ist es, dass die Software immer durch aktuelle Modelle beschrieben und somit zumindest in Teilen dokumentiert wird\,\cite[S. 13ff.]{stahl2007}. Die Vorteile von Generative Programming\,\cite[S. 13ff.]{czaeis2000} und MDA\,\cite{mdaguide} werden sehr ähnlich beschrieben.
+Durch MDSD soll, wie bereits in der Einleitung dieser Arbeit beschrieben, die Qualität der entstandenen Software gesteigert werden. Dies wird durch den resultierenden einheitlichen Code und die erhöhte Wiederverwertbarkeit erreicht. Außerdem kann potentiell mithilfe der zusätzlichen Abstraktion eine erhöhte Entwicklungsgeschwindigkeit erzielt werden. Ein Bonus von MDSD ist es, dass die Software immer durch aktuelle Modelle beschrieben und somit zumindest in Teilen dokumentiert wird\,\cite[S.\,13ff.]{stahl2007}. Die Vorteile von Generative Programming\,\cite[S.\,13ff.]{czaeis2000} und MDA\,\cite{mdaguide} werden sehr ähnlich beschrieben.
 
 \subsection{Domäne}
 
 Bei der modellgetriebenen Softwareentwicklung sind, wie bereits erwähnt, Modelle Dreh- und Angelpunkt des Entwicklungsprozesses. Um jedoch ein Modell bilden zu können, muss zuerst untersucht werden, was mit diesem Modell abgebildet wird. Diese Untersuchung ist Teil des Domain Engineerings.
 
-Domain Engineering umfasst die Analyse, das Design und die Implementation einer Domäne. Design und Implementation beziehen sich bereits auf die Zusammensetzung des Systems und dessen technische Umsetzung\,\cite[S. 21f.]{czaeis2000}. Zur Modellbildung ist für diese Arbeit vor allem die Domänenanalyse interessant.
+Domain Engineering umfasst die Analyse, das Design und die Implementation einer Domäne. Design und Implementation beziehen sich bereits auf die Zusammensetzung des Systems und dessen technische Umsetzung\,\cite[S.\,21f.]{czaeis2000}. Zur Modellbildung ist für diese Arbeit vor allem die Domänenanalyse interessant.
 
 \subsubsection{Definition}
 
-Eine Domäne beinhaltet laut Czarnecki und Eisenecker das fachliche Wissen über ein Problem-Themengebiet. Jedoch geht die Domäne im Domain Engineering noch darüber hinaus. Sie umfasst nicht nur das fachliche Wissen, sondern auch Informationen darüber, wie Anwendungen für diesen Themenbereich aufgebaut sind. Wichtig ist hierbei, dass sich die Domäne aus dem übereinstimmenden Wissen der beteiligten Stakeholder ergibt. Als Stakeholder werden alle Personen bezeichnet, die ein Interesse an einer bestimmten Domäne haben\,\cite[S. 33]{czaeis2000}.
+Eine Domäne beinhaltet laut Czarnecki und Eisenecker das fachliche Wissen über ein Problem-Themengebiet. Jedoch geht die Domäne im Domain Engineering noch darüber hinaus. Sie umfasst nicht nur das fachliche Wissen, sondern auch Informationen darüber, wie Anwendungen für diesen Themenbereich aufgebaut sind. Wichtig ist hierbei, dass sich die Domäne aus dem übereinstimmenden Wissen der beteiligten Stakeholder ergibt. Als Stakeholder werden alle Personen bezeichnet, die ein Interesse an einer bestimmten Domäne haben\,\cite[S.\,33]{czaeis2000}.
 
 \subsubsection{Domänenanalyse}
 
@@ -300,17 +307,17 @@ Bereits im 1990 erschienenen Paper \textit{Domain Analysis: An Introduction} zä
 \item classification and cataloging for further reuse
 \end{enumerate}
 
-Diese drei Punkte sind auch heute noch zutreffend. In der Analyse wird zunächst beim Domain Scoping die Domäne eingegrenzt. Dies ist notwendig, um eine konsistente Umsetzung möglich zu machen und alle Anforderungen konkret und klar zu definieren\,\cite[S. 239]{stahl2007}. Danach werden Entitäten, Operationen und Beziehungen zwischen diesen identifiziert. Sobald dies geschehen ist, können diese auf Ähnlichkeiten und Unterschiede versucht werden. Durch die gefundenen Gemeinsamkeiten, beziehungsweise Variabilitäten, kann nun abstrahiert und generalisiert werden. Festgehalten werden diese Informationen in einem umfassenden Domänenmodell\,\cite[S. 24ff.]{czaeis2000}.
+Diese drei Punkte sind auch heute noch zutreffend. In der Analyse wird zunächst beim Domain Scoping die Domäne eingegrenzt. Dies ist notwendig, um eine konsistente Umsetzung möglich zu machen und alle Anforderungen konkret und klar zu definieren\,\cite[S.\,239]{stahl2007}. Danach werden Entitäten, Operationen und Beziehungen zwischen diesen identifiziert. Sobald dies geschehen ist, können diese auf Ähnlichkeiten und Unterschiede versucht werden. Durch die gefundenen Gemeinsamkeiten, beziehungsweise Variabilitäten, kann nun abstrahiert und generalisiert werden. Festgehalten werden diese Informationen in einem umfassenden Domänenmodell\,\cite[S.\,24ff.]{czaeis2000}.
 
-Als Domänenmodell bezeichnen Czarnecki und Eisenecker eine ausdrückliche Darstellung aller Gemeinsamkeiten und Variabilitäten eines Systems in einer Domäne, der Bedeutung dieser Domänenkonzepte und den Abhängigkeiten zwischen den unterschiedlichen Eigenschaften\,\cite[S. 23f.]{czaeis2000}.
+Als Domänenmodell bezeichnen Czarnecki und Eisenecker eine ausdrückliche Darstellung aller Gemeinsamkeiten und Variabilitäten eines Systems in einer Domäne, der Bedeutung dieser Domänenkonzepte und den Abhängigkeiten zwischen den unterschiedlichen Eigenschaften\,\cite[S.\,23f.]{czaeis2000}.
 
 \subsubsection{Feature Modelling}
 
-Neben der Domänendefinition, dem Domänenlexikon, welches den verwendeten Glossar auflistet, und konzeptionellen Modellen können auch Featuremodelle Teil des Domänenmodells sein.
+Neben der Domänendefinition, dem Domänenlexikon, welches den verwendeten Glossar auflistet, und konzeptionellen Modellen können auch Featuremodelle Teil des Domänen"-modells sein.
 
 Das Feature Modelling erlaubt es, Gemeinsamkeiten und Variabilitäten von Systemen zu dokumentieren. Neben einer genauen Beschreibung aller Features in schriftlicher Form kann man Zusammenhänge und Regeln zur Komposition der Features in einem Featurediagramm darstellen.
 
-Ursprünglich wurde das Featurediagramm als Teil der Feature-Oriented Domain Analysis (FODA) definiert\,\cite{kang1990}. Es ermöglicht, Merkmale hierarchisch darzustellen und erlaubt es, Beziehungen zwischen ihnen genauer festzulegen. Weiterhin kann unterschieden werden, ob genau eine oder mehrere Eigenschaften der Alternativen Anwendung finden. Zudem können noch weitere Einschränkungen definiert werden, welche es erlauben auch weiter voneinander entfernte Knotenpunkte zueinander in Beziehung zu setzen\,\cite[S. 240f.]{stahl2007}. Die Abbildung ~\ref{fig:fd} stellt beispielshaft ein Featurediagramm für einen E-Shop dar.
+Ursprünglich wurde das Featurediagramm als Teil der Feature-Oriented Domain Analysis (FODA) definiert\,\cite{kang1990}. Es ermöglicht, Merkmale hierarchisch darzustellen und erlaubt es, Beziehungen zwischen ihnen genauer festzulegen. Weiterhin kann unterschieden werden, ob genau eine oder mehrere Eigenschaften der Alternativen Anwendung finden. Zudem können noch weitere Einschränkungen definiert werden, welche es erlauben auch weiter voneinander entfernte Knotenpunkte zueinander in Beziehung zu setzen\,\cite[S.\,240f.]{stahl2007}. Die Abbildung ~\ref{fig:fd} stellt beispielshaft ein Featurediagramm für einen E-Shop dar.
 
 \begin{figure}[tbp]
 \centering
@@ -321,19 +328,19 @@ Ursprünglich wurde das Featurediagramm als Teil der Feature-Oriented Domain Ana
 
 \subsection{Metamodell}
 
-Die Analyse des Problemfelds und Modellierung der Merkmale soll in erster Linie die Grundlage für die Definition des Metamodells der Domäne liefern\,\cite[S. 200]{stahl2007}.
+Die Analyse des Problemfelds und Modellierung der Merkmale soll in erster Linie die Grundlage für die Definition des Metamodells der Domäne liefern\,\cite[S.\,200]{stahl2007}.
 
 \subsubsection{Definition}
 
-Zur Beschreibung, welche Mittel zur Definition eines bestimmten Modells zur Verfügung stehen, kann man wiederum ein Modell definieren. Dieses, über dem beschriebenen Modell stehende Modell, nennt man Metamodell. Stahl und Völter bezeichnen es als Beschreibung der möglichen Struktur von Modellen. Dazu zählen sie die Konstrukte der Modellierungssprache, auf welche Weise diese zueinander in Beziehung stehen, sowie vorhandene Regeln bezüglich der Gültigkeit beziehungsweise der Modellierung\,\cite[S. 59]{stahl2007}.
+Zur Beschreibung, welche Mittel zur Definition eines bestimmten Modells zur Verfügung stehen, kann man wiederum ein Modell definieren. Dieses, über dem beschriebenen Modell stehende Modell, nennt man Metamodell. Stahl und Völter bezeichnen es als Beschreibung der möglichen Struktur von Modellen. Dazu zählen sie die Konstrukte der Modellierungssprache, auf welche Weise diese zueinander in Beziehung stehen, sowie vorhandene Regeln bezüglich der Gültigkeit beziehungsweise der Modellierung\,\cite[S.\,59]{stahl2007}.
 
 Ein Unified Modeling Language 2.0 (UML) Diagramm, welches alle Java-Sprachkonzepte, wie beispielsweise die Existenz von Klassen, Attributen und Instanzen, beschreibt, ist eine Darstellung für das Java-Metamodell. Geschriebener Java-Quelltext wäre somit eine Instanz dieses Modells, kann aber wiederum instanziiert werden. Handelt es sich nämlich um eine Definition einer Java-Klasse, so können hiervon Objekte mit konkreten Werten existieren.
 
-Es ist noch hervorzuheben, dass mit dem Begriff Metamodell nicht einfach nur eine Abstraktion gemeint ist. Die Silbe Meta kann hier als \glqq die Definition von\grqq\ verstanden werden. Ein Modell kann ein anderes Modell abstrahieren, in dem es beispielsweise Informationen auslässt, falls diese für ein Anwendungsfall nicht relevant oder implizit sind. Das ist im obigen Sinne dann jedoch noch kein Metamodell. Es ist also nur bedingt sinnvoll, zu sagen, ein Metamodell sei das Modell eines Modells\,\cite[S. 27]{voelter2013}.
+Es ist noch hervorzuheben, dass mit dem Begriff Metamodell nicht einfach nur eine Abstraktion gemeint ist. Die Silbe Meta kann hier als \glqq die Definition von\grqq\ verstanden werden. Ein Modell kann ein anderes Modell abstrahieren, in dem es beispielsweise Informationen auslässt, falls diese für ein Anwendungsfall nicht relevant oder implizit sind. Das ist im obigen Sinne dann jedoch noch kein Metamodell. Es ist also nur bedingt sinnvoll, zu sagen, ein Metamodell sei das Modell eines Modells\,\cite[S.\,27]{voelter2013}.
 
 \subsubsection{Abstrakte Syntax und Konkrete Syntax}
 
-Die in diesem Beispiel definierten Sprachkonzepte sind die abstrakte Syntax für Java. In Abgrenzung hierzu dient eine konkrete Syntax zur Beschreibung eines Modells. Möchte man einen Datentypen definieren, könnte man das mit einem UML Klassendiagramm. Da man den Datentypen auch mit Java-Code beschreiben könnte, sieht man, dass es für dasselbe Metamodell mehr als eine konkrete Syntax geben kann\,\cite[S. 59f.]{stahl2007}.
+Die in diesem Beispiel definierten Sprachkonzepte sind die abstrakte Syntax für Java. In Abgrenzung hierzu dient eine konkrete Syntax zur Beschreibung eines Modells. Möchte man einen Datentypen definieren, könnte man das mit einem UML Klassendiagramm. Da man den Datentypen auch mit Java-Code beschreiben könnte, sieht man, dass es für dasselbe Metamodell mehr als eine konkrete Syntax geben kann\,\cite[S.\,59f.]{stahl2007}.
 
 \subsection{Domänenspezifische Sprache (DSL)}
 
@@ -341,7 +348,7 @@ Wurde das Metamodell für eine Domäne definiert, das heißt die abstrakte Synta
 
 \subsubsection{Definition}
 
-Stahl und Völter definieren eine solche Programmiersprache mit:\,\cite[S. 30]{stahl2007}. \glqq Eine DSL ist nichts anderes als eine Programmiersprache für eine Domäne.\grqq Martin Fowler hat in seinem Buch zu diesem Thema eine umfangreichere Definition geschaffen und erläutert diese mit vier Schlüsselelementen\,\cite[S. 27f.]{fowler2010}.
+Stahl und Völter definieren eine DSL als \glqq [...] nichts anderes als eine Programmiersprache für eine Domäne\grqq\,\cite[S.\,30]{stahl2007}. Martin Fowler hat in seinem Buch zu diesem Thema eine umfangreichere Definition geschaffen und erläutert diese mit vier Schlüsselelementen\,\cite[S.\,27f.]{fowler2010}.
 
 \begin{quote}\glqq Domain-specific Language (noun): a computer programming language of limited expressiveness focused on a particular domain.\grqq \end{quote}
 
@@ -355,21 +362,21 @@ Im letzten Teil seiner Ausführung zu dieser Definition geht Fowler auf den \glq
 
 \subsubsection{General Purpose Language (GPL)}
 
-Die von Fowler angesprochenen allgemeinen Programmiersprachen bezeichnet man als General Purpose Language oder auch abgekürzt als GPL. Im Gegensatz zu DSLs sind GPLs nicht auf eine bestimmte Domäne zugeschnitten, sondern können breiter eingesetzt werden. Moderne Programmiersprachen wie Java und C\# sind solche Universalsprachen. Durch ihre Turing-Vollständigkeit, kann man sie untereinander austauschen\,\cite[S. 111]{hromkovic2014}. Da sich einzelne Sprachen durch zusätzliche besondere Sprachfeatures voneinander abheben, gibt es mehr als eine GPL\,\cite[S. 27]{voelter2013}. Durch die Unterstützung von Pointern in C ist es zum Beispiel potenziell möglich Datenstrukturen besonders speicheroptimiert anzulegen\,\cite[S. 93ff.]{kernighan1988}.
+Die von Fowler angesprochenen allgemeinen Programmiersprachen bezeichnet man als General Purpose Language oder auch abgekürzt als GPL. Im Gegensatz zu DSLs sind GPLs nicht auf eine bestimmte Domäne zugeschnitten, sondern können breiter eingesetzt werden. Moderne Programmiersprachen wie Java und C\# sind solche Universalsprachen. Durch ihre Turing-Vollständigkeit, kann man sie untereinander austauschen\,\cite[S.\,111]{hromkovic2014}. Da sich einzelne Sprachen durch zusätzliche besondere Sprachfeatures voneinander abheben, gibt es mehr als eine GPL\,\cite[S.\,27]{voelter2013}. Durch die Unterstützung von Pointern in C ist es zum Beispiel potenziell möglich Datenstrukturen besonders speicheroptimiert anzulegen\,\cite[S.\,93ff.]{kernighan1988}.
 
 \subsubsection{Interne DSLs}
 
 Bettet man die Befehle zur Beschreibung einer Instanz des Metamodells auf geeignete Weise in eine Universalsprache ein, kann man dies interne DSL nennen. Der Aufbau und die Folge von Befehlen soll sich bei einer internen DSL, soweit möglich, wie eine eigene Sprache anfühlen\,\cite[S 28]{fowler2010}.
 
-Für die Implementation von internen DSLs eignen sich dynamische Sprachen wie Ruby und Lisp gut, da sie hilfreiche Features wie die Definition von Makros unterstützen. Je mehr in die normale Syntax einer Sprache eingegriffen werden kann, desto eigenständiger lässt sich die Syntax der internen DSL formen\,\cite[S. 98]{stahl2007}. Hierdurch grenzt sich diese immer weiter von einem einfachen Application Programming Interface (API) ab. Gerade wenn das Metamodell bei objektorientierter Programmierung in Form von Klassen vorliegt, kann eine interne DSL eher wie eine einfache Schnittstelle wirken. Die Abgrenzung von internen DSLs zu APIs ist nicht eindeutig und stellt eine Grauzone dar\,\cite[S. 67]{fowler2010}.
+Für die Implementation von internen DSLs eignen sich dynamische Sprachen wie Ruby und Lisp gut, da sie hilfreiche Features wie die Definition von Makros unterstützen. Je mehr in die normale Syntax einer Sprache eingegriffen werden kann, desto eigenständiger lässt sich die Syntax der internen DSL formen\,\cite[S.\,98]{stahl2007}. Hierdurch grenzt sich diese immer weiter von einem einfachen Application Programming Interface (API) ab. Gerade wenn das Metamodell bei objektorientierter Programmierung in Form von Klassen vorliegt, kann eine interne DSL eher wie eine einfache Schnittstelle wirken. Die Abgrenzung von internen DSLs zu APIs ist nicht eindeutig und stellt eine Grauzone dar\,\cite[S.\,67]{fowler2010}.
 
-Eine erwähnenswerte Sonderform der intern DSLs sind fragmentierte DSLs. Bei diesem Spezialfall wird die Hostsprache, also die Programmiersprache, mit der die interne DSL ausgedrückt wird, an einzelnen Stellen mit Informationen angereichert. Reguläre Ausdrücke, die als Bruchstücke in einer GPL verwendet werden, kann man hier als Beispiel anführen\,\cite[S. 32]{fowler2010}.
+Eine erwähnenswerte Sonderform der intern DSLs sind fragmentierte DSLs. Bei diesem Spezialfall wird die Hostsprache, also die Programmiersprache, mit der die interne DSL ausgedrückt wird, an einzelnen Stellen mit Informationen angereichert. Reguläre Ausdrücke, die als Bruchstücke in einer GPL verwendet werden, kann man hier als Beispiel anführen\,\cite[S.\,32]{fowler2010}.
 
 \subsubsection{Externe DSLs}
 
-Eine externe DSL hat genau wie eine GPL eine eigene Syntax. Laut Fowler ist es jedoch auch nicht unüblich, dass die Syntax einer anderen Sprache, beispielsweise XML, verwendet wird. Sprachen wie die Structured Query Language (SQL) oder Cascading Style Sheets (CSS) sind externe DSLs\,\cite[S. 28]{fowler2010}. SQL erlaubt es, mit syntaktisch einfachen Mitteln Anfragen an eine Datenbank zu schicken und mit CSS kann die grafische Repräsentation von HTML-Seiten manipuliert werden.
+Eine externe DSL hat genau wie eine GPL eine eigene Syntax. Laut Fowler ist es jedoch auch nicht unüblich, dass die Syntax einer anderen Sprache, beispielsweise XML, verwendet wird. Sprachen wie die Structured Query Language (SQL) oder Cascading Style Sheets (CSS) sind externe DSLs\,\cite[S.\,28]{fowler2010}. SQL erlaubt es, mit syntaktisch einfachen Mitteln Anfragen an eine Datenbank zu schicken und mit CSS kann die grafische Repräsentation von HTML-Seiten manipuliert werden.
 
-Im Gegensatz zu internen DSLs, welche auf der Struktur der zugrunde liegenden GPL beruhen, erlauben externe DSLs ihre Syntax weitestgehend frei zu gestalten. Für ihre Implementation kann grundsätzlich auf einen reichen Schatz an Techniken, die zur Verarbeitung von Programmiersprachen seit Jahren Verwendung finden, zugegriffen werden\,\cite[S. 89]{fowler2010}.
+Im Gegensatz zu internen DSLs, welche auf der Struktur der zugrunde liegenden GPL beruhen, erlauben externe DSLs ihre Syntax weitestgehend frei zu gestalten. Für ihre Implementation kann grundsätzlich auf einen reichen Schatz an Techniken, die zur Verarbeitung von Programmiersprachen seit Jahren Verwendung finden, zugegriffen werden\,\cite[S.\,89]{fowler2010}.
 
 \subsubsection{Language Workbenches}
 
@@ -383,7 +390,7 @@ Ein großer Unterschied zwischen internen und externen DSLs besteht in ihrer Ver
 
 Normalerweise liegt der Quelltext, wie der Name schon sagt, in Textform vor. Wenn im folgenden von Quelltext die Rede ist, so ist damit der Source Code von externen DSLs sowie der von GPLs gemeint.
 
-Zur Verarbeitung liest ein Reader den Quelltext ein. Dieser wird dann meist in einem ersten Schritt zeilenweise von einem Lexer in seine Bestandteile (Token) zerlegt. Diese aufgespaltenen Codezeilen können dann auf syntaktische Korrektheit geprüft werden und in eine Übergangsrepräsentation überführt werden\,\cite[S. 29f.]{parr2009}. Eine Form hierfür kann ein Abstract Syntax Tree (AST) sein.
+Zur Verarbeitung liest ein Reader den Quelltext ein. Dieser wird dann meist in einem ersten Schritt zeilenweise von einem Lexer in seine Bestandteile (Token) zerlegt. Diese aufgespaltenen Codezeilen können dann auf syntaktische Korrektheit geprüft werden und in eine Übergangsrepräsentation überführt werden\,\cite[S.\,29f.]{parr2009}. Eine Form hierfür kann ein Abstract Syntax Tree (AST) sein.
 
 \begin{figure}[htbp]
 \centering
@@ -394,7 +401,7 @@ Zur Verarbeitung liest ein Reader den Quelltext ein. Dieser wird dann meist in e
 
 \subsubsection{Abstract Syntax Tree (AST)}
 
-Für jeden wichtigen Token wird im AST ein Knotenpunkt mit für den weiteren Prozess wesentlichen Daten angelegt\,\cite[S. 23]{parr2009}. Die grafische Darstellung des AST für die Prüfung der Parität einer natürlichen Zahl auf Abbildung ~\ref{fig:ast} zeigt diese knotenbasierte Strukturierung des eingelesenen Codes. Die Knoten eines AST kennen ihre eigene Position im Baum und somit kann dieser mit geeigneten Strategien durchlaufen werden\,\cite[S. 24]{parr2009}.
+Für jeden wichtigen Token wird im AST ein Knotenpunkt mit für den weiteren Prozess wesentlichen Daten angelegt\,\cite[S.\,23]{parr2009}. Die grafische Darstellung des AST für die Prüfung der Parität einer natürlichen Zahl auf Abbildung ~\ref{fig:ast} zeigt diese knotenbasierte Strukturierung des eingelesenen Codes. Die Knoten eines AST kennen ihre eigene Position im Baum und somit kann dieser mit geeigneten Strategien durchlaufen werden\,\cite[S.\,24]{parr2009}.
 
 Eine Möglichkeit ist die Anwendung des Visitor Patterns, welches in dieser Arbeit in einem späteren Unterkapitel behandelt wird.
 
@@ -402,7 +409,7 @@ Eine Möglichkeit ist die Anwendung des Visitor Patterns, welches in dieser Arbe
 
 Nachdem die syntaktische Korrektheit des Quelltextes sichergestellt ist und dieser in einer geeigneten Datenstruktur vorliegt, stehen mehrere Möglichkeiten zur Verfügung. Die jetzt in Baumstruktur vorliegenden Anweisungen sind durch Interpretation von einer Plattform ausführbar. Alternativ könnte auch eine Übersetzung in eine andere Sprache vorgenommen oder direkt zu ausführbaren Maschinencode kompiliert werden.
 
-Bei Java wird der Quelltext beispielsweise eingelesen und zu Byte-Code transformiert, welcher dann von der Java Virtual Machine (JVM) interpretiert werden kann\,\cite{javavm2014}. Die Übersetzung in eine andere Sprache bietet sich sowohl bei externen DSLs als auch bei GPLs an. Allgemein könnte diese Transformation sinnvoll sein, wenn man seinen Code für eine bestimmte Plattform kompatibel zu einer anderen Plattform machen möchte. Ein Beispiel hierfür ist der Kompilierprozess einer in C\# geschriebenen Unity3D Anwendung zu einer WebGL App. Hierbei wird der C\# Code zuerst in C++ und dann in JavaScript umgewandelt\,\cite{unity2018}. Native GPLs wie C werden direkt zu Maschinensprache kompiliert\,\cite{kernighan1988}. Externe DSLs werden von einem Generator häufig zu GPL Quelltext transformiert\,\cite[S. 26]{voelter2013}.
+Bei Java wird der Quelltext beispielsweise eingelesen und zu Byte-Code transformiert, welcher dann von der Java Virtual Machine (JVM) interpretiert werden kann\,\cite{javavm2014}. Die Übersetzung in eine andere Sprache bietet sich sowohl bei externen DSLs als auch bei GPLs an. Allgemein könnte diese Transformation sinnvoll sein, wenn man seinen Code für eine bestimmte Plattform kompatibel zu einer anderen Plattform machen möchte. Ein Beispiel hierfür ist der Kompilierprozess einer in C\# geschriebenen Unity3D Anwendung zu einer WebGL App. Hierbei wird der C\# Code zuerst in C++ und dann in JavaScript umgewandelt\,\cite{unity2018}. Native GPLs wie C werden direkt zu Maschinensprache kompiliert\,\cite{kernighan1988}. Externe DSLs werden von einem Generator häufig zu GPL Quelltext transformiert\,\cite[S.\,26]{voelter2013}.
 
 \subsection{Codegenerator}
 
@@ -410,27 +417,27 @@ Soll der vom Parser eingelesene Quelltext oder das von einer DSL beschriebene Mo
 
 \subsubsection{Definition}
 
-Nach Czarnecki und Eisenecker ist ein Generator ein Programm, welches eine Spezifikation von Software auf einer höheren abstrakten Ebene entgegennimmt und dessen Implementation als Artefakt ausgibt\,\cite[S. 333]{czaeis2000}.
+Nach Czarnecki und Eisenecker ist ein Generator ein Programm, welches eine Spezifikation von Software auf einer höheren abstrakten Ebene entgegennimmt und dessen Implementation als Artefakt ausgibt\,\cite[S.\,333]{czaeis2000}.
 
-Das ausgegebene Artefakt kann, muss aber nicht zwingend, ein gesamtes lauffähiges Softwaresystem sein. Es könnten auch nur einzelne Klassen oder Funktionen generiert werden\,\cite[S. 333]{czaeis2000}. Sogar in einem noch kleineren Scope kommt Codegenerierung zum Einsatz. Integrierte Entwicklungsumgebungen, wie JetBrains IntelliJ oder Microsofts Visual Studio, erlauben es auf Knopfdruck Code-Snippets, wie zum Beispiel Konstruktoren für eine Klasse, zu generieren.
+Das ausgegebene Artefakt kann, muss aber nicht zwingend, ein gesamtes lauffähiges Softwaresystem sein. Es könnten auch nur einzelne Klassen oder Funktionen generiert werden\,\cite[S.\,333]{czaeis2000}. Sogar in einem noch kleineren Scope kommt Codegenerierung zum Einsatz. Integrierte Entwicklungsumgebungen, wie JetBrains IntelliJ oder Microsofts Visual Studio, erlauben es auf Knopfdruck Code-Snippets, wie zum Beispiel Konstruktoren für eine Klasse, zu generieren.
 
 In der modellgetriebenen Softwareentwicklung dreht sich der gesamte Automatisierungsprozess um das Modell. Es bildet den Ausgangspunkt jeder weiteren Umwandlung. Wie bereits im Abschnitt zu MDSD beschrieben, sollen Änderungen nur am zugrunde liegenden Modell vorgenommen werden und nicht an hieraus entstandenen Generaten. Der Einsatz eines Codegenerators setzt dieses Vorgehen jedoch nicht zwingend voraus.
 
 \subsubsection{Techniken zur Generierung von Code}
 
-Herrington teilt Codegeneratoren in seinem Buch \textit{Codegeneration in Action} in die zwei Hauptkategorien aktiv und passiv ein\,\cite[S. 28]{herrington2003}.
+Herrington teilt Codegeneratoren in seinem Buch \textit{Codegeneration in Action} in die zwei Hauptkategorien aktiv und passiv ein\,\cite[S.\,28]{herrington2003}.
 
 Passive Codegeneratoren werden eingesetzt, um einmal Quelltext zu generieren, zum Beispiel zur Unterstützung des Programmierers in einer integrierten Entwicklungsumgebung. Der Programmierer verarbeitet diesen generierten Code dann nach Belieben weiter. Im Gegensatz hierzu stehen aktive Codegeneratoren, welche immer wieder zur Ausführung kommen und den generierten Quelltext, abhängig von den Eingabeparametern des Generators, immer wieder regenerieren. Die für MDSD verwendeten Generatoren kann man dieser Kategorie zuordnen, die Eingabeparameter sind hier das konkrete Modell.
 
-Im Zusammenhang mit MDSD gibt es zwei Möglichkeiten der Generierung von Code aus dem konkreten Modell. Fowler nennt diese zwei Formen der Generierung Transformer Generation und Templated Generation\,\cite[S. 124f.]{fowler2010}.
+Im Zusammenhang mit MDSD gibt es zwei Möglichkeiten der Generierung von Code aus dem konkreten Modell. Fowler nennt diese zwei Formen der Generierung Transformer Generation und Templated Generation\,\cite[S.\,124f.]{fowler2010}.
 
 Bei der Transformer Generation werden aus einem konkreten Modell Statements einer Zielsprache generiert. Hierfür wird das Modell traversiert und der Generator setzt aus den im Modell vorliegenden Informationen zum Aufbau des Codes Ausdrücke zusammen. Templated Generation basiert auf Textersetzung. Es wird eine Codevorlage, das Template, geschrieben, in welcher Variabilitäten auf besondere Weise markiert sind. Aus den Daten des konkreten Modells werden Werte für diese Variabilitäten vom Generator ausgelesen und im Template eingesetzt.
 
-Diese Ansätze sind nicht nur voneinander getrennt verwendbar. Beim Einsatz von Transformer Generation ist es möglich, dass der ausgegebene Quelltext zwar komplett neu generiert wird, aber einzelne Teile dieses Quelltextes auf Basis von kleinen Templates erstellt werden\,\cite[S. 125]{fowler2010}.
+Diese Ansätze sind nicht nur voneinander getrennt verwendbar. Beim Einsatz von Transformer Generation ist es möglich, dass der ausgegebene Quelltext zwar komplett neu generiert wird, aber einzelne Teile dieses Quelltextes auf Basis von kleinen Templates erstellt werden\,\cite[S.\,125]{fowler2010}.
 
 \subsubsection{Zusammenhang mit Transformatoren}
 
-Es ist denkbar, ein von einer DSL beschriebenes Modell durch weitere Umwandlungsschritte weiter zu verarbeiten, bevor abschließend Quelltext generiert wird. Dies kann Sinn machen, um ein Modell so aufzubereiten, dass ein bestimmter Generator es verarbeiten kann\,\cite[S. 195]{stahl2007}. Eine Komponente, die diese Transformation durchführt, nennt man Transformator. Wird ein Modell zu Text transformiert, so nennt man das Codegenerierung, durchgeführt von einem Generator\,\cite[S. 271]{voelter2013}.
+Es ist denkbar, ein von einer DSL beschriebenes Modell durch weitere Umwandlungsschritte weiter zu verarbeiten, bevor abschließend Quelltext generiert wird. Dies kann Sinn machen, um ein Modell so aufzubereiten, dass ein bestimmter Generator es verarbeiten kann\,\cite[S.\,195]{stahl2007}. Eine Komponente, die diese Transformation durchführt, nennt man Transformator. Wird ein Modell zu Text transformiert, so nennt man das Codegenerierung, durchgeführt von einem Generator\,\cite[S.\,271]{voelter2013}.
 
 Ein konkreter Anwendungsfall wäre, wenn ein Generator, der eine konkrete Instanz eines bestimmten Metamodells zu Code verarbeiten kann, bereits implementiert vorliegt, jedoch das von einer DSL beschriebene Metamodell von dem für den Generator verständlichen Metamodell abweicht. Eine Modell-zu-Modell-Transformation könnte hier eine Brücke schlagen und somit den bereits vorhandenen Generator nutzbar machen. Dies könnte unter Umständen, vor allem wenn die Metamodelle bereits eine ähnliche Struktur aufweisen, den Arbeitsaufwand reduzieren.
 
@@ -440,11 +447,11 @@ Die Komplexität der Umwandlung von einem Metamodell in das andere könnte durch
 
 \subsubsection{Abgrenzung zu Compilern}
 
-In der Literatur wird ein Generator stellenweise auch Compiler genannt\,\cite[S. 26]{voelter2013}. Das Erzeugen von Quelltext nennt sich auch kompilieren\,\cite[S. 19]{fowler2010}.
+In der Literatur wird ein Generator stellenweise auch Compiler genannt\,\cite[S.\,26]{voelter2013}. Das Erzeugen von Quelltext nennt sich auch kompilieren\,\cite[S.\,19]{fowler2010}.
 
-Bei genauerem Hinsehen ist die Abgrenzung von Generatoren zu Compilern im Zusammenhang mit MDSD möglich. Bei der modellgetriebenen Softwareentwicklung wandeln Generatoren DSL-Code in konkreten Code einer GPL um. Normalerweise wird aus DSL-Code nicht direkt Bytecode oder Maschinencode generiert, da wir durch den Schritt über GPL-Code den Compiler der GPL mit all seinen Features verwenden können\,\cite[S. 11]{voelter2013}.
+Bei genauerem Hinsehen ist die Abgrenzung von Generatoren zu Compilern im Zusammenhang mit MDSD möglich. Bei der modellgetriebenen Softwareentwicklung wandeln Generatoren DSL-Code in konkreten Code einer GPL um. Normalerweise wird aus DSL-Code nicht direkt Bytecode oder Maschinencode generiert, da wir durch den Schritt über GPL-Code den Compiler der GPL mit all seinen Features verwenden können\,\cite[S.\,11]{voelter2013}.
 
-Wie beschrieben, wandelt ein Compiler GPL-Code zu Bytecode oder Maschinencode um. Dabei nimmt er Optimierungen, wie zum Beispiel zur Verbesserung der Geschwindigkeit oder des Speicherverbrauchs eines Programms, vor. Das vom Compiler erzeugte Artefakt kann auf der Zielplattform direkt ausgeführt werden\,\cite[S. 345ff.]{czaeis2000}.
+Wie beschrieben, wandelt ein Compiler GPL-Code zu Bytecode oder Maschinencode um. Dabei nimmt er Optimierungen, wie zum Beispiel zur Verbesserung der Geschwindigkeit oder des Speicherverbrauchs eines Programms, vor. Das vom Compiler erzeugte Artefakt kann auf der Zielplattform direkt ausgeführt werden\,\cite[S.\,345ff.]{czaeis2000}.
 
 Da eine Beschreibung des Kompilierprozesses und die verwendeten Techniken im Compilerbau den Rahmen dieser Arbeit sprengen würden, wird hier nicht tiefer auf das Thema eingegangen, sondern auf das \glqq Drachenbuch\grqq\ als weiterführende Literatur verwiesen\,\cite{aho2006}.
 
@@ -453,7 +460,7 @@ Da eine Beschreibung des Kompilierprozesses und die verwendeten Techniken im Com
 Software Engineering, auch bekannt unter der deutschen Bezeichnung Softwaretechnik, wird von Helmut Balzert in seinem Lehrbuch der Softwaretechnik folgendermaßen definiert\,\cite[S.17]{balzert2009a}:
 
 \begin{quote}
-Softwaretechnik: Zielorientierte Bereitstellung und systematische Verwendung von Prinzipien, Methoden und Werkzeugen fürdie arbeitsteilige, ingenieurmäßige Entwicklung und Anwendung von umfangreichen Softwaresystemen. Zielorientiert bedeutet dieBerücksichtigung z. B. von Kosten, Zeit, Qualität.
+\glqq Softwaretechnik: Zielorientierte Bereitstellung und systematische Verwendung von Prinzipien, Methoden und Werkzeugen fürdie arbeitsteilige, ingenieurmäßige Entwicklung und Anwendung von umfangreichen Softwaresystemen. Zielorientiert bedeutet dieBerücksichtigung z. B. von Kosten, Zeit, Qualität.\grqq
 \end{quote}
 
 Es geht also um die wirtschaftliche Anwendung von erprobten Lösungen bei der Umsetzung großer Softwaresysteme. Außerdem soll dies systematisch geschehen, das heißt es soll begründet werden, wieso ein Prinzip, eine Methode oder ein Werkzeug zur Lösung eines bestimmten Problems verwendet wurde. In der Softwaretechnik geht es nicht darum, das Rad jedes Mal neu zu erfinden. Vielmehr soll der vorhandene Stand der Technik strukturiert angewandt werden.
@@ -462,11 +469,11 @@ Für den Bereich der Prinzipien in der Softwaretechnik hat Balzert einige grundl
 
 \subsection{Prinzipien der Softwaretechnik}
 
-Ein Prinzip liegt als Basis dem zugrunde, was wir tun. Sie sind weder konkret, noch beziehen sie sich auf Spezialfälle\,\cite[S. 25]{balzert2009a}.
+Ein Prinzip liegt als Basis dem zugrunde, was wir tun. Sie sind weder konkret, noch beziehen sie sich auf Spezialfälle\,\cite[S.\,25]{balzert2009a}.
 
 \subsubsection{Abstraktion}
 
-Abstrahieren bedeutet, etwas zu verallgemeinern. Das bedeutet, sich von besonderen Eigenschaften einer Sache zu lösen und wesentliche Dinge und gleiche Merkmale, die mehrere Instanzen dieser Sache haben, hervorzuheben. Im Gegensatz zur Abstraktion steht die Konkretisierung\,\cite[S. 26]{balzert2009a}.
+Abstrahieren bedeutet, etwas zu verallgemeinern. Das bedeutet, sich von besonderen Eigenschaften einer Sache zu lösen und wesentliche Dinge und gleiche Merkmale, die mehrere Instanzen dieser Sache haben, hervorzuheben. Im Gegensatz zur Abstraktion steht die Konkretisierung\,\cite[S.\,26]{balzert2009a}.
 
 In der Softwareentwicklung, im Rahmen objektorientierter Programmierung, ist eine Form der Abstraktion der Aufbau von Vererbungsstrukturen. Hier werden allgemeine Eigenschaften in eine Oberklasse abstrahiert und andere Klassen erben hiervon und fügen eigene, spezielle Eigenschaften hinzu.
 
@@ -480,13 +487,13 @@ Selbst wenn ein Modell so genau wie möglich sein soll, muss an einer Stelle ein
 
 Das Prinzip der Modularisierung steht in direktem Zusammenhang mit der Abstraktion. Modularisierung bedeutet, ein System in Module zu zerlegen. Dieses Konzept kommt zum Beispiel besonders häufig bei Elektrogeräten vor. Ein Computer hat mehrere, einzeln entwickelte, Bauteile. Der Arbeitsspeicher ist von einem anderen Hersteller als die Grafikkarte. Über eine definierte Schnittstelle, die Anschlüsse auf der Hauptplatine, können Arbeitsspeicher und Grafikkarte gemeinsam in einem System betrieben werden.
 
-Ein Modul stellt eine funktionale Einheit oder eine auf semantische Weise verbundenen Funktionsgruppe dar. Ebenso ist ein Modul weitgehend Kontext unabhängig, das heißt, es kann für sich stehend verstanden, entwickelt, geprüft und gewartet werden. Gekoppelt sind die Module über eine klar erkennbare Schnittstelle\,\cite[S. 41]{balzert2009a}.
+Ein Modul stellt eine funktionale Einheit oder eine auf semantische Weise verbundenen Funktionsgruppe dar. Ebenso ist ein Modul weitgehend Kontext unabhängig, das heißt, es kann für sich stehend verstanden, entwickelt, geprüft und gewartet werden. Gekoppelt sind die Module über eine klar erkennbare Schnittstelle\,\cite[S.\,41]{balzert2009a}.
 
 \subsubsection{Weitere Prinzipien und Abhängigkeiten zwischen den Prinzipien der Softwaretechnik}
 
-Es gibt neben den genannten Prinzipien noch einige weitere, die hier nicht tiefer behandelt werden. Das Prinzip der Strukturierung besagt, dass ein Softwaresystem in einer bestimmten definierten Struktur vorliegt\,\cite[S. 34ff.]{balzert2009a}. Bindung und Kopplung beschreiben strukturelle Eigenschaften eines Softwaresystems. Bindung bezeichnet hierbei die Kompaktheit einer Systemkomponente. Ist ein System stark gebunden, so haben die einzelnen Komponenten ihre klar definierten Verantwortlichkeiten. Im Gegensatz zur Bindung steht die Kopplung, diese ist die Assoziation und Vererbungsstruktur zwischen verschiedenen Klassen und Paketen. Je höher der Kopplungsgrad ist, desto größere Auswirkungen haben Änderungen in einer Komponente auf andere, hiermit gekoppelte, Komponenten\,\cite[S. 37f.]{balzert2009a}. Wenn ein System nach einer Rangordnung angeordnet ist, so besitzt es eine Hierarchie. Dies ist eine stärkere Form der Strukturierung und verhindert, dass ein Softwaresystem eine chaotische Struktur entwickelt\,\cite[S. 39ff.]{balzert2009a}. Unter Geheimnisprinzip versteht man eine schärfere Version der Modularisierung. Für den Anwender soll eine Systemkomponente keinen Einblick in die eigene Funktionsweise bieten, sondern nur korrekt funktionieren\,\cite[S. 42ff.]{balzert2009a}. Lokalität bedeutet, dass für eine Aufgabe wichtige Informationen nicht zusammengesucht werden müssen, sondern zum Beispiel als Felder in einer Klasse bereits vorliegen\,\cite[S. 45f.]{balzert2009a}. Mit dem Prinzip der Verbalisierung ist unter anderem gemeint, dass Komponenten, wie Klassen, Methoden und Felder eine aussagekräftige Namensgebung haben, da dies bis zu einem gewissen Grad zu einer Selbstdokumentierung des Codes führt\,\cite[S. 46ff.]{balzert2009a}.
+Es gibt neben den genannten Prinzipien noch einige weitere, die hier nicht tiefer behandelt werden. Das Prinzip der Strukturierung besagt, dass ein Softwaresystem in einer bestimmten definierten Struktur vorliegt\,\cite[S.\,34ff.]{balzert2009a}. Bindung und Kopplung beschreiben strukturelle Eigenschaften eines Softwaresystems. Bindung bezeichnet hierbei die Kompaktheit einer Systemkomponente. Ist ein System stark gebunden, so haben die einzelnen Komponenten ihre klar definierten Verantwortlichkeiten. Im Gegensatz zur Bindung steht die Kopplung, diese ist die Assoziation und Vererbungsstruktur zwischen verschiedenen Klassen und Paketen. Je höher der Kopplungsgrad ist, desto größere Auswirkungen haben Änderungen in einer Komponente auf andere, hiermit gekoppelte, Komponenten\,\cite[S.\,37f.]{balzert2009a}. Wenn ein System nach einer Rangordnung angeordnet ist, so besitzt es eine Hierarchie. Dies ist eine stärkere Form der Strukturierung und verhindert, dass ein Softwaresystem eine chaotische Struktur entwickelt\,\cite[S.\,39ff.]{balzert2009a}. Unter Geheimnisprinzip versteht man eine schärfere Version der Modularisierung. Für den Anwender soll eine Systemkomponente keinen Einblick in die eigene Funktionsweise bieten, sondern nur korrekt funktionieren\,\cite[S.\,42ff.]{balzert2009a}. Lokalität bedeutet, dass für eine Aufgabe wichtige Informationen nicht zusammengesucht werden müssen, sondern zum Beispiel als Felder in einer Klasse bereits vorliegen\,\cite[S.\,45f.]{balzert2009a}. Mit dem Prinzip der Verbalisierung ist unter anderem gemeint, dass Komponenten, wie Klassen, Methoden und Felder eine aussagekräftige Namensgebung haben, da dies bis zu einem gewissen Grad zu einer Selbstdokumentierung des Codes führt\,\cite[S.\,46ff.]{balzert2009a}.
 
-Die Prinzipien der Softwaretechnik stehen nicht losgelöst im Raum, sondern sie bedingen sich teilweise oder stehen zueinander in Wechselwirkung. Bindung und Kopplung benötigen zum Beispiel Modularisierung beziehungsweise Strukturierung. Das Geheimnisprinzip kann ebenfalls nur auf Basis von Modularisierung Anwendung finden. Ein Graph, der diese Zusammenhänge abbildet, findet sich bei Balzert\,\cite[S. 49]{balzert2009a}.
+Die Prinzipien der Softwaretechnik stehen nicht losgelöst im Raum, sondern sie bedingen sich teilweise oder stehen zueinander in Wechselwirkung. Bindung und Kopplung benötigen zum Beispiel Modularisierung beziehungsweise Strukturierung. Das Geheimnisprinzip kann ebenfalls nur auf Basis von Modularisierung Anwendung finden. Ein Graph, der diese Zusammenhänge abbildet, findet sich bei Balzert\,\cite[S.\,49]{balzert2009a}.
 
 \subsubsection{Zusammenhang zwischen den Prinzipien der Softwaretechnik und der Entwicklung von Codegeneratoren}
 
@@ -502,57 +509,57 @@ Das viel beachtete Werk \textit{Design Patterns: Elements of Reusable Object-Ori
 
 Das erste Element ist der Name, welcher verwendet werden kann, um auf das Pattern zu referenzieren. Dies ermöglicht, allein schon durch die Erweiterung des Vokabulars, Software mit erhöhter Abstraktion zu entwerfen. Des Weiteren gehört zu jedem dieser Muster eine Beschreibung, bei welcher Art von Problem es anwendbar sein könnte. Als dritter Teil eines Patterns werden die Elemente, welche verwendet werden, um das beschriebene Problem zu lösen, abstrakt erläutert. Diese Lösungen beschreiben kein konkretes Design oder eine konkrete Implementation, da das Muster in verschiedenen Situationen Anwendung finden kann. Jedes Muster bringt Vor- und Nachteile. Diese Konsequenzen sind wichtig zum Verständnis eines Patterns und werden daher explizit aufgeführt\,\cite[S.30 f.]{gamma2015}.
 
-Modellgetriebene Softwareentwicklung stellt den Anwender im Zusammenhang mit objektorientierter Programmierung vor Probleme, für deren Lösung bestimmte Design Pattern hilfreich sein können. Die Beschreibung dieser Entwurfsmuster folgt in dem oben zitierten Werk einem konsistenten Aufbau. Die folgenden Abschnitte dieser Arbeit orientieren sich an dieser Vorlage. Zunächst wird das Pattern benannt, dann wird kurz der Zweck, also was mit der Verwendung des Patterns erreicht werden soll, zusammengefasst. Anschließend wird erklärt, wann das Pattern anwendbar sein könnte und zum Abschluss wird in Form eines Diagramms das behandelte Muster dargestellt. Erklärungen zur verwendeten Notation können auf den ersten Seiten der aktuellen deutschen Übersetzung des Design Pattern Werkes entnommen werden\,\cite[S. 8]{gamma2015}. Der genaue Aufbau und der Ablauf der Kommunikation zwischen den Akteuren des Patterns wird in dieser Arbeit nur oberflächlich erläutert. Die Intention dieses Abschnitts ist, dass die aufgezeigten Muster, wenn diese später erwähnt werden, in ihrer grundlegenden Funktion bekannt sind.
+Modellgetriebene Softwareentwicklung stellt den Anwender im Zusammenhang mit objektorientierter Programmierung vor Probleme, für deren Lösung bestimmte Design Pattern hilfreich sein können. Die Beschreibung dieser Entwurfsmuster folgt in dem oben zitierten Werk einem konsistenten Aufbau. Die folgenden Abschnitte dieser Arbeit orientieren sich an dieser Vorlage. Zunächst wird das Pattern benannt, dann wird kurz der Zweck, also was mit der Verwendung des Patterns erreicht werden soll, zusammengefasst. Anschließend wird erklärt, wann das Pattern anwendbar sein könnte und zum Abschluss wird in Form eines Diagramms das behandelte Muster dargestellt. Erklärungen zur verwendeten Notation können auf den ersten Seiten der aktuellen deutschen Übersetzung des Design Pattern Werkes entnommen werden\,\cite[S.\,8]{gamma2015}. Der genaue Aufbau und der Ablauf der Kommunikation zwischen den Akteuren des Patterns wird in dieser Arbeit nur oberflächlich erläutert. Die Intention dieses Abschnitts ist, dass die aufgezeigten Muster, wenn diese später erwähnt werden, in ihrer grundlegenden Funktion bekannt sind.
 
-Das Factory Method Pattern bezeichnet hier nicht das von Gamma et al. vorgeschlagene Factory Method Muster\,\cite[S. 173ff.]{gamma2015}, sondern bezieht sich auf die von Bloch in \textit{Effective Java} beschriebene Static Factory Method\,\cite[S. 5ff.]{bloch2017}.
+Das Factory Method Pattern bezeichnet hier nicht das von Gamma et al. vorgeschlagene Factory Method Muster\,\cite[S.\,173ff.]{gamma2015}, sondern bezieht sich auf die von Bloch in \textit{Effective Java} beschriebene Static Factory Method\,\cite[S.\,5ff.]{bloch2017}.
 
 \subsection{Visitor Pattern}
 
-Das Visitor Pattern oder auch Besuchermuster ist ein objektbasiertes Verhaltensmuster\,\cite[S. 480]{gamma2015}.
+Das Visitor Pattern oder auch Besuchermuster ist ein objektbasiertes Verhaltensmuster\,\cite[S.\,480]{gamma2015}.
 
 \subsubsection{Zweck}
 
-Dieses Muster erlaubt es, Operationen auf Elementen einer Objektstruktur zu definieren, ohne die eigentlichen Klassen der Elemente ändern zu müssen\,\cite[S. 480]{gamma2015}.
+Dieses Muster erlaubt es, Operationen auf Elementen einer Objektstruktur zu definieren, ohne die eigentlichen Klassen der Elemente ändern zu müssen\,\cite[S.\,480]{gamma2015}.
 
 \subsubsection{Anwendbarkeit}
 
-Das Besuchermuster kann Anwendung finden, wenn eine Struktur aus Objekten mit unterschiedlichen Schnittstellen vorliegt und auf diesen Objekten, abhängig von ihrer konkreten Klasse, Operationen auszuführen sind. Dies schützt vor allem davor, dass die Klassen dieser Objekte für jede Anwendung die jeweiligen Operationen implementieren müssen. Wird die Objektstruktur verwendet, so können die notwendigen Operationen lokalisiert definiert werden. Das Besuchermuster erlaubt es leicht, neue Operation hinzuzufügen, sollte sich jedoch die Objektstruktur häufiger ändern, so müssen jedes Mal die Visitor-Schnittstellen neu definiert werden. Hier könnte es besser sein, die Operationen in den betroffenen Klassen zu definieren\,\cite[S. 484]{gamma2015}.
+Das Besuchermuster kann Anwendung finden, wenn eine Struktur aus Objekten mit unterschiedlichen Schnittstellen vorliegt und auf diesen Objekten, abhängig von ihrer konkreten Klasse, Operationen auszuführen sind. Dies schützt vor allem davor, dass die Klassen dieser Objekte für jede Anwendung die jeweiligen Operationen implementieren müssen. Wird die Objektstruktur verwendet, so können die notwendigen Operationen lokalisiert definiert werden. Das Besuchermuster erlaubt es leicht, neue Operation hinzuzufügen, sollte sich jedoch die Objektstruktur häufiger ändern, so müssen jedes Mal die Visitor-Schnittstellen neu definiert werden. Hier könnte es besser sein, die Operationen in den betroffenen Klassen zu definieren\,\cite[S.\,484]{gamma2015}.
 
-Ein Anwendungsbeispiel für das Visitor Pattern bei modellgetriebener Softwareentwicklung ist die Verarbeitung der Nodes eines AST. Der Baum stellt hier die erwähnte Objektstruktur dar und dessen Knoten die Elemente\,\cite[S. 480]{gamma2015}.
+Ein Anwendungsbeispiel für das Visitor Pattern bei modellgetriebener Softwareentwicklung ist die Verarbeitung der Nodes eines AST. Der Baum stellt hier die erwähnte Objektstruktur dar und dessen Knoten die Elemente\,\cite[S.\,480]{gamma2015}.
 
 \subsubsection{Struktur}
 
-Die Abbildung ~\ref{fig:visitor} zeigt den Aufbau des Visitor Patterns. Sind die entsprechenden Klassen auf diese Weise implementiert, so kann jederzeit, wenn eine Operation auf den Elementen einer Datenstruktur ausführbar gemacht werden soll, ein konkreter Visitor implementiert werden, welcher diese Operation ausführt. Traversiert man die einzelnen Objekte der Struktur, kann auf jedem dieser Objekte die Accept-Operation aufgerufen werden. Diese führt dann die entsprechende Visit-Operation auf dem übergebenen konkretenen Visitor aus. Es ist möglich, dass nicht eine einzigartig benannte Visit-Operation für jedes konkrete Element existiert, sondern, dass die Operation durch Funktionsüberladung einer aussagekräftig benannten Visit-Methode implementiert wird\,\cite[S.485 ff.]{gamma2015}.
+Die Abbildung~\ref{fig:visitor} zeigt den Aufbau des Visitor Patterns. Sind die entsprechenden Klassen auf diese Weise implementiert, so kann jederzeit, wenn eine Operation auf den Elementen einer Datenstruktur ausführbar gemacht werden soll, ein konkreter Visitor implementiert werden, welcher diese Operation ausführt. Traversiert man die einzelnen Objekte der Struktur, kann auf jedem dieser Objekte die Accept-Operation aufgerufen werden. Diese führt dann die entsprechende Visit-Operation auf dem übergebenen konkretenen Visitor aus. Es ist möglich, dass nicht eine einzigartig benannte Visit-Operation für jedes konkrete Element existiert, sondern, dass die Operation durch Funktionsüberladung einer aussagekräftig benannten Visit-Methode implementiert wird\,\cite[S.485 ff.]{gamma2015}.
 
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=1.0\textwidth]{bilder/visitor}
-\caption{Darstellung der Struktur des Visitor Design Patterns, entnommen aus\,\cite[S. 485]{gamma2015}.}
-\label{fig:visitor}
+	\centering
+	\includegraphics[width=1.0\textwidth]{bilder/visitor}
+	\caption{Darstellung der Struktur des Visitor Design Patterns, entnommen aus\,\cite[S.\,485]{gamma2015}.}
+	\label{fig:visitor}
 \end{figure}
 
 \subsection{Builder}
 
-Das Pattern Builder oder im deutschen auch Erbauer ist ein objektbasiertes Erzeugungsmuster\,\cite[S. 159]{gamma2015}.
+Das Pattern Builder oder im deutschen auch Erbauer ist ein objektbasiertes Erzeugungsmuster\,\cite[S.\,159]{gamma2015}.
 
 \subsubsection{Zweck}
 
-Ein Erbauer soll die Erzeugung eines komplexen Objektes von dessen Repräsentation trennen. Somit ist es möglich, unterschiedlich aufgebaute Instanzen einer Klasse zu erzeugen\,\cite[S. 159]{gamma2015}. Eine spezielle Form des Builders, die Joshua Bloch in \textit{Effective Java} vorschlägt, dient dazu, komplexe Objekte mit vielen optionalen Parametern vereinfacht zu konstruieren\,\cite[S. 10ff.]{bloch2017}.
+Ein Erbauer soll die Erzeugung eines komplexen Objektes von dessen Repräsentation trennen. Somit ist es möglich, unterschiedlich aufgebaute Instanzen einer Klasse zu erzeugen\,\cite[S.\,159]{gamma2015}. Eine spezielle Form des Builders, die Joshua Bloch in \textit{Effective Java} vorschlägt, dient dazu, komplexe Objekte mit vielen optionalen Parametern vereinfacht zu konstruieren\,\cite[S.\,10ff.]{bloch2017}.
 
 \subsubsection{Anwendbarkeit}
 
 Soll die Logik, die bei der Erzeugung eines komplexen Objektes verwendet wird, losgelöst sein von dem eigentlichen Objekt oder soll das komplexe Objekt optionale Parameter ermöglichen, könnte man einen Builder verwenden.
 
-Ein Anwendungsfall für die Verwendung eines Builders stellt die Implementation einer internen DSL dar. Das beschriebene komplexe Objekt ist hier die konkrete Instanz des Metamodells\,\cite[S. 343ff.]{fowler2010}.
+Ein Anwendungsfall für die Verwendung eines Builders stellt die Implementation einer internen DSL dar. Das beschriebene komplexe Objekt ist hier die konkrete Instanz des Metamodells\,\cite[S.\,343ff.]{fowler2010}.
 
 \subsubsection{Struktur}
 
-Wie bei vielen der von Gamma et al. beschriebenen Pattern, definiert eine Abstrakte Klasse eine Schnittstelle mit den zur Erzeugung verwendbaren Methoden, welche dann von einer konkreten Klasse implementiert werden. Hier sind das die Klassen Builder und ConcreteBuilder. Ein Director verwendet diese Schnittstelle und erzeugt damit ein konkretes Produkt\,\cite[S. 162f.]{gamma2015}. Eine mögliche Abwandlung davon wäre die von Bloch beschriebene Erweiterung der BuildPart-Methoden, um eine Referenz auf das aktuelle Builder Objekt als Rückgabewert. Der Builder hält den aktuellen Zustand des erzeugten Objekts und erst wenn bei der dadurch entstehenden Methodenkaskade eine abschließende Build-Methode aufgerufen wird, gibt der Builder das erzeugte Objekt zurück\,\cite[S. 13ff]{bloch2017}.
+Wie bei vielen der von Gamma et al. beschriebenen Pattern, definiert eine Abstrakte Klasse eine Schnittstelle mit den zur Erzeugung verwendbaren Methoden, welche dann von einer konkreten Klasse implementiert werden. Hier sind das die Klassen Builder und ConcreteBuilder. Ein Director verwendet diese Schnittstelle und erzeugt damit ein konkretes Produkt\,\cite[S.\,162f.]{gamma2015}. Eine mögliche Abwandlung davon wäre die von Bloch beschriebene Erweiterung der BuildPart-Methoden, um eine Referenz auf das aktuelle Builder Objekt als Rückgabewert. Der Builder hält den aktuellen Zustand des erzeugten Objekts und erst wenn bei der dadurch entstehenden Methodenkaskade eine abschließende Build-Methode aufgerufen wird, gibt der Builder das erzeugte Objekt zurück\,\cite[S.\,13ff]{bloch2017}.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=1.0\textwidth]{bilder/builder}
-\caption{Darstellung der Struktur des Builder Design Patterns, entnommen aus\,\cite[S. 162]{gamma2015}.}
+\caption{Darstellung der Struktur des Builder Design Patterns, entnommen aus\,\cite[S.\,162]{gamma2015}.}
 \label{fig:builder}
 \end{figure}
 
@@ -562,19 +569,19 @@ Obwohl die Factory Method, oder auch Fabrikmethode, in dieser Form nicht von Gam
 
 \subsubsection{Zweck}
 
-Ziel einer Factory Method ist es, anstelle von speziellen Konstruktoren, statische Methoden zur Erzeugung von Objekten bereitzustellen. Da eine Methode im Gegensatz zu Konstruktoren benannt werden kann, ist es möglich die erzeugte Instanz eindeutiger zu beschreiben\,\cite[S. 5f]{bloch2017}.
+Ziel einer Factory Method ist es, anstelle von speziellen Konstruktoren, statische Methoden zur Erzeugung von Objekten bereitzustellen. Da eine Methode im Gegensatz zu Konstruktoren benannt werden kann, ist es möglich die erzeugte Instanz eindeutiger zu beschreiben\,\cite[S.\,5f]{bloch2017}.
 
 \subsubsection{Anwendbarkeit}
 
-Die Verwendung von Fabrikmethoden kann sinnvoll sein, wenn die Parameter eines Konstruktors das erzeugte Objekt nicht eindeutig beschreiben. Hier kann eine sprechend benannte statische Fabrikmethode eine genauere Beschreibung bieten und die Lesbarkeit des Quelltextes erhöhen. Es ist nicht möglich, Konstruktoren mit gleicher Signatur aber unterschiedlichem Verhalten bereitzustellen. Statische Fabrikmethoden können solche Konstruktoren ersetzen. Außerdem können sie Objekte eines Subtypen zurückgeben, somit kann die eigentliche instanziierte Klasse versteckt werden\,\cite[S. 5ff]{bloch2017}.
+Die Verwendung von Fabrikmethoden kann sinnvoll sein, wenn die Parameter eines Konstruktors das erzeugte Objekt nicht eindeutig beschreiben. Hier kann eine sprechend benannte statische Fabrikmethode eine genauere Beschreibung bieten und die Lesbarkeit des Quelltextes erhöhen. Es ist nicht möglich, Konstruktoren mit gleicher Signatur aber unterschiedlichem Verhalten bereitzustellen. Statische Fabrikmethoden können solche Konstruktoren ersetzen. Außerdem können sie Objekte eines Subtypen zurückgeben, somit kann die eigentliche instanziierte Klasse versteckt werden\,\cite[S.\,5ff]{bloch2017}.
 
 In Verbindung mit einem Enum oder String als Parameter der statischen Fabrikmethode, kann die Erzeugung eines komplexen Objekts mit einer aussagekräftigen Benennung gesteuert werden.
 
 \subsubsection{Struktur}
 
-Da für die statische Fabrikmethode nach Bloch kein Gegenstück im Katalog Design Pattern von Gamma et al. existiert\,\cite[S. 5]{bloch2017} und die Struktur lediglich durch das Hinzufügen weiterer Methoden zu einem Objekt besteht, wird hier auf eine Abbildung verzichtet.
+Da für die statische Fabrikmethode nach Bloch kein Gegenstück im Katalog Design Pattern von Gamma et al. existiert\,\cite[S.\,5]{bloch2017} und die Struktur lediglich durch das Hinzufügen weiterer Methoden zu einem Objekt besteht, wird hier auf eine Abbildung verzichtet.
 
-Eine statische Fabrikmethode ist eine von außen zugängliche statische Methode einer Klasse mit beliebigen Parametern, die, wie ein Konstruktor, ein Objekt dieser Klasse zurückgibt. Sie kann die Konstruktoren einer Klasse vollständig ersetzen oder die Klasse nur erweitern\,\cite[S. 5f]{bloch2017}. Die statische Fabrikmethode könnte auch in eine extra Fabrik Klasse ausgelagert werden, um so Logik für die Instanziierung verschiedener konfigurierter Objekte einer Klasse lokal zu sammeln.
+Eine statische Fabrikmethode ist eine von außen zugängliche statische Methode einer Klasse mit beliebigen Parametern, die, wie ein Konstruktor, ein Objekt dieser Klasse zurückgibt. Sie kann die Konstruktoren einer Klasse vollständig ersetzen oder die Klasse nur erweitern\,\cite[S.\,5f]{bloch2017}. Die statische Fabrikmethode könnte auch in eine extra Fabrik Klasse ausgelagert werden, um so Logik für die Instanziierung verschiedener konfigurierter Objekte einer Klasse lokal zu sammeln.
 
 \chapter{Analyse}
 
@@ -586,11 +593,11 @@ Zu jedem analysierten Problem werden mögliche Lösungswege aufgeführt und ihre
 
 \section{Aufwand eines konventionellen Softwareprojektes im Vergleich zu MDSD}
 
-Die Umsetzung einer Anwendung hat unterschiedliche Etappen. Zu Beginn der Entwicklung wird spezifiziert, was entwickelt werden soll, also wie die Anforderungen an die Anwendung aussehen. Diese ist gefolgt von einer Entwurfsphase, in welcher beschrieben wird, wie die Anwendung aussieht und aus welchen Bausteinen sie besteht. Als letzter Schritt wird das in der Entwurfsphase erarbeitete Konzept implementiert\,\cite[S. 62]{balzert2009a}. Abhängig vom verwendeten Entwicklungsprozess, wird parallel zu dieser Entwicklung oder im Anschluss daran die Qualität durch Tests gesichert. Wurden diese Etappen durchlaufen, ist die App bereit für eine Veröffentlichung.
+Die Umsetzung einer Anwendung hat unterschiedliche Etappen. Zu Beginn der Entwicklung wird spezifiziert, was entwickelt werden soll, also wie die Anforderungen an die Anwendung aussehen. Diese ist gefolgt von einer Entwurfsphase, in welcher beschrieben wird, wie die Anwendung aussieht und aus welchen Bausteinen sie besteht. Als letzter Schritt wird das in der Entwurfsphase erarbeitete Konzept implementiert\,\cite[S.\,62]{balzert2009a}. Abhängig vom verwendeten Entwicklungsprozess, wird parallel zu dieser Entwicklung oder im Anschluss daran die Qualität durch Tests gesichert. Wurden diese Etappen durchlaufen, ist die App bereit für eine Veröffentlichung.
 
-Die Idee der modellgetriebenen Softwareentwicklung ist es, dass man vereinfacht und ab einem gewissen Punkt wirtschaftlich, ganze Anwendungen oder Anwendungsteile einfacher, schneller und wiederverwertbar generieren kann\,\cite[S. 14f.]{stahl2007}. Ein Beispiel hierfür wäre die Umsetzung verschiedener konfigurierter Ausprägungen einer Softwarefamilie\,\cite[S. 237ff.]{stahl2007}. Wie aus dem vorherigen Kapitel Grundlagen hervorgeht, hat auch MDSD grundsätzlich mehrere Entwicklungsschritte. Um Software mit einem Modell beschreiben und daraus generieren zu können, muss bekannt sein, wie diese aufgebaut ist und funktioniert. Ein erster Schritt bei MDSD kann also sein, eine Ursprungs-App zu entwicklen, welche als Referenz für den weiteren Entwicklungsprozess dient. Danach kann diese Referenzimplementation analysiert werden. Hierunter fällt auch das in Grundlagen beschriebene Domain Engineering und die Definition eines Metamodells. Hierauf aufbauend kann zum einen eine domänenspezifische Sprache und zum anderen ein Generator entwickelt werden, welcher aus einer Instanz des Metamodells verschiedene Ausprägungen der Software generieren kann.
+Die Idee der modellgetriebenen Softwareentwicklung ist es, dass man vereinfacht und ab einem gewissen Punkt wirtschaftlich, ganze Anwendungen oder Anwendungsteile einfacher, schneller und wiederverwertbar generieren kann\,\cite[S.\,14f.]{stahl2007}. Ein Beispiel hierfür wäre die Umsetzung verschiedener konfigurierter Ausprägungen einer Softwarefamilie\,\cite[S.\,237ff.]{stahl2007}. Wie aus dem vorherigen Kapitel Grundlagen hervorgeht, hat auch MDSD grundsätzlich mehrere Entwicklungsschritte. Um Software mit einem Modell beschreiben und daraus generieren zu können, muss bekannt sein, wie diese aufgebaut ist und funktioniert. Ein erster Schritt bei MDSD kann also sein, eine Ursprungs-App zu entwicklen, welche als Referenz für den weiteren Entwicklungsprozess dient. Danach kann diese Referenzimplementation analysiert werden. Hierunter fällt auch das in Grundlagen beschriebene Domain Engineering und die Definition eines MetamodellS.\,Hierauf aufbauend kann zum einen eine domänenspezifische Sprache und zum anderen ein Generator entwickelt werden, welcher aus einer Instanz des Metamodells verschiedene Ausprägungen der Software generieren kann.
 
-Für die Umsetzung einer Referenzimplementation muss der gleiche Prozess durchlaufen werden, wie der für das konventionelle Entwickeln einer App\,\cite[S. 219f.]{stahl2007}. Da bei MDSD noch eine umfangreiche Analysephase und die Entwicklung des Generators durchgeführt werden müssen, kann modellgetriebene Softwareentwicklung frühestens mit der Entwicklung einer zweiten Anwendung einer Softwarefamilie oder vielleicht sogar erst zu einem späteren Zeitpunkt wirtschaftlich werden. Die Abbildung ~\ref{fig:vgl1} stellt diesen Vergleich grafisch vereinfacht dar.
+Für die Umsetzung einer Referenzimplementation muss der gleiche Prozess durchlaufen werden, wie der für das konventionelle Entwickeln einer App\,\cite[S.\,219f.]{stahl2007}. Da bei MDSD noch eine umfangreiche Analysephase und die Entwicklung des Generators durchgeführt werden müssen, kann modellgetriebene Softwareentwicklung frühestens mit der Entwicklung einer zweiten Anwendung einer Softwarefamilie oder vielleicht sogar erst zu einem späteren Zeitpunkt wirtschaftlich werden. Die Abbildung ~\ref{fig:vgl1} stellt diesen Vergleich grafisch vereinfacht dar.
 
 \begin{figure}[htbp]
 \centering
@@ -599,22 +606,22 @@ Für die Umsetzung einer Referenzimplementation muss der gleiche Prozess durchla
 \label{fig:vgl1}
 \end{figure}
 
-Ein zusätzlicher Faktor, der die Wirtschaftlichkeit von MDSD beeinträchtigen könnte, ist, dass sich ein Entwicklungsteam bei der Verwendung eines modellgetriebenen Ansatzes normalerweise aufteilt. Ein Teil der Entwickler erweitert DSLs und Generatoren und der andere Teil verwendet diese. Diese Abhängigkeit muss in der Ablaufplanung des Projektes berücksichtigt werden. Da sich bei MDSD nicht um konventionelle Softwareentwicklung handelt, kann es zusätzlich sein, dass die Konzepte einem Entwicklungsteam erst näher gebracht und etwaige Kompetenzen erst aufgebaut werden müssen\,\cite[S. 44ff.]{voelter2013}.
+Ein zusätzlicher Faktor, der die Wirtschaftlichkeit von MDSD beeinträchtigen könnte, ist, dass sich ein Entwicklungsteam bei der Verwendung eines modellgetriebenen Ansatzes normalerweise aufteilt. Ein Teil der Entwickler erweitert DSLs und Generatoren und der andere Teil verwendet diese. Diese Abhängigkeit muss in der Ablaufplanung des Projektes berücksichtigt werden. Da sich bei MDSD nicht um konventionelle Softwareentwicklung handelt, kann es zusätzlich sein, dass die Konzepte einem Entwicklungsteam erst näher gebracht und etwaige Kompetenzen erst aufgebaut werden müssen\,\cite[S.\,44ff.]{voelter2013}.
 
 Betrachtet man den MDSD Entwicklungsprozess strukturiert von Anfang bis Ende, ist gut zu sehen, an welcher Stelle eine Erhöhung der Wirtschaftlichkeit denkbar wäre.
 
-Die Entwicklung einer Referenzimplementation kann, wie bereits beschrieben, kaum gekürzt werden. Eine vollständige Analyse ist nur möglich, wenn auch eine zu analysierende Anwendung existiert. Da mit dem Generator konkreter Quelltext erzeugt werden soll, reicht auch eine reine Kozeptionierung der Referenzimplementation kaum aus. Diese sollte codiert vorliegen. Es könnte möglich sein, mithilfe von zum Beispiel Feature Modelling einen großen Teil einer Domäne losgelöst von einer konkreten Implementation zu analysieren. Spätestens, wenn es darum geht, die zu generierende Architektur zu untersuchen, ist die Referenzimplementation eine wichtige Hilfestellung und Ausgangspunkt\,\cite[S. 123f.]{stahl2007}.
+Die Entwicklung einer Referenzimplementation kann, wie bereits beschrieben, kaum gekürzt werden. Eine vollständige Analyse ist nur möglich, wenn auch eine zu analysierende Anwendung existiert. Da mit dem Generator konkreter Quelltext erzeugt werden soll, reicht auch eine reine Kozeptionierung der Referenzimplementation kaum auS.\,Diese sollte codiert vorliegen. Es könnte möglich sein, mithilfe von zum Beispiel Feature Modelling einen großen Teil einer Domäne losgelöst von einer konkreten Implementation zu analysieren. Spätestens, wenn es darum geht, die zu generierende Architektur zu untersuchen, ist die Referenzimplementation eine wichtige Hilfestellung und Ausgangspunkt\,\cite[S.\,123f.]{stahl2007}.
 
 Da die Analyse der Domäne und die Entwicklung des Metamodells sich nicht nur auf die Referenzimplementation stützt, sondern sich auch auf semantische, in der Referenzimplementation nicht zwingend festgehaltene, Zusammenhänge bezieht, ist sie nur sehr schwer und wenn überhaupt nur in Teilen automatisierbar.
 
-Im Gegensatz dazu steht die geradezu mechanisch anmutende Generierung von konkretem Quelltext aus einer Instanz eines beschriebenen Metamodells. Ist durch die Referenzimplementation und Analyse bekannt, wie die allgemeine Architektur für eine Anwendung aussieht und durch das Metamodell welche Variabilitäten vorliegen, so folgt die Erzeugung von Quelltext eindeutig vorher definierbaren Regeln. Konkrete Instanzen von Modellen, die für einen solchen Generator verständlich sind, müssten also dann alle auf dem gleichen Metamodell beruhen. Eine DSL zur Instanziierung eines solchen Metamodells könnte dann entweder immer gleich aussehen oder davon abhängen, welche Variabilitäten, basierend auf einer Referenzimplementation, überhaupt beschreibbar sein müssen. Unabhängig hiervon besteht in diesem Schritt somit Potenzial den MDSD Prozess durch Automatisierung zu verkürzen. Die folgende Abbildung ~\ref{fig:vgl2} zeigt dieses Potenzial in vereinfachter grafischer Darstellung noch einmal auf.
+Im Gegensatz dazu steht die geradezu mechanisch anmutende Generierung von konkretem Quelltext aus einer Instanz eines beschriebenen MetamodellS.\,Ist durch die Referenzimplementation und Analyse bekannt, wie die allgemeine Architektur für eine Anwendung aussieht und durch das Metamodell welche Variabilitäten vorliegen, so folgt die Erzeugung von Quelltext eindeutig vorher definierbaren Regeln. Konkrete Instanzen von Modellen, die für einen solchen Generator verständlich sind, müssten also dann alle auf dem gleichen Metamodell beruhen. Eine DSL zur Instanziierung eines solchen Metamodells könnte dann entweder immer gleich aussehen oder davon abhängen, welche Variabilitäten, basierend auf einer Referenzimplementation, überhaupt beschreibbar sein müssen. Unabhängig hiervon besteht in diesem Schritt somit Potenzial den MDSD Prozess durch Automatisierung zu verkürzen. Die folgende Abbildung ~\ref{fig:vgl2} zeigt dieses Potenzial in vereinfachter grafischer Darstellung noch einmal auf.
 
-Der Aufwand des letzten Schritts, der eigentlichen Anwendung des Generators, hängt von den oben bereits erwähnten Kompetenzen der Entwickler und vor allem mit der zur Modellbeschreibung verwendeten DSL zusammen. Je einfacher die DSL verwendet werden kann, je eindeutiger und eingängig ihre Syntax und je stärker die durch die DSL ermöglichte Abstraktion ist, desto produktiver kann mit ihr gearbeitet werden. Um dies bei DSLs zu erreichen haben Stahl und Voelter einige Best-Practices zur Definition von DSLs formuliert\,\cite[S. 113]{stahl2007}. Einsparungen können hier also im Grunde nur im Vorfeld, also bei der Analyse unter Umsetzung des Generators ausgelöst werden. Welche Ausprägung einer Anwendung genau generiert werden soll, muss ein Entwickler immer noch manuell schreiben.
+Der Aufwand des letzten Schritts, der eigentlichen Anwendung des Generators, hängt von den oben bereits erwähnten Kompetenzen der Entwickler und vor allem mit der zur Modellbeschreibung verwendeten DSL zusammen. Je einfacher die DSL verwendet werden kann, je eindeutiger und eingängig ihre Syntax und je stärker die durch die DSL ermöglichte Abstraktion ist, desto produktiver kann mit ihr gearbeitet werden. Um dies bei DSLs zu erreichen haben Stahl und Voelter einige Best-Practices zur Definition von DSLs formuliert\,\cite[S.\,113]{stahl2007}. Einsparungen können hier also im Grunde nur im Vorfeld, also bei der Analyse unter Umsetzung des Generators ausgelöst werden. Welche Ausprägung einer Anwendung genau generiert werden soll, muss ein Entwickler immer noch manuell schreiben.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{bilder/vergleich_2}
-\caption{Vereinfachte Darstellung des Einsparungspotentials im Generator Implementations-Schritt bei MDSD.}
+\caption{Vereinfachte Darstellung des Einsparungspotentials im Generator-Im"-ple"-men"-ta"-ti"-ons"-schritt bei MDSD.}
 \label{fig:vgl2}
 \end{figure}
 
@@ -633,7 +640,7 @@ Es gibt mehrere Möglichkeiten, zusätzliche Informationen zum vorhandenen Java-
 
 Als weiterer Ansatz könnten Stellen im Quelltext, die mit Informationen angereichert werden sollen, zeilenweise mit Kommentaren versehen werden. Die genaue textuelle Form der Kommentare ist hier frei wählbar. Es wäre sogar denkbar, hier eine eigenständige DSL zu verwenden. Der Informationsgehalt und dessen semantische Bedeutung müssten nach oder beim Parsen des Java-Quelltextes in einem zusätzlichen Schritt analysiert werden. Kommentare könnten an jeder Stelle des Codes, also auch innerhalb von Methoden, theoretisch sogar innerhalb von einzelnen Ausdrücken, verwendet werden. Eine Einschränkung, welcher Kommentar an welche Stelle des Codes gesetzt werden darf, kann jedoch nicht ohne zusätzliche Hilfsmittel gemacht werden.
 
-Eine dritte Variante wäre es, den Quelltext mit Java-Annotationen zu versehen. Abhängig von der Information die eine solche Annotation anbringen soll, könnte eine semantisch passende Benennung gewählt werden. Durch zusätzliche Target-Annotationen an den Annotations-Definitionen könnte noch genauer bestimmt werden, an welcher Stelle im Code welche Annotation angebracht werden darf. Mit Hilfe von Annotations-Parametern könnten noch weitere Informationen übermittelt werden. Da es nicht möglich, ist Quelltext innerhalb von Methoden zu annotieren, könnten dort auf diesem Weg keine zusätzlichen Informationen angegeben werden.
+Eine dritte Variante wäre es, den Quelltext mit Java-Annotationen zu versehen. Abhängig von der Information die eine solche Annotation anbringen soll, könnte eine semantisch passende Benennung gewählt werden. Durch zusätzliche Target-Annotationen an den Annotations-Definitionen könnte noch genauer bestimmt werden, an welcher Stelle im Code welche Annotation angebracht werden darf. Mit Hilfe von Annotations-Parametern könnten noch weitere Informationen übermittelt werden. Da es nicht möglich, ist Quelltext innerhalb von Methoden zu annotieren, könnten dort auf diesem Weg keine zu"-sätz"-lichen Informationen angegeben werden.
 
 \subsubsection{Parsen des Java-Codes}
 
@@ -647,13 +654,13 @@ Wurden der Java-Quelltext und die angebrachten Informationen eingelesen und zusa
 
 An das Metamodell werden mehrere Anforderungen gestellt. Grundsätzlich muss es möglich sein, die, zur späteren Generierung notwendigen Strukturinformationen aus dem Java-Quelltext, zu halten. Außerdem müssen Instanzen dieses Metamodells gebildet werden können, die in ihrem Aufbau die nicht variablen Teile des Ursprungs-Codes widerspiegeln und über eine Schnittstelle mit Informationen zu den variablen Teilen befüllt werden können.
 
-Da beschreibbar sein muss, welche Variabilitäten im Quelltext existieren, reicht die Verwendung des beim Parsen entstandenen AST als solcher nicht aus. Es wäre jedoch denkbar, das Metamodell des AST zu übernehmen und diesen mit weiteren Informationen zu den Nodes zu versehen. Je nach verwendeter Bibliothek könnte es hier möglich sein, diese Erweiterung durch den Aufbau einer Vererbungshierarchie zu den vorhandenen Klassen der Knotenpunkte vorzunehmen. Wird auf den von einer Bibliothek gelieferten AST zurückgegriffen, könnte es sein, dass dieser viel mehr Informationen enthält, als für den konkreten Erzeugungsprozess notwendig wären und somit zusätzliche Komplexität einführt.
+Da beschreibbar sein muss, welche Variabilitäten im Quelltext existieren, reicht die Verwendung des beim Parsen entstandenen AST als solcher nicht auS.\,Es wäre jedoch denkbar, das Metamodell des AST zu übernehmen und diesen mit weiteren Informationen zu den Nodes zu versehen. Je nach verwendeter Bibliothek könnte es hier möglich sein, diese Erweiterung durch den Aufbau einer Vererbungshierarchie zu den vorhandenen Klassen der Knotenpunkte vorzunehmen. Wird auf den von einer Bibliothek gelieferten AST zurückgegriffen, könnte es sein, dass dieser viel mehr Informationen enthält, als für den konkreten Erzeugungsprozess notwendig wären und somit zusätzliche Komplexität einführt.
 
 Eine weitere Möglichkeit wäre es, ein eigenes Metamodell zu definieren. Hierdurch können Struktur und Inhalt des Metamodells genau an die Aufgabe des Metagenerators angepasst werden. Mit Einführung eines unabhängigen Metamodells würde die Modularität der Anwendung zusätzlich gesteigert. Dieser Ansatz würde zudem ein iteratives Vorgehen erlauben. Parser, Metamodell und Generator könnten schrittweise gemeinsam um zusätzliche Funktionalität erweitert werden.
 
 \subsubsection{Schnittstellen zur Instanziierung des Metamodells}
 
-Um konkrete Ausprägungen des Metamodells bilden zu können, wird eine Schnittstelle benötigt. Im Zusammenhang mit modellgetriebener Softwareentwicklung ist dies normalerweise eine DSL. Es ist jedoch auch denkbar, auf das Metamodell mit einer Command-Query-API zuzugreifen\,\cite[S. 343ff.]{fowler2010}. Das bedeutet, dass die einzelnen Felder einer Instanz des Metamodells mit Methoden, wie zum Beispiel klassischen Settern, gesetzt werden.
+Um konkrete Ausprägungen des Metamodells bilden zu können, wird eine Schnittstelle benötigt. Im Zusammenhang mit modellgetriebener Softwareentwicklung ist dies normalerweise eine DSL. Es ist jedoch auch denkbar, auf das Metamodell mit einer Command-Query-API zuzugreifen\,\cite[S.\,343ff.]{fowler2010}. Das bedeutet, dass die einzelnen Felder einer Instanz des Metamodells mit Methoden, wie zum Beispiel klassischen Settern, gesetzt werden.
 
 Greift man auf eine domänenspezifische Sprache zurück, könnten hier gleich mehrere Ansätze verfolgt werden. Bei Verwendung einer externen DSL müsste diese entweder selbst definiert und implementiert werden. Das würde bedeutet, dass auch ein Parser für diese geschaffen werden müsste. Alternativ kann auf eine bereits existierende DSL zurückgegriffen werden. In diesem Fall muss dafür Sorge getragen werden, dass das Metamodell und die DSL miteinander kompatibel sind. Zusätzlich hätte die Verwendung einer bereits existierenden DSL den Vorteil, dass Hilfsmittel zum Parsen und Weiterverarbeiten der DSL normalerweise schon gegeben sind und somit der Implementationsaufwand reduziert wird. Stattdessen könnte auf eine Language Workbench zurückgegriffen werden. So stünde eine Entwicklungsumgebung zum Schreiben von DSL-Code zur Verfügung. Dies würde aber die Bindung an ein Tool bedeuten.
 
@@ -663,11 +670,11 @@ Da der Metagenerator im für diese Thesis relevanten Fall, unabhängig von seine
 
 Eine konkrete Ausprägung des Metamodells soll eingelesen und aus diesem Java-Quelltext generiert werden.
 
-\subsubsection{Verwendung vorhandener Bibliotheken zur Java-Codegenerierung}
+\subsubsection{Verwendung vorhandener Bibliotheken zur Erzeugung von Java-Quelltext}
 
 Wie auch beim ersten Schritt des Metagenerator-Prozesses, dem Parsen, muss abermals entschieden werden, ob die Komponente, welche den Java-Quelltext in Form von Zeichenketten generiert, vollständig neu umgesetzt wird oder ob auf vorhandene Bibliotheken zurückgegriffen werden soll. Es gelten die gleichen Vorteile wie schon bezüglich des Parsers erörtert. Verwendet man bereits existierende Komponenten, spart man sich die Implementationsarbeit und hat meist den Vorteil eines zuverlässigeren und aktuell gehaltenen Moduls.
 
-Sowohl bei Verwendung einer externen Bibliothek als auch bei einer Neuimplementation muss entschieden werden, auf welche Weise der Code zu generieren ist. Wie bereits im Grundlagen-Kapitel erklärt, gibt es hier im Allgemeinen zwei Ansätze. Der Quelltext könnte aus Vorlagen heraus erzeugt werden. Dies ist vor allem dann von Vorteil, wenn große Teile des erzeugten Codes gleich sind und nur Schlüsselelemente, wie zum Beispiel Identifier, ausgetauscht werden sollen\,\cite[S. 125]{fowler2010}. Werden die ersetzten Teile des erzeugten Quelltextes zu komplex oder zu umfangreich, so könnte das Generat unüberschaubar werden. Ab einer gewissen geforderten Variabilität des Generats, könnte templatebasierte Generierung gar nicht mehr anwendbar sein. In solchen Fällen kann die von Fowler sogenannte Transformer Generation in Betracht gezogen werden\,\cite[S. 125]{fowler2010}. Sie gibt die volle Kontrolle über den erzeugten Code. Da der Ziel-Quelltext in diesem Fall mit Java-Statements definiert wird, zum Beispiel unter Verwendung eines Builders, ist er im Vergleich zur vorlagenbasierten Generierung möglicherweise schwieriger verständlich. Bei einer vorlagenbasierten Generierung liegt der erzeugte Quelltext quasi in seiner endgültigen Form bereits vor und könnte somit leichter erfasst werden.
+Sowohl bei Verwendung einer externen Bibliothek als auch bei einer Neuimplementation muss entschieden werden, auf welche Weise der Code zu generieren ist. Wie bereits im Grundlagen-Kapitel erklärt, gibt es hier im Allgemeinen zwei Ansätze. Der Quelltext könnte aus Vorlagen heraus erzeugt werden. Dies ist vor allem dann von Vorteil, wenn große Teile des erzeugten Codes gleich sind und nur Schlüsselelemente, wie zum Beispiel Identifier, ausgetauscht werden sollen\,\cite[S.\,125]{fowler2010}. Werden die ersetzten Teile des erzeugten Quelltextes zu komplex oder zu umfangreich, so könnte das Generat unüberschaubar werden. Ab einer gewissen geforderten Variabilität des Generats, könnte templatebasierte Generierung gar nicht mehr anwendbar sein. In solchen Fällen kann die von Fowler sogenannte Transformer Generation in Betracht gezogen werden\,\cite[S.\,125]{fowler2010}. Sie gibt die volle Kontrolle über den erzeugten Code. Da der Ziel-Quelltext in diesem Fall mit Java-Statements definiert wird, zum Beispiel unter Verwendung eines Builders, ist er im Vergleich zur vorlagenbasierten Generierung möglicherweise schwieriger verständlich. Bei einer vorlagenbasierten Generierung liegt der erzeugte Quelltext quasi in seiner endgültigen Form bereits vor und könnte somit leichter erfasst werden.
 
 \subsubsection{DSL oder Generator als alternative Erzeugnisse des Metagenerators}
 
@@ -685,16 +692,16 @@ In den folgenden Abschnitten wird zunächst auf den allgemeinen Aufbau des Metag
 
 Der im vorangegangenen Kapitel durchgeführte Aufwandsvergleich zeigt, dass, wenn die Entwicklung eines Codegenerators durch Automatisierung wirtschaftlicher gemacht werden soll, diese nicht in der Analyse, sondern im eigentlichen Implementationsschritt für den Generator eingeführt werden könnte. Hier setzt auch das Konzept dieses Generators an. Durch Verwendung eines einheitlichen Metamodells kann die Entwicklung der beschreibenden DSL automatisiert werden. So kann anstelle eines spezialisierten Generators ein allgemeiner Generator treten.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{bilder/metagenProzess}
+	\caption{Darstellung der Prozessstruktur des Java-Metagenerators.}
+	\label{fig:meta1}
+\end{figure}
+
 \section{Allgemeine Struktur}
 
 Wie auf Abbildung ~\ref{fig:meta1} zu erkennen ist, besteht der Java-Metagenerator im Grunde aus zwei Teilen. Der DSL-Generator bietet dem Anwender die Möglichkeit Java-Quelltext durch Annotationen mit Informationen anzureichern. Der annotierte Java-Quelltext wird dann geparsed und daraus ein Annotations-Modell instanziiert. Dieses beinhaltet alle nötigen Informationen, um eine DSL zur Beschreibung des CodeUnit-Modells zu generieren. Das konkrete Endprodukt des DSL-Generators sind mehrere Builder-Klassen, die dann als interne DSL verwendet werden können. Der zweite Teil, der Java-Quelltextgenerator, transformiert eine Instanz des CodeUnit-Modells in ein allgemeines Java-Modell. Aus einer Instanz des Java-Modells wird mit einem allgemeinen Java-Generator konkreter Java-Quelltext generiert.
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=1.0\textwidth]{bilder/metagenProzess}
-\caption{Darstellung der Prozessstruktur des Java-Metagenerators.}
-\label{fig:meta1}
-\end{figure}
 
 \section{Funktionsweise des Metagenerators}
 
@@ -710,19 +717,19 @@ Als Alternative zur expliziten Markierung einzelner Elemente als statisch, wäre
 
 \subsubsection{Annotationen als Mittel zur Informationsanreicherung}
 
-Im letzten Kapitel wurden drei Ansätze aufgezeigt, um Java-Quelltext mit zusätzlichen Informationen zu hinterlegen. Diese sind die Verwendung einer externen Modelldatei mit Referenzen zum Java-Quelltext, Kommentierung von Quelltextzeilen beziehungsweise -abschnitten mit den zusätzlichen Daten in einer speziellen Syntax oder Markierung von Codeelementen mit Annotationen.
+Im letzten Kapitel wurden drei Ansätze aufgezeigt, um Java-Quelltext mit zusätzlichen Informationen zu hinterlegen. Diese sind die Verwendung einer externen Modelldatei mit Referenzen zum Java-Quelltext, Kommentierung von Quelltextzeilen beziehungsweise "~abschnitten mit den zusätzlichen Daten in einer speziellen Syntax oder Markierung von Codeelementen mit Annotationen.
 
-Für dieses Konzept sind Annotationen das Mittel der Wahl. Sie kombinieren einige Vorteile der beiden anderen Ansätze. Da ein Anwender des Metagenerators den Schritt der Informationsanreicherung manuell durchführen muss, bietet ihm die Einschränkungsmöglichkeit der Anwendbarkeit von Annotationen auf bestimmte Elemente des Codes eine Hilfestellung und reduziert mögliche Fehler. Die Annotationen sind hier eine verteilte interne DSL und somit stellt jede Annotationen ein Schlüsselwort dieser internen DSL dar. Im Gegensatz zur Verwendung von Kommentaren hat ein Entwickler also rudimentäre IDE Unterstützung.
+Für dieses Konzept sind Annotationen das Mittel der Wahl. Sie kombinieren einige Vorteile der beiden anderen Ansätze. Da ein Anwender des Metagenerators den Schritt der Informationsanreicherung manuell durchführen muss, bietet ihm die Einschränkungsmög"-lich"-keit der Anwendbarkeit von Annotationen auf bestimmte Elemente des Codes eine Hilfestellung und reduziert mögliche Fehler. Die Annotationen sind hier eine verteilte interne DSL und somit stellt jede Annotationen ein Schlüsselwort dieser internen DSL dar. Im Gegensatz zur Verwendung von Kommentaren hat ein Entwickler also rudimentäre IDE Unterstützung.
 
 Der Vorteil einer externen XML-Modelldatei mit entsprechender XSD ist, dass die Struktur klar definiert und eingeschränkt werden kann. Diese Eigenschaft kommt zwar nur beim Parsen der XML-Daten zum tragen, bietet aber keinerlei Hilfe bei der Definition der Variabilitäten durch einen Entwickler. Zudem müsste hierfür ein System zur Referenzierung einzelner Codezeilen eingeführt werden. Durch Annotationen ist die Zugehörigkeit zu einem bestimmten Codeelement eindeutig.
 
-Sowohl bei der Verwendung von Kommentaren, als auch von externen Modell-Dateien müsste ein Entwickler unter Umständen ein komplett neuartiges Konzept lernen. Für Kommentare müsste eine extra Syntax verwendet werden und bei externen Modell-Dateien zum Beispiel XML. Annotationen erlauben es dem Entwickler, im Java-Sprachraum zu bleiben und reduzieren somit den zusätzlichen Lernaufwand.
+Sowohl bei der Verwendung von Kommentaren, als auch von externen Modell-Dateien müsste ein Entwickler unter Umständen ein komplett neuartiges Konzept lernen. Für Kommentare müsste eine extra Syntax verwendet werden und bei externen Modell-Dateien zum Beispiel XML. Annotationen erlauben es dem Entwickler, im Java-Sprach"-raum zu bleiben und reduzieren somit den zusätzlichen Lernaufwand.
 
 \subsubsection{Parsen des annotierten Codes}
 
 Für dieses Konzept wird der annotierte Java-Quelltext mithilfe einer externen Bibliothek geparsed. Diese Entscheidung wurde getroffen, da ein möglichst großer Teil des Java-Sprachschatzes vom Metagenerator abgedeckt sein sollte. Während der Entwicklung hätte eine eigene Implementation des Parsers zur Folge gehabt, dass dieser sukzessiv mit dem Metagenerator hätte erweitert werden müssen, welches ein signifikant höherer Arbeitsaufwand gewesen wäre.
 
-Die konkrete Wahl ist auf die Bibliothek JavaParser in Kombination mit dessen Erweiterung JavaSymbolSolver in der Version 0.6.3 gefallen. Beides ist unter http://javaparser.org/ zu finden und dort mit Anleitungen und Codebeispielen versehen. Das aktive GitHub-Repository mit mehreren tausend Commits weckt den Anschein, dass JavaParser ständig aktualisiert und weiterentwickelt wird. Außerdem kann der von der Bibliothek bereitgestellte AST leicht mithilfe des Visitor Patterns weiterverarbeitet werden. JavaSymbolSolver kommt zum Einsatz, da an einigen Stellen im Proof-of-Concept voll qualifizierte Datentypen benötigt werden, welche aus dem normalen AST nicht ohne Zusatzaufwand gewonnen werden konnten. Genauere Informationen zur Verwendung von JavaParser und JavaSymbolSolver werden im Kapitel zur tatsächlichen Umsetzung dieses Konzepts bereitgestellt.
+Die konkrete Wahl ist auf die Bibliothek JavaParser in Kombination mit dessen Erweiterung JavaSymbolSolver in der Version 0.6.3 gefallen. Unter http://javaparser.org/ ist beides zu finden und dort mit Anleitungen und Codebeispielen versehen. Das aktive GitHub-Repository mit mehreren tausend Commits weckt den Anschein, dass JavaParser ständig aktualisiert und weiterentwickelt wird. Außerdem kann der von der Bibliothek bereitgestellte AST leicht mithilfe des Visitor Patterns weiterverarbeitet werden. JavaSymbolSolver kommt zum Einsatz, da an einigen Stellen im Proof-of-Concept voll qualifizierte Datentypen benötigt werden, welche aus dem normalen AST nicht ohne Zusatzaufwand gewonnen werden konnten. Genauere Informationen zur Verwendung von JavaParser und JavaSymbolSolver werden im Kapitel zur tatsächlichen Umsetzung dieses Konzepts bereitgestellt.
 
 \subsubsection{Zweck des Annotations-Modells}
 
@@ -751,7 +758,7 @@ Diese Struktur wurde gewählt, da sich Quelltext in einer solchen hierarchischen
 
 Um später eine konkrete Instanz des CodeUnit-Modells zu einer Java-Modell-Instanz transformieren zu können, müssen wichtige semantische Informationen vorliegen. Eine hiervon ist, welche Art von Java-Element mit dieser CodeUnit abgebildet wird. Jede CodeUnit hat einen CodeUnit-Typen, an welchem der Transformator später erkennt, auf welche Weise die spezifische CodeUnit in das Java-Modell transformiert werden muss.
 
-Für das Konzept wurde hierfür kein objektorientierter Ansatz gewählt. Bei diesem würde für jeden CodeUnit-Typ eine eigene CodeUnit-Klasse implementiert werden. Das Argument gegen spezielle CodeUnit-Klassen ist, dass die CodeUnit-Klasse hier ein Datenmodell darstellt, welches kein eigenes Verhalten hat. Somit wäre jede von CodeUnit abgeleitete Klasse durch ihre Benennung nur eine semantische Erweiterung, aber ansonsten funktionslos. Zudem reduziert der gewählte Ansatz den Aufwand bei der Erweiterung der CodeUnit-Struktur um neue CodeUnit-Typen.
+Für das Konzept wurde hierfür kein objektorientierter Ansatz gewählt. Bei diesem würde für jeden CodeUnit-Typ eine eigene CodeUnit-Klasse implementiert werden. Das Argument gegen spezielle CodeUnit-Klassen ist, dass die CodeUnit-Klasse hier ein Datenmodell darstellt, welches kein eigenes Verhalten hat. Somit wäre jede von CodeUnit abgeleitete Klasse durch ihre Benennung nur eine semantische Erweiterung, aber ansonsten funktionsloS.\,Zudem reduziert der gewählte Ansatz den Aufwand bei der Erweiterung der CodeUnit-Struktur um neue CodeUnit-Typen.
 
 Als Ausnahme könnte man CodeUnits, welche mit Buildern beschreibbar sind, zählen. Da mit einem Builder für eine Klassen-CodeUnit unter Umständen eine Feld-CodeUnit als SubCodeUnit angehängt wird, hätte man hier durch die Einführung von eigenen Datentypen die Möglichkeit einzuschränken, welche Typen von CodeUnits als SubCodeUnits verwendbar sind. Diese Klassen würden dann nur für diese Eigenschaft existieren keine weiteren Funktionen haben.
 
@@ -767,9 +774,9 @@ Beispiele für solche Parameter wären der Identifier-Parameter, welchem als Dat
 
 Grundsätzlich wäre, wie in der Analyse beschrieben, für dieses Konzept sowohl eine externe DSL als auch eine interne DSL denkbar gewesen. Der für eine externe DSL notwendige Mehraufwand beziehungsweise die Toolbindung bei Verwendung einer Language Workbench waren hier jedoch ausschlaggebend für die Entscheidung zur internen DSL. Außerdem gilt, genau wie bei dem Argument für Annotationen, dass bei der Verwendung einer internen DSL auf Java-Basis die Anwendung potentiell einfacher ausfällt. Durch das Annotations-Modell wäre es jedoch denkbar aus diesem eine externe DSL zu generieren.
 
-Die konkrete Umsetzung einer internen DSL bietet mehrere Ansätze. Zum einen könnte man hier auf Sequenzen aus Funktionen zurückgreifen. Damit hätte der Anwender aber keine Kontrolle darüber, in welcher Reihenfolge der Entwickler die verschiedenen Statements aufruft. Unter Verwendung eines Kontextobjekts wäre es lediglich möglich, bei einer unerlaubten Sequenz Fehler auszugeben oder Exceptions zu werfen\,\cite[S. 351ff.]{fowler2010}. Alternativ hierzu könnte ein Builder Pattern mit Method Chaining zum Einsatz kommen. Dies würde große Kontrolle darüber ermöglichen, welche Statements in welcher Reihenfolge ausführbar sind\,\cite[S. 343ff.]{fowler2010}. Eine weitere Möglichkeit zur Implementation einer internen DSL wäre die Verwendung von geschachtelten Methoden. Hierdurch kann ebenso stark kontrolliert werden, in welcher Reihenfolge Methoden einer Sequenz anwendbar sind. Da die verschachtelten Funktionen von innen nach außen evaluiert werden, muss man hierauf besondere Rücksicht nehmen\,\cite[S. 357ff.]{fowler2010}.
+Die konkrete Umsetzung einer internen DSL bietet mehrere Ansätze. Zum einen könnte man hier auf Sequenzen aus Funktionen zurückgreifen. Damit hätte der Anwender aber keine Kontrolle darüber, in welcher Reihenfolge der Entwickler die verschiedenen Statements aufruft. Unter Verwendung eines Kontextobjekts wäre es lediglich möglich, bei einer unerlaubten Sequenz Fehler auszugeben oder Exceptions zu werfen\,\cite[S.\,351ff.]{fowler2010}. Alternativ hierzu könnte ein Builder Pattern mit Method Chaining zum Einsatz kommen. Dies würde große Kontrolle darüber ermöglichen, welche Statements in welcher Reihenfolge ausführbar sind\,\cite[S.\,343ff.]{fowler2010}. Eine weitere Möglichkeit zur Implementation einer internen DSL wäre die Verwendung von geschachtelten Methoden. Hierdurch kann ebenso stark kontrolliert werden, in welcher Reihenfolge Methoden einer Sequenz anwendbar sind. Da die verschachtelten Funktionen von innen nach außen evaluiert werden, muss man hierauf besondere Rücksicht nehmen\,\cite[S.\,357ff.]{fowler2010}.
 
-Für dieses Konzept wurde, wie schon mehrfach erwähnt, auf ein Builder Pattern mit Method Chaining zurückgegriffen. Hauptargument hierfür war die mögliche Kontrolle über die Reihenfolge der ausführbaren Statements. Da sowohl verschachtelte Methoden als auch Builder ähnliche Vorteile haben, wurde zwischen diesen auf Basis persönlicher Präferenz entschieden. Wird an eine CodeUnit eine SubCodeUnit angehängt, ist diese ein Parameter der aufgerufenen Builder Methode und somit handelt es sich hier im kleinen Rahmen um eine Verschachtelung.
+Für dieses Konzept wurde, wie schon mehrfach erwähnt, auf ein Builder Pattern mit Method Chaining zurückgegriffen. Hauptargument hierfür war die mögliche Kontrolle über die Reihenfolge der ausführbaren StatementS.\,Da sowohl verschachtelte Methoden als auch Builder ähnliche Vorteile haben, wurde zwischen diesen auf Basis persönlicher Präferenz entschieden. Wird an eine CodeUnit eine SubCodeUnit angehängt, ist diese ein Parameter der aufgerufenen Builder Methode und somit handelt es sich hier im kleinen Rahmen um eine Verschachtelung.
 
 \subsubsection{Erzeugte Builder als Schlüsselwörter der internen DSL}
 
@@ -783,9 +790,9 @@ Werden auf diese Weise mehrere Builder zur Beschreibung unterschiedlich konfigur
 
 Abhängig davon, welcher CodeUnit-Typ von einem konkreten Builder beschrieben werden kann und welche Variabilitäten in Form von Annotationen in der Referenzimplementation definiert wurden, hat ein CodeUnit-Builder unterschiedliche Methoden.
 
-Ein Builder zur Beschreibung des im letzten Abschnitt gegebenen Beispiels eines öffentlichen Feldes mit variablem Datentyp, benötigt beispielsweise keine Methode zum Setzen eines Parameters für den Java-Modifier. Jedoch benötigt jeder Builder eine Methode zum Starten der Methodenkette und eine um diese abzuschließen.
+Ein Builder zur Beschreibung des im letzten Abschnitt gegebenen Beispiels eines öf"-fent"-lichen Feldes mit variablem Datentyp, benötigt beispielsweise keine Methode zum Setzen eines Parameters für den Java-Modifier. Jedoch benötigt jeder Builder eine Methode zum Starten der Methodenkette und eine um diese abzuschließen.
 
-Der Ansatz hierfür ist  komponentenbasiert. Die unterschiedlichen Methoden, die ein konkreter Builder haben kann, werden diesem komponentenweise während der Erzeugung hinzugefügt. Dieses Konzept wurde gewählt, da die Alternative hierfür wäre, dass jeder Builder genau die gleichen Methoden implementiert. Hierbei müsste, um das Setzen bestimmter Werte zu verbieten, spezielles Error Handling betrieben werden. Der komponentenbasierte Ansatz schränkt die konkrete Syntax der internen DSL weiter ein und bietet somit dem Anwender eine Hilfestellung bei der Formulierung von Ausdrücken.
+Der Ansatz hierfür ist komponentenbasiert. Die unterschiedlichen Methoden, die ein konkreter Builder haben kann, werden diesem komponentenweise während der Erzeugung hinzugefügt. Dieses Konzept wurde gewählt, da die Alternative hierfür wäre, dass jeder Builder genau die gleichen Methoden implementiert. Hierbei müsste, um das Setzen bestimmter Werte zu verbieten, spezielles Error Handling betrieben werden. Der komponentenbasierte Ansatz schränkt die konkrete Syntax der internen DSL weiter ein und bietet somit dem Anwender eine Hilfestellung bei der Formulierung von Ausdrücken.
 
 \subsubsection{Übertragung vorgegebener Informationen in einen Builder}
 
@@ -841,7 +848,7 @@ Wie bereits im Konzept erläutert, wurde sowohl zum Einlesen der Referenzimpleme
 
 \subsection{JavaParser mit JavaSymbolSolver}
 
-Die Entwickler von JavaParser und JavaSymbolSolver beschreiben ihre Bibliothek als Möglichkeit zur Interaktion mit Java-Quelltext in Form einer Objekt-Repräsentation, womit hier ein AST gemeint ist. Zusätzlich soll mit Unterstützung des Visitor Patterns ein praktischer Mechanismus zur Traversierung des AST zur Verfügung gestellt werden. Außerdem könnte mit dem JavaParser der AST manipuliert und wieder in eine Datei überführt werden\,\cite[S. 1]{javaparser2017}. Dieses Feature wird in Spectrum jedoch nicht verwendet.
+Die Entwickler von JavaParser und JavaSymbolSolver beschreiben ihre Bibliothek als Möglichkeit zur Interaktion mit Java-Quelltext in Form einer Objekt-Repräsentation, womit hier ein AST gemeint ist. Zusätzlich soll mit Unterstützung des Visitor Patterns ein praktischer Mechanismus zur Traversierung des AST zur Verfügung gestellt werden. Außerdem könnte mit dem JavaParser der AST manipuliert und wieder in eine Datei überführt werden\,\cite[S.\,1]{javaparser2017}. Dieses Feature wird in Spectrum jedoch nicht verwendet.
 
 \subsubsection{Anwendung}
 
@@ -850,37 +857,37 @@ language=java,
 firstnumber=1,
 caption=Beispielhafte Initialisierung und Verwendung des JavaParsers und des JavaSymbolSolvers]
 class ExampleParser {
-public void handle(File file) {
-//parse sourcecode file
-CompilationUnit cu = JavaParser.parse(file);
-
-//inject TypeSolver
-TypeSolver ts = new ReflectionTypeSolver();
-JavaSymbolSolver jss = new JavaSymbolSolver(ts);
-jss.inject(cu);
-
-//visit with VariableVisitor
-new VariableVisitor().visit(cu, null);
+	public void handle(File file) {
+		//parse sourcecode file
+		CompilationUnit cu = JavaParser.parse(file);
+		
+		//inject TypeSolver
+		TypeSolver ts = new ReflectionTypeSolver();
+		JavaSymbolSolver jss = new JavaSymbolSolver(ts);
+		jss.inject(cu);
+		
+		//visit with VariableVisitor
+		new VariableVisitor().visit(cu, null);
+	}
 }
-}
-
+	
 private static class VariableVisitor extends VoidVisitorAdapter<Void> {
-@Override
-public void visit(VariableDeclarator declarator, Void arg) {
-//resolve declarator and get qualified identifier
-String qualifiedVariableName = declarator
-.resolve()
-.asReferenceType()
-.getQualifiedName();
-
-//do something with qualifiedVariableName;
-}
+	@Override
+	public void visit(VariableDeclarator declarator, Void arg) {
+		//resolve declarator and get qualified identifier
+		String qualifiedVariableName = declarator
+			.resolve()
+			.asReferenceType()
+			.getQualifiedName();
+		
+		//do something with qualifiedVariableName;
+	}
 }
 \end{lstlisting}
 
-Um mit JavaParser arbeiten zu können, wird zuerst eine vorhandenen Java-Quelltextdatei geparsed. Das Endprodukt des Parseprozesses heißt bei JavaParser CompilationUnit. Hierunter sind in einer hierarchischen Ordnung alle Knotenpunkte des AST gesammelt. Zur Traversierung der CompilationUnit können Visitor implementiert werden. Diese ermöglichen es, den Baum gezielt nach Knotenpunkten mit bestimmten Eigenschaften zu durchlaufen. Hierfür wird eine Klasse mit einer Visit-Methode implementiert, welche einen von JavaParser zur Verfügung gestellten VisitorAdapter erweitert. Der Typparameter des erweiterten VisitorAdapters ist in der Signatur der Visit-Methode wiederzufinden. Über den zweiten Parameter dieser Methode kann, wenn ein Typparameter angegeben wird, ein Kontextobjekt übergeben werden.
+Um mit JavaParser arbeiten zu können, wird zuerst eine vorhandenen Java-Quell"-text"-da"-tei geparsed. Das Endprodukt des Parseprozesses heißt bei JavaParser CompilationUnit. Hierunter sind in einer hierarchischen Ordnung alle Knotenpunkte des AST gesammelt. Zur Traversierung der CompilationUnit können Visitor implementiert werden. Diese ermöglichen es, den Baum gezielt nach Knotenpunkten mit bestimmten Eigenschaften zu durchlaufen. Hierfür wird eine Klasse mit einer Visit-Methode implementiert, welche einen von JavaParser zur Verfügung gestellten VisitorAdapter erweitert. Der Typparameter des erweiterten VisitorAdapters ist in der Signatur der Visit-Methode wiederzufinden. Über den zweiten Parameter dieser Methode kann, wenn ein Typparameter angegeben wird, ein Kontextobjekt übergeben werden.
 
-Um mit JavaSymbolSolver Symbole auflösen zu können, damit beispielsweise auf den vollständig qualifizierenden Namen einer Klasse zugegriffen werden kann, muss ein JavaSymbolSolver Objekt instanziiert werden. Dafür wird eine Instanz eines TypeSolvers benötigt. Diese werden in \textit{JavaParser: Visited} genauer erklärt\,\cite[S. 39ff.]{javaparser2017}.
+Um mit JavaSymbolSolver Symbole auflösen zu können, damit beispielsweise auf den vollständig qualifizierenden Namen einer Klasse zugegriffen werden kann, muss ein JavaSymbolSolver Objekt instanziiert werden. Dafür wird eine Instanz eines TypeSolvers benötigt. Diese werden in \textit{JavaParser: Visited} genauer erklärt\,\cite[S.\,39ff.]{javaparser2017}.
 
 Der genaue Typ des TypeSolvers steuert, wo nach Typreferenzen gesucht wird. Ein JarTypeSolver sucht beispielsweise nur innerhalb einer bestimmten JAR-Datei. Ein ReflectionTypeSolver sucht, wie der Name schon sagt, nach Klassenreferenzen via Reflection. Das Listing ~\ref{lst:jpVisit} zeigt die in diesem Abschnitt erläuterten Features von JavaParser und JavaSymbolSolver in einer beispielhaften Anwendung.
 
@@ -891,14 +898,15 @@ language=HTML,
 firstnumber=1,
 caption=XML-Code zum Einbinden von JavaParser und JavaSymbolSolver als Maven-Dependency.]
 <dependency>
-<groupId>com.github.javaparser</groupId>
-<artifactId>java-symbol-solver-core</artifactId>
-<version>0.6.3</version>
+	<groupId>com.github.javaparser</groupId>
+	<artifactId>java-symbol-solver-core</artifactId>
+	<version>0.6.3</version>
 </dependency>
 \end{lstlisting}
 
 Bei der kombinierten Verwendung von JavaParser und JavaSymbolSolver, muss lediglich die Abhängigkeit zu JavaSymbolSolver in die pom.xml eingetragen werden. JavaSymbolSolver beinhaltet automatisch die aktuellste kompatible JavaParser Version. Der XML-Code zum Einbinden des JavaSymbolSolver als Maven-Dependency wird in Listing ~\ref{lst:jpmaven} dargestellt.
 
+\newpage
 \subsection{JavaPoet}
 
 JavaParser hätte zwar grundsätzlich die Möglichkeit zur Erzeugung von Java-Quelltext Dateien geboten, im Gegensatz zu JavaParser hat JavaPoet jedoch zusätzlich eine gut lesbare API zur Beschreibung des zu erzeugenden Quelltextes.
@@ -935,9 +943,9 @@ class HelloWorldGenerator {
 package example.package.name;
 
 public final class Example {
-public static void main(String[] args) {
-System.out.println("Hello, World!");
-}
+	public static void main(String[] args) {
+		System.out.println("Hello, World!");
+	}
 }
 
 \end{lstlisting}
@@ -953,9 +961,9 @@ language=HTML,
 firstnumber=1,
 caption=XML-Code zum Einbinden von JavaPoet als Maven-Dependency.]
 <dependency>
-<groupId>com.squareup</groupId>
-<artifactId>javapoet</artifactId>
-<version>1.9.0</version>
+	<groupId>com.squareup</groupId>
+	<artifactId>javapoet</artifactId>
+	<version>1.9.0</version>
 </dependency>
 \end{lstlisting}
 
@@ -970,7 +978,7 @@ Zur Einrichtung der Maven-Dependency von JavaPoet kann der in Listing~\ref{lst:j
 \label{fig:spectrumPackages}
 \end{figure}
 
-Die allgemeine Architektur von Spectrum orientiert sich an der Funktionalität einzelner Komponenten. Insgesamt besteht Spectrum aus fünf Java-Packages: Amber, Cherry, Jade, Scarlet und Violet. Jede dieser Komponenten hat eine klare Aufgabe im Metagenerator-Gesamtprozess. Die Grafik~\ref{fig:spectrumPackages} zur Architektur von Spectrum, welche sich an der Abbildung~\ref{fig:meta1} aus dem Konzept-Kapitel orientiert, zeigt unter anderem die im Prozess entstehenden Artefakte und welche Komponenten jeweils mit diesen in Berührung kommen. Die genaue Aufgabe und Implementation der Bestandteile von Spectrum werden in den folgenden Abschnitten erläutert.
+Die allgemeine Architektur von Spectrum orientiert sich an der Funktionalität einzelner Komponenten. Insgesamt besteht Spectrum aus fünf Java-Packages: Amber, Cherry, Jade, Scarlet und Violet. Jede dieser Komponenten hat eine klare Aufgabe im Metagenerator-GesamtprozesS.\,Die Grafik~\ref{fig:spectrumPackages} zur Architektur von Spectrum, welche sich an der Abbildung~\ref{fig:meta1} aus dem Konzept-Kapitel orientiert, zeigt unter anderem die im Prozess entstehenden Artefakte und welche Komponenten jeweils mit diesen in Berührung kommen. Die genaue Aufgabe und Implementation der Bestandteile von Spectrum werden in den folgenden Abschnitten erläutert.
 
 \begin{figure}[htbp]
 \centering
@@ -987,14 +995,14 @@ Die Bereitstellung der Annotationen zur Informationsanreicherung der Referenzimp
 
 Die Annotationen bilden die Schlüsselwörter der verteilten DSL zur Informationsanreicherung einer Referenzimplementation. In der aktuellen Version des Proof-of-Concept können Klassen, Felder, Methoden und Konstruktoren annotiert werden. Ist eines davon als CodeUnit markiert und wird als Annotations-Parameter ein String übergeben, so wird hieraus ein Annotations-Modell geparsed. Cherry erzeugt dann aus jeder Instanz des Annotations-Modells einen Builder. Als FixedCodeUnit annotierte Elemente werden in die Ursprungs-CodeUnit des logisch darüber liegenden Annotations-Modells übernommen.
 
-Alle zur Informationsanreicherung verfügbaren Annotationen sind im Package \texttt{annotations} zu finden. Grundsätzlich gibt es für diese Annotationen mehrere Einschränkungen. Durch eine Target-Annotation wird gesteuert, an welche Teile des Java-Quelltextes die Annotationen überhaupt angebracht werden dürfen. Diese Einschränkung wird also normalerweise von der verwendeten IDE erzwungen. Abbildung~\ref{fig:tblAnnoTrgt} zeigt auf, wo die jeweiligen Annotationen stehen dürfen. Es existieren noch weitere, nicht erzwungene Restriktionen, welche durch den Parseprozess eingehalten werden. Allgemein sind die einzigen beiden Annotationen, welche eigenständig verwendet werden dürfen, die CodeUnit- und FixedCodeUnit-Annotationen, alle anderen können nur in Kombination mit diesen beiden stehen. Einige der Einschränkungen beruhen auf semantischen Zusammenhängen, denn beispielsweise eine HasGetter-Annotation macht nur an einem Feld Sinn. Andere Limitierungen sind auf den aktuellen Entwicklungsstand zurückzuführen.
-
 \begin{figure}[htbp]
-\centering
-\includegraphics[width=0.75\textwidth]{bilder/tblAnnoTrgt}
-\caption{Darstellung der legalen Ziele für die von Amber bereitgestellten Annotationen. Eine grüne Markierung kennzeichnet ein Ziel als legal.}
-\label{fig:tblAnnoTrgt}
+	\centering
+	\includegraphics[width=0.75\textwidth]{bilder/tblAnnoTrgt}
+	\caption{Darstellung der legalen Ziele für die von Amber bereitgestellten Annotationen. Eine grüne Markierung kennzeichnet ein Ziel als legal.}
+	\label{fig:tblAnnoTrgt}
 \end{figure}
+
+Alle zur Informationsanreicherung verfügbaren Annotationen sind im Package\linebreak \texttt{annotations} zu finden. Grundsätzlich gibt es für diese Annotationen mehrere Einschränkungen. Durch eine Target-Annotation wird gesteuert, an welche Teile des Java-Quelltextes die Annotationen überhaupt angebracht werden dürfen. Diese Einschränkung wird also normalerweise von der verwendeten IDE erzwungen. Abbildung~\ref{fig:tblAnnoTrgt} zeigt auf, wo die jeweiligen Annotationen stehen dürfen. Es existieren noch weitere, nicht erzwungene Restriktionen, welche durch den Parseprozess eingehalten werden. Allgemein sind die einzigen beiden Annotationen, welche eigenständig verwendet werden dürfen, die CodeUnit- und FixedCodeUnit-Annotationen, alle anderen können nur in Kombination mit diesen beiden stehen. Einige der Einschränkungen beruhen auf semantischen Zusammenhängen, denn beispielsweise eine HasGetter-Annotation macht nur an einem Feld Sinn. Andere Limitierungen sind auf den aktuellen Entwicklungsstand zurückzuführen.
 
 \subsubsection{Bedeutung und Limitationen der Annotationen und deren Auswirkung auf die erzeugten Builder}
 
@@ -1006,7 +1014,7 @@ firstnumber=1,
 caption=Darstellung der Annotations-Möglichkeiten an einer Klasse.]
 @CodeUnit("ExampleClass") @VariableModifier
 public class ExampleRef {
-//...
+	//...
 }
 \end{lstlisting}
 
@@ -1018,17 +1026,17 @@ firstnumber=1,
 caption=Darstellung der Annotations-Möglichkeiten an einem Feld.]
 @CodeUnit("ExampleClass")
 public class ExampleRef {
-@FixedCodeUnit @HasGetter @HasSetter
-private int id;
-
-@FixedCodeUnit
-protected static float f;
-
-@CodeUnit("PublicString") @HasGetter @HasSetter
-public String s;
-
-@CodeUnit("Variable") @VariableModifier @VariableType
-Object o;
+	@FixedCodeUnit @HasGetter @HasSetter
+	private int id;
+	
+	@FixedCodeUnit
+	protected static float f;
+	
+	@CodeUnit("PublicString") @HasGetter @HasSetter
+	public String s;
+	
+	@CodeUnit("Variable") @VariableModifier @VariableType
+	Object o;
 }
 \end{lstlisting}
 
@@ -1044,25 +1052,25 @@ firstnumber=1,
 caption=Darstellung der Annotations-Möglichkeiten von Konstruktoren und Methoden.]
 @CodeUnit("ExampleClass")
 public class ExampleRef {
-@FixedCodeUnit
-private ExampleRef() {
-//...
-}
-
-@CodeUnit("Constructor") @VariableModifier @VariableParams
-public ExampleRef(int i) {
-//...
-}
-
-@FixedCodeUnit
-public static void ExampleStaticMethod() {
-//...
-}
-
-@CodeUnit("Method") @VariableModifier @VariableParams
-void ExampleMethod() {
-//..
-}
+	@FixedCodeUnit
+	private ExampleRef() {
+		//...
+	}
+	
+	@CodeUnit("Constructor") @VariableModifier @VariableParams
+	public ExampleRef(int i) {
+		//...
+	}
+	
+	@FixedCodeUnit
+	public static void ExampleStaticMethod() {
+		//...
+	}
+	
+	@CodeUnit("Method") @VariableModifier @VariableParams
+	void ExampleMethod() {
+		//..
+	}
 }
 \end{lstlisting}
 
@@ -1072,23 +1080,22 @@ Da vor dem Parsen der Referenzimplementation keine Prüfung der Annotationen dur
 
 \subsubsection{Visitor \& Parser}
 
-Mithilfe von Visitor-Klassen werden die Knotenpunkte des als AST eingelesenen Quelltextes verarbeitet. Abhängig vom Typ des Knotenpunkts wird ein Parser aufgerufen, welcher prüft, ob eine CodeUnit- oder FixedCodeUnit-Annotation angebracht wurde. Die jeweiligen Parser-Klassen steuern die weitere Verarbeitung der Node im entsprechenden Kontext. Neben der Verarbeitung der Konkreten Information zur annotierten Klasse ruft der ClassAnnotationParser noch weitere Visitor auf. Diese sorgen dann für die Verarbeitung etwaiger innerhalb der annotierten Klasse befindlicher FixedCodeUnits. Der Umkehrschluss hieraus ist, dass FixedCodeUnit-Annotationen nur dann berücksichtigt werden, wenn diese innerhalb einer als CodeUnit annotierten Klasse stehen.
+Mithilfe von Visitor-Klassen werden die Knotenpunkte des als AST eingelesenen Quelltextes verarbeitet. Abhängig vom Typ des Knotenpunkts wird ein Parser aufgerufen, welcher prüft, ob eine CodeUnit- oder FixedCodeUnit-Annotation angebracht wurde. Die jeweiligen Parser-Klassen steuern die weitere Verarbeitung der Node im entsprechenden Kontext. Neben der Verarbeitung der Konkreten Information zur annotierten Klasse ruft der ClassAnnotationParser noch weitere Visitor auf. Diese sorgen dann für die Verarbeitung etwaiger innerhalb der annotierten Klasse befindlicher FixedCodeUnitS.\,Der Umkehrschluss hieraus ist, dass FixedCodeUnit-Annotationen nur dann berücksichtigt werden, wenn diese innerhalb einer als CodeUnit annotierten Klasse stehen.
 
 \subsubsection{Annotation Modell}
 
-Für jede CodeUnit-Annotation erzeugt Amber ein AnnotationModel. Neben einem Identifier und der im Konzept bereits erläuterten Ursprungs-CodeUnit, enthält dieses zusätzlich zwei Sets aus AnnotationType-Einträgen. AnnotationType ist hier ein Enum zur Identifikation von in der Referenzimplementation gemachten Annotationen. Eines der Sets enthält Informationen zu Variabilitäten, das heißt, ob beispielsweise der Modifier veränderlich ist. Das andere beinhaltet Daten zu Erweiterungen. Mit Erweiterung ist hier gemeint, dass es zu einem Feld automatisch einen Getter, Setter oder vergleichbares gibt. Momentan sind dies die einzigen Erweiterungen, die durch Annotationen getätigt werden können. Es wäre jedoch auch denkbar, zum Beispiel eine IsSingleton-Annotation einzuführen, welche dann eine Erweiterung der Klasse wäre.
+Für jede CodeUnit-Annotation erzeugt Amber ein AnnotationModel. Neben einem Identifier und der im Konzept bereits erläuterten Ursprungs-CodeUnit, enthält dieses zu"-sätz"-lich zwei Sets aus AnnotationType-Einträgen. AnnotationType ist hier ein Enum zur Identifikation von in der Referenzimplementation gemachten Annotationen. Eines der Sets enthält Informationen zu Variabilitäten, das heißt, ob beispielsweise der Modifier ver"-änder"-lich ist. Das andere beinhaltet Daten zu Erweiterungen. Mit Erweiterung ist hier gemeint, dass es zu einem Feld automatisch einen Getter, Setter oder vergleichbares gibt. Momentan sind dies die einzigen Erweiterungen, die durch Annotationen getätigt werden können. Es wäre jedoch auch denkbar, zum Beispiel eine IsSingleton-Annotation einzuführen, welche dann eine Erweiterung der Klasse wäre.
 
 Im Generator für die Builder werden abhängig von den Variabilitäts-Annotationen passende Builder-Methoden als Komponenten ausgewählt und an den Builder angehängt. Zudem wird die Information, welche Erweiterungs-Annotationen existieren, in den Builder übertragen, damit bei der Anwendung des Builders später entsprechende Verarbeitungsschritte durchgeführt werden können.
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{bilder/cherry}
-\caption{Darstellung der Unter-Packages im cherry Package.}
-\label{fig:cherryPackages}
-\end{figure}
-
 \subsection{Cherry}
 
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{bilder/cherry}
+	\caption{Darstellung der Unter-Packages im cherry Package.}
+	\label{fig:cherryPackages}
+\end{figure}
 Aus den aus der Referenzimplementation entstandenen Annotations-Modellen werden von Cherry im darauffolgenden Schritt die später verwendbaren Builder erzeugt. Zudem ist im Package \texttt{model} das von dieser generierten internen DSL beschriebene CodeUnit-Modell definiert. Der im Konzept erwähnte Pattform-Code ist in Cherry im Package \texttt{platform} zu finden. Abbildung~\ref{fig:cherryPackages} zeigt noch einmal die erwähnten Packages.
 
 In den folgenden Abschnitten werden die Funktionsweise und Aufgabe von Cherry genau erläutert. Im Anschluss daran wird die Verwendung der erzeugten Bilder noch einmal erklärt und mit Beispiel verdeutlicht.
@@ -1105,50 +1112,50 @@ In den folgenden Abschnitten werden die Funktionsweise und Aufgabe von Cherry ge
 Wie bereits zuvor erwähnt, könnte man das CodeUnit-Modell als das Kernstück von Spectrum ansehen. Eine Instanz des CodeUnit-Modells wird durch Verwendung der erzeugten internen DSL beschrieben und aus dieser kann dann zum Beispiel wieder konkreter Java-Quelltext erzeugt werden.
 
 Das Diagramm auf Abbildung~\ref{fig:classcu} zeigt das CodeUnit-Modell und seine Hilfsklassen.
-Die Grundidee des CodeUnit-Modells wurde im Konzeptkapitel bereits erläutert. Konkret wird der Zusammenhang zwischen CodeUnit und SubCodeUnits dadurch dargestellt, dass eine CodeUnit eine Liste mit weiteren CodeUnits hält. Der Typ der CodeUnit wird in einem Feld eines Wertes des CodeUnitType-Enums gehalten. Es gibt nicht immer zwingend zu jedem CodeUnitType auch einen möglichen Builder. Die CodeUnitTypes METHOD\_BODY und METHOD\_PARAM existieren nur als SubCodeUnits des CodeUnitTypes METHOD.
+Die Grundidee des CodeUnit-Modells wurde im Konzeptkapitel bereits erläutert. Konkret wird der Zusammenhang zwischen CodeUnit und SubCodeUnits dadurch dargestellt, dass eine CodeUnit eine Liste mit weiteren CodeUnits hält. Der Typ der CodeUnit wird in einem Feld eines Wertes des CodeUnitType-Enums gehalten. Es gibt nicht immer zwingend zu jedem CodeUnitType auch einen möglichen Builder. Die CodeUnitTypes METHOD\_BODY und METHOD\_PARAM existieren nur als SubCodeUnits des \mbox{CodeUnitTypes} METHOD.
 
 Besonderes Augenmerk fällt hier darauf, dass in der Implementation, entgegen dem Konzept, von CodeUnit abgeleitete Klassen existieren. Wie bereits beschrieben, wird die Identifikation des Typs einer CodeUnit anhand des CodeUnitType durchgeführt. Die Ableitungen von CodeUnit haben keine eigene Funktion und dienen nur zur Fehlerreduzierung bei der Verwendung der Builder. Durch spezielle CodeUnit-Klassen ist es möglich, Builder-Methoden zu generieren, die einschränken, welche Art von CodeUnit als SubCodeUnit übergeben werden darf. Beispielsweise kann mithilfe der MethodCodeUnit-Klasse eine Methode für ein Builder der eine ClassCodeUnit beschreibt erzeugt werden, welche ausschließlich die Übergabe einer MethodCodeUnit erlaubt. Konkret wäre das die Methode withMethod.
 
 Das Konzept der Parametrisierung durch eine generische Datenstruktur wurde als Map mit dem Schlüssel CodeUnitDatumType und Einträgen des Typs CodeUnitDatum realisiert. CodeUnitDatumType ist abermals ein Enum, welches eine semantische Bedeutung hat und somit später erlaubt, den Parameter korrekt auszulesen. Der Parameter selbst, also das CodeUnitDatum, ist generisch parametrisiert und kann somit einzelne Werte oder auch Arrays halten. Allgemein kann hier jedoch jeder Datentyp stehen. Für den CodeUnitDatumType IDENTIFIER wird hier beispielsweise ein String als Typparameter verwendet. Zur Verdeutlichung zeigt Listing~\ref{lst:cud} die Implementation von CodeUnitDatum. Exemplarisch wird in Listing~\ref{lst:cudex} dargestellt, wie einer CodeUnit ein CodeUnitDatum hinzugefügt werden kann und aud welche Weise dieses später ausgelesen werden muss.
 
-Die Methode addCodeUnitDatum folgert den hinterlegten Datentyp anhand des als zweiten Parameter übergebenen Datums. Mit der Methode getCodeUnitDatum kann das unter einem CodeUnitDatumType hinterlegte Datum wieder ausgelesen werden. Da die Information, welcher generische Typparameter in der Map hinterlegt wurde, verloren geht, muss stets explizit auf den korrekten Typ umgewandelt werden. Dies stellte kein Problem dar, da unter einem bestimmten CodeUnitDatumType mit einem eindeutigen Datentyp zu rechnen ist.
+Die Methode addCodeUnitDatum folgert den hinterlegten Datentyp anhand des als zweiten Parameter übergebenen DatumS.\,Mit der Methode getCodeUnitDatum kann das unter einem CodeUnitDatumType hinterlegte Datum wieder ausgelesen werden. Da die Information, welcher generische Typparameter in der Map hinterlegt wurde, verloren geht, muss stets explizit auf den korrekten Typ umgewandelt werden. Dies stellte kein Problem dar, da unter einem bestimmten CodeUnitDatumType mit einem eindeutigen Datentyp zu rechnen ist.
 
 \begin{lstlisting}[label=lst:cud,
 language=java,
 firstnumber=1,
 caption=Implementation der Klasse CodeUnitDatum.]
 public class CodeUnitDatum<T> implements Serializable {
-private final T datumData;
-
-public CodeUnitDatum(T datumData) {
-this.datumData = datumData;
-}
-
-public T getDatumData() {
-return datumData;
-}
-
-@Override
-public String toString() {
-if(datumData.getClass().isArray())
-return Arrays.toString((Object[]) datumData);
-
-return datumData.toString();
-}
+	private final T datumData;
+	
+	public CodeUnitDatum(T datumData) {
+		this.datumData = datumData;
+	}
+	
+	public T getDatumData() {
+		return datumData;
+	}
+	
+	@Override
+	public String toString() {
+		if(datumData.getClass().isArray())
+			return Arrays.toString((Object[]) datumData);
+		
+		return datumData.toString();
+	}
 }
 \end{lstlisting}
 
 \begin{lstlisting}[label=lst:cudex,
 language=java,
 firstnumber=1,
-caption=Beispiel zum konkreten hinterlegen und auslesen eines CodeUnitDatums.]
+caption=Beispiel zum hinterlegen und auslesen eines CodeUnitDatums.]
 void exampleDatumWriter(String identifier) {
-CodeUnit cu = new CodeUnit();
-cu.addCodeUnitDatum(CodeUnitDatumType.IDENTIFIER, identifier);
+	CodeUnit cu = new CodeUnit();
+	cu.addCodeUnitDatum(CodeUnitDatumType.IDENTIFIER, identifier);
 }
-
+	
 String exampleDatumReader(CodeUnit cu) {
-return (String) cu.getCodeUnitDatum(CodeUnitDatumType.IDENTIFIER).getDatumData();
+	return (String) cu.getCodeUnitDatum(CodeUnitDatumType.IDENTIFIER).getDatumData();
 }
 \end{lstlisting}
 
@@ -1164,31 +1171,30 @@ Um die in der defaultCodeUnit hinterlegten Daten in die Ursprungs-CodeUnit des B
 language=java,
 firstnumber=1,
 caption=Quelltext zur Erzeugung des MethodSpecs für die Builder-Methode initializeDefaultCodeUnit und die daraus resultierende konrekte Methode in einem Builder.]
-
 //Erzeugung des MethodSpec in der BuilderMethodFactory
 private MethodSpec createInitDefCodeUnitMethod() {
-CodeUnit sourceCodeUnit = annotationModel.getDefaultCodeUnit();
-
-byte[] serializedCodeUnit = SerializationUtils.serialize(sourceCodeUnit);
-
-String codeUnitArrayLiteral = Arrays
-.toString(serializedCodeUnit)
-.replace("[","{")
-.replace("]","}");
-
-return MethodSpec.methodBuilder("initializeDefaultCodeUnit")
-.addComment("Initializes this builder's data with default data encoded into a byte[]")
-.addModifiers(Modifier.PRIVATE)
-.addStatement("byte[] serializedCodeUnit = new byte[] $L", codeUnitArrayLiteral)
-.addStatement("this.codeUnit = $T.deserialize(serializedCodeUnit)", SerializationUtils.class)
-.build();
+	CodeUnit sourceCodeUnit = annotationModel.getDefaultCodeUnit();
+	
+	byte[] serializedCodeUnit = SerializationUtils.serialize(sourceCodeUnit);
+	
+	String codeUnitArrayLiteral = Arrays
+		.toString(serializedCodeUnit)
+		.replace("[","{")
+		.replace("]","}");
+	
+	return MethodSpec.methodBuilder("initializeDefaultCodeUnit")
+		.addComment("Initializes this builder's data with default data encoded into a byte[]")
+		.addModifiers(Modifier.PRIVATE)
+		.addStatement("byte[] serializedCodeUnit = new byte[] $L", codeUnitArrayLiteral)
+		.addStatement("this.codeUnit = $T.deserialize(serializedCodeUnit)", SerializationUtils.class)
+		.build();
 }
 
-//Erzeugte konrete Methode in einem Builder
+//Erzeugte Methode in einem Builder
 private void initializeDefaultCodeUnit() {
-// Initializes this builder's data with default data encoded into a byte[]
-byte[] serializedCodeUnit = new byte[] {-84, -19, 0/* more data */};
-this.codeUnit = SerializationUtils.deserialize(serializedCodeUnit);
+	// Initializes this builder's data with default data encoded into a byte[]
+	byte[] serializedCodeUnit = new byte[] {-84, -19, 0/* more data */};
+	this.codeUnit = SerializationUtils.deserialize(serializedCodeUnit);
 }
 \end{lstlisting}
 
@@ -1209,27 +1215,27 @@ language=java,
 firstnumber=1,
 caption=Quelltext zur Verwendung verschiedener erzeugter Builder.]
 CodeUnit cu = ExampleClassUnitBuilder
-.createWithIdentifier("ExampleIdentifier")
-.withModifiers(CodeUnitModifier.PROTECTED)
-.withField(VarUnitBuilder
-.createWithIdentifier("exampleField")
-.withModifiers(CodeUnitModifier.PRIVATE)
-.withDataType(Object.class.getName())
-.end())
-.withMethod(MethodUnitBuilder
-.createWithIdentifier("exampleMethod")
-.withModifiers(CodeUnitModifier.PUBLIC)
-.withParameter("param", String.class.getName())
-.withMethodBody("return param")
-.withReturnType(String.class.getName())
-.end())
-.withConstructor(ConstructorUnitBuilder
-.create()
-.withParameter("param", String.class.getName())
-.withModifiers(CodeUnitModifier.PUBLIC)
-.withMethodBody("//body als String")
-.end())
-.end();
+	.createWithIdentifier("ExampleIdentifier")
+	.withModifiers(CodeUnitModifier.PROTECTED)
+	.withField(VarUnitBuilder
+		.createWithIdentifier("exampleField")
+		.withModifiers(CodeUnitModifier.PRIVATE)
+		.withDataType(Object.class.getName())
+		.end())
+	.withMethod(MethodUnitBuilder
+		.createWithIdentifier("exampleMethod")
+		.withModifiers(CodeUnitModifier.PUBLIC)
+		.withParameter("param", String.class.getName())
+		.withMethodBody("return param")
+		.withReturnType(String.class.getName())
+		.end())
+	.withConstructor(ConstructorUnitBuilder
+		.create()
+		.withParameter("param", String.class.getName())
+		.withModifiers(CodeUnitModifier.PUBLIC)
+		.withMethodBody("//body als String")
+		.end())
+	.end();
 \end{lstlisting}
 
 \subsection{Jade}
@@ -1246,38 +1252,38 @@ Die eher kleine Komponente Jade hat die Aufgabe, fertig beschriebene CodeUnits i
 \subsubsection{Transformator}
 
 Für die unterschiedlichen Elemente in Scarlets Java-Modell sind im CodeUnitTransformator Transformationsregeln in Form von Methoden definiert. Da das CodeUnitModell und somit auch die CodeUnitTypes ursprünglich aus Java-Quelltext abgeleitet wurden, ist die Umwandlung vergleichsweise unkompliziert. Dies ist am Beispiel der Transformation von Feldern in Listing~\ref{lst:trans} gut zu sehen. Mithilfe von Java-Streams werden hier die SubCodeUnits einer Klassen-CodeUnit gefiltert und dann die einzelnen Felder umgewandelt.
-
+\newpage
 \begin{lstlisting}[label=lst:trans,
 language=java,
 firstnumber=1,
 caption=Umwandlung der Felder in den SubCodeUnits einer CodeUnit. Auszug aus der Klasse CodeUnitTransformator.]
 private List<JavaField> transformFields(CodeUnit cu) {
-return cu.getSubCodeUnits()
-.stream()
-.filter(this::isField)
-.map(this::transformField)
-.collect(Collectors.toList());
+	return cu.getSubCodeUnits()
+		.stream()
+		.filter(this::isField)
+		.map(this::transformField)
+		.collect(Collectors.toList());
 }
-
+	
 private JavaField transformField(CodeUnit cu) {
-JavaField jField = new JavaField();
-jField.modifiers = this.transformModifier(cu);
-jField.identifier = this.transformIdentifier(cu);
-jField.type = this.transformType(cu);
-jField.typeParams = this.transformTypeArguments(cu);
-
-return jField;
+	JavaField jField = new JavaField();
+	jField.modifiers = this.transformModifier(cu);
+	jField.identifier = this.transformIdentifier(cu);
+	jField.type = this.transformType(cu);
+	jField.typeParams = this.transformTypeArguments(cu);
+	
+	return jField;
 }
 \end{lstlisting}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.5\textwidth]{bilder/scarlet}
-\caption{Darstellung des Unter-Packages im scarlet Package.}
-\label{fig:scarletPackages}
-\end{figure}
-
 \subsection{Scarlet}
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{bilder/scarlet}
+	\caption{Darstellung des Unter-Packages im scarlet Package.}
+	\label{fig:scarletPackages}
+\end{figure}
 
 Die Komponente Scarlet stellt ein Modell zur Verfügung, welches die Struktur und den Aufbau einer Java-Klasse widerspiegelt. Die zweite Aufgabe von Scarlet ist es, aus diesem Java-Modell konkreten Java-Quelltext zu erzeugen. Die in Scarlet definierten Visitor finden keine Verwendung mehr. Ursprünglich haben diese Java-Quelltext eingelesen und in das Java-Modell überführt. Alle Unter-Packages von Scarlet sind auf Abbildung~\ref{fig:scarletPackages} dargestellt.
 
@@ -1287,7 +1293,7 @@ Der Generator ist vergleichsweise einfach aufgebaut. Der konkrete Quelltext wird
 
 \subsubsection{Modell zur Abbildung von Java-Klassen}
 
-Das Modell auf dessen Basis Scarlet den Java-Quelltext erzeugt, ist ein Teilmodell des Java-Metamodells. Soll Spectrum um neue Generiermöglichkeiten erweitert werden, so werden auch meist das Scarlet Java-Modell und der Java-Klassengenerator ergänzt.
+Das Modell auf dessen Basis Scarlet den Java-Quelltext erzeugt, ist ein Teilmodell des Java-MetamodellS.\,Soll Spectrum um neue Generiermöglichkeiten erweitert werden, so werden auch meist das Scarlet Java-Modell und der Java-Klassengenerator ergänzt.
 
 \subsection{Violet}
 
@@ -1321,40 +1327,40 @@ firstnumber=1,
 caption={Quelltext einer annotierten Referenzimplementation für eine Singleton Klasse}.]
 @CodeUnit("Singleton")
 public class SingletonClass {
-@FixedCodeUnit
-private static SingletonClass instance;
-
-@FixedCodeUnit
-private SingletonClass() { }
-
-@FixedCodeUnit
-public static SingletonClass getInstance() {
-if(instance == null) {
-instance = new SingletonClass();
-}
-
-return instance;
-}
+	@FixedCodeUnit
+	private static SingletonClass instance;
+	
+	@FixedCodeUnit
+	private SingletonClass() { }
+	
+	@FixedCodeUnit
+	public static SingletonClass getInstance() {
+		if(instance == null) {
+			instance = new SingletonClass();
+		}
+		
+		return instance;
+	}
 }
 \end{lstlisting}
-
+\newpage
 \begin{lstlisting}[label=lst:clazzref,
 language=java,
 firstnumber=1,
 caption={Quelltext einer annotierten Referenzimplementation für eine Klasse mit den für den Logger benötigten Annotationen}.]
 @CodeUnit("Clazz")
 public class ReferenceClass {
-@CodeUnit("GetVar") @HasGetter @VariableType
-private int getvar;
-
-@CodeUnit("PublicMethod") @VariableParams
-public void publicMethod() {}
-
-@CodeUnit("PrivateMethod") @VariableParams
-private void privateMethod() {}
-
-@CodeUnit("PublicStaticMethod") @VariableParams
-public static void publicStaticMethod() {}
+	@CodeUnit("GetVar") @HasGetter @VariableType
+	private int getvar;
+	
+	@CodeUnit("PublicMethod") @VariableParams
+	public void publicMethod() {}
+	
+	@CodeUnit("PrivateMethod") @VariableParams
+	private void privateMethod() {}
+	
+	@CodeUnit("PublicStaticMethod") @VariableParams
+	public static void publicStaticMethod() {}
 }
 \end{lstlisting}
 
@@ -1363,70 +1369,70 @@ language=java,
 firstnumber=1,
 caption=Quelltext zur Erzeugung des DataLoggers und des zugehörigen Testers.]
 void GenerateDataLogger() {
-CodeUnit dataLogger = BuildDataLogger();
-CodeUnit dataLoggerTester = BuildDataLoggerTester();
-
-System.out.println(dataLogger);
-System.out.println(dataLoggerTester);
-
-WriteToFile(dataLogger);
-WriteToFile(dataLoggerTester);
+	CodeUnit dataLogger = BuildDataLogger();
+	CodeUnit dataLoggerTester = BuildDataLoggerTester();
+	
+	System.out.println(dataLogger);
+	System.out.println(dataLoggerTester);
+	
+	WriteToFile(dataLogger);
+	WriteToFile(dataLoggerTester);
 }
 
 private CodeUnit BuildDataLogger() throws IOException {
-return SingletonUnitBuilder
-.createWithIdentifier("DataLogger")
-.withField(GetVarUnitBuilder
-.createWithIdentifier("logCount")
-.withDataType(int.class.getName())
-.end())
-.withMethod(PublicMethodUnitBuilder
-.createWithIdentifier("logInfo")
-.withParameter("message", String.class.getName())
-.withMethodBody("this.log(\"[info]\", message);")
-.end())
-.withMethod(PublicMethodUnitBuilder
-.createWithIdentifier("logError")
-.withParameter("message", String.class.getName())
-.withMethodBody("this.log(\"[error]\", message);")
-.end())
-.withMethod(PrivateMethodUnitBuilder
-.createWithIdentifier("log")
-.withParameter("prefix", String.class.getName())
-.withParameter("message", String.class.getName())
-.withMethodBody("System.out.println(prefix + \" \" + message);\n" +
-"logCount++;")
-.end())
-.end();
+	return SingletonUnitBuilder
+		.createWithIdentifier("DataLogger")
+		.withField(GetVarUnitBuilder
+			.createWithIdentifier("logCount")
+			.withDataType(int.class.getName())
+			.end())
+		.withMethod(PublicMethodUnitBuilder
+			.createWithIdentifier("logInfo")
+			.withParameter("message", String.class.getName())
+			.withMethodBody("this.log(\"[info]\", message);")
+			.end())
+		.withMethod(PublicMethodUnitBuilder
+			.createWithIdentifier("logError")
+			.withParameter("message", String.class.getName())
+			.withMethodBody("this.log(\"[error]\", message);")
+			.end())
+		.withMethod(PrivateMethodUnitBuilder
+			.createWithIdentifier("log")
+			.withParameter("prefix", String.class.getName())
+			.withParameter("message", String.class.getName())
+			.withMethodBody("System.out.println(prefix + \" \" + message);\n" +
+			"logCount++;")
+			.end())
+		.end();
 }
 
 private CodeUnit BuildDataLoggerTester() {
-return ClazzUnitBuilder
-.createWithIdentifier("DataLoggerTester")
-.withMethod(PublicStaticMethodUnitBuilder
-.createWithIdentifier("main")
-.withMethodBody("DataLogger logger = DataLogger.getInstance();\n" +
-"logger.logInfo(\"Hello, World!\");\n" +
-"logger.logError(\"Don't Panic!\");\n" +
-"int c = logger.getLogCount();\n" +
-"logger.logInfo(\"Logged Messages: \" + c);")
-.end())
-.end();
+	return ClazzUnitBuilder
+		.createWithIdentifier("DataLoggerTester")
+		.withMethod(PublicStaticMethodUnitBuilder
+			.createWithIdentifier("main")
+			.withMethodBody("DataLogger logger = DataLogger.getInstance();\n" +
+			"logger.logInfo(\"Hello, World!\");\n" +
+			"logger.logError(\"Don't Panic!\");\n" +
+			"int c = logger.getLogCount();\n" +
+			"logger.logInfo(\"Logged Messages: \" + c);")
+			.end())
+		.end();
 }
 
 private void WriteToFile(CodeUnit cu) throws IOException {
-JavaFile jf = TransformToJavaFile(cu, "scarlet.generated");
-jf.writeTo(new File("src-generated/"));
+	JavaFile jf = TransformToJavaFile(cu, "scarlet.generated");
+	jf.writeTo(new File("src-generated/"));
 }
 
 private JavaFile TransformToJavaFile(CodeUnit cu, String packageName) throws IOException {
-CodeUnitTransformator cut = new CodeUnitTransformator();
-JavaClassFile j = new JavaClassFile();
-j.javaClass = cut.transformClassCodeUnit(cu);
-j.packageName = packageName;
-
-JavaClassGenerator jcg = new JavaClassGenerator();
-return jcg.generateJavaFileFromModel(j);
+	CodeUnitTransformator cut = new CodeUnitTransformator();
+	JavaClassFile j = new JavaClassFile();
+	j.javaClass = cut.transformClassCodeUnit(cu);
+	j.packageName = packageName;
+	
+	JavaClassGenerator jcg = new JavaClassGenerator();
+	return jcg.generateJavaFileFromModel(j);
 }
 \end{lstlisting}
 
@@ -1439,56 +1445,54 @@ package scarlet.generated;
 import java.lang.String;
 
 public class DataLogger {
-private static DataLogger instance;
+	private static DataLogger instance;
+	
+	private int logCount;
+	
+	private DataLogger() {
+	}
 
-private int logCount;
+	public static DataLogger getInstance() {
+		if (instance == null) {
+			instance = new DataLogger();
+		}
 
-private DataLogger() {
+		return instance;
+	}
 
-}
-
-public static DataLogger getInstance() {
-if (instance == null) {
-instance = new DataLogger();
-}
-
-return instance;
-}
-
-public void logInfo(String message) {
-this.log("[info]", message);
-}
-
-public void logError(String message) {
-this.log("[error]", message);
-}
-
-private void log(String prefix, String message) {
-System.out.println(prefix + " " + message);
-logCount++;
-}
-
-public int getLogCount() {
-return logCount;
-}
+	public void logInfo(String message) {
+		this.log("[info]", message);
+	}
+	
+	public void logError(String message) {
+		this.log("[error]", message);
+	}
+	
+	private void log(String prefix, String message) {
+		System.out.println(prefix + " " + message);
+		logCount++;
+	}
+	
+	public int getLogCount() {
+		return logCount;
+	}
 }
 \end{lstlisting}
-
+\newpage
 \begin{lstlisting}[label=lst:dataloggertester,
 language=java,
 firstnumber=1,
 caption={Quelltext der erzeugten DataLoggerTester-Klasse}.]
 package scarlet.generated;
-
 class DataLoggerTester {
-//String[] args fehlt, da Arrays noch nicht implementiert sind
-public static void main() {
-DataLogger logger = DataLogger.getInstance();
-logger.logInfo("Hello, World!");
-logger.logError("Don't Panic!");
-int c = logger.getLogCount();
-logger.logInfo("Logged Messages: " + c);
-}
+	//String[] args fehlt, da Arrays noch nicht implementiert sind
+	public static void main() {
+		DataLogger logger = DataLogger.getInstance();
+		logger.logInfo("Hello, World!");
+		logger.logError("Don't Panic!");
+		int c = logger.getLogCount();
+		logger.logInfo("Logged Messages: " + c);
+	}
 }
 \end{lstlisting}
 
@@ -1522,7 +1526,7 @@ In diesem Abschnitt geht es erst einmal grundsätzlich darum, dass durch die Ver
 
 \subsection{Verbesserte Strukturierung des Parsers durch Vererbung oder Generics}
 
-Große Quelltextanteile innerhalb der verschiedenen Parser wiederholen sich. Grundsätzlich sollte hier durch Refaktorierung sich wiederholender Code in eine Basisklasse übertragen werden. Der von JavaParser ausgegebene AST basiert auf einem Baum aus Knotenpunkten, welche keine eigenen Klassen haben. Stattdessen implementieren die Knotenpunkte Interfaces mit generischen Typparametern. Daher kann nicht ohne weiteres in den Parse-Methoden von Amber auf gemeinsame Basistypen zurückgegriffen werden. Ein möglicher Lösungsansatz könnte hier sein, die AnnotationParser ebenfalls mit Java-Generics zu versehen und auf diese Weise eine Verallgemeinerung zu ermöglichen.
+Große Quelltextanteile innerhalb der verschiedenen Parser wiederholen sich. Grund"-sätz"-lich sollte hier durch Refaktorierung sich wiederholender Code in eine Basisklasse übertragen werden. Der von JavaParser ausgegebene AST basiert auf einem Baum aus Knotenpunkten, welche keine eigenen Klassen haben. Stattdessen implementieren die Knotenpunkte Interfaces mit generischen Typparametern. Daher kann nicht ohne weiteres in den Parse-Methoden von Amber auf gemeinsame Basistypen zurückgegriffen werden. Ein möglicher Lösungsansatz könnte hier sein, die AnnotationParser ebenfalls mit Java-Generics zu versehen und auf diese Weise eine Verallgemeinerung zu ermöglichen.
 
 \section{Cherry}
 
@@ -1538,7 +1542,7 @@ Das CodeUnit-Modell würde als vollständige objektorientierte Struktur implemen
 
 Wie in der Evaluierung zu Amber erwähnt, wird die Ursprungs-CodeUnit innerhalb des Builders durch Deserialisierung aus einem Byte-Array instanziiert. Dieser Lösungsansatz ist äußerst undurchsichtig. Es gibt praktisch keine Möglichkeit, im Nachhinein festzustellen, welche Daten genau für einen Builder initialisiert werden. Der größte Vorteil an diesem Ansatz war, dass jede Art von CodeUnit, unabhängig von der genauen Zusammensetzung, instanziiert werden konnte. Somit musste auch bei jeder Erweiterung von Spectrum keine Rücksicht auf diese Initialisierung genommen werden.
 
-Entgegen dem ursprünglichen Konzept, wurde in der Implementation, wie in Abschnitt~\ref{sec:plattform} beschrieben, auf Pattform-Code zurückgegriffen. Wenn es gelingt, die Initialisierung einer CodeUnit allgemein zu formulieren, könnte auch hierfür Pattform-Code angelegt werden. Dieser würde dann aus einer konkreten CodeUnit-Instanz eine Reihe von Statements erzeugen. Die Statements würden den Java-Code beinhalten, der notwendig wäre, um die CodeUnit zu initialisieren. Der erzeugte Java-Code würde dann als weitere Komponente in den Builder-Quelltext einfließen.
+Entgegen dem ursprünglichen Konzept, wurde in der Implementation, wie in\linebreak Abschnitt~\ref{sec:plattform} beschrieben, auf Pattform-Code zurückgegriffen. Wenn es gelingt, die Initialisierung einer CodeUnit allgemein zu formulieren, könnte auch hierfür Pattform-Code angelegt werden. Dieser würde dann aus einer konkreten CodeUnit-Instanz eine Reihe von Statements erzeugen. Die Statements würden den Java-Code beinhalten, der notwendig wäre, um die CodeUnit zu initialisieren. Der erzeugte Java-Code würde dann als weitere Komponente in den Builder-Quelltext einfließen.
 
 \section{Jade}
 
@@ -1552,7 +1556,7 @@ Sollte das CodeUnit-Modell umgestellt werden und der in der Evaluierung von Cher
 
 \section{Scarlet \& Violet}
 
-Wie im Konzept in Abschnitt~\ref{sec:javagen} beschrieben, erzeugt Scarlet aus dem Java-Modell konkreten Java-Quelltext. Auch hier lassen sich Erweiterungen, durch die im Lösungskapitel beschriebene Struktur, mit geringem Aufwand einpflegen.
+Wie im Konzept in Abschnitt~\ref{sec:javagen} beschrieben, erzeugt Scarlet aus dem Java-Modell konkreten Java-Quelltext. Auch hier lassen sich Erweiterungen, durch die im Lösungska"-pi"-tel beschriebene Struktur, mit geringem Aufwand einpflegen.
 
 Violet war im ursprünglichen Konzept nicht vorgesehen, erfüllt die Aufgabe des Loggings als Querschnittsfunktion aber einwandfrei und könnte lediglich noch um weitere Features, wie zum Beispiel Logging in eine Datei, erweitert werden.
 
@@ -1574,7 +1578,7 @@ Sicherlich gibt es noch weitere Limitationen, welche sich erst im Laufe der Zeit
 
 \chapter{Abschluss}
 
-Zum Abschluss dieser Bachelorthesis werden im folgenden Kapitel die aus dieser Arbeit gewonnenen Erkenntnisse noch einmal zusammengefasst und ein Ausblick auf die mögliche zukünftige Weiterentwicklung dieses Konzepts gegeben. Außerdem werden mögliche Schnittstellen für potentielle nachfolgende Arbeiten umrissen.
+Zum Abschluss dieser Bachelorthesis werden im folgenden Kapitel die aus dieser Arbeit gewonnenen Erkenntnisse noch einmal zusammengefasst und ein Ausblick auf die mög"-liche zukünftige Weiterentwicklung dieses Konzepts gegeben. Außerdem werden mögliche Schnittstellen für potentielle nachfolgende Arbeiten umrissen.
 
 \section{Zusammenfassung}
 
@@ -1597,7 +1601,7 @@ Zusammenfassend kann die Aussage getroffen werden, dass eine mögliche Antwort a
 
 \section{Ausblick}
 
-Spectrum bietet eine Vielzahl möglicher Anknüpfungspunkte für zukünftige Arbeiten. An erster Stelle stünde die offensichtliche Erweiterung des Funktionsumfangs. Wie bei der Evaluierung bereits beschrieben wurde, fehlen noch fundamentale Features. Allein um vergleichsweise einfache POJOs vollständig beschreiben zu können, fehlt zum Beispiel der Support für Arrays und Feldern mit generischen Typparametern.
+Spectrum bietet eine Vielzahl möglicher Anknüpfungspunkte für zukünftige Arbeiten. An erster Stelle stünde die offensichtliche Erweiterung des FunktionsumfangS.\,Wie bei der Evaluierung bereits beschrieben wurde, fehlen noch fundamentale FeatureS.\,Allein um vergleichsweise einfache POJOs vollständig beschreiben zu können, fehlt zum Beispiel der Support für Arrays und Feldern mit generischen Typparametern.
 
 Um den Aufwand bei der Verwendung der erzeugten DSL weiter zu reduzieren, könnten zudem weitere abstrahierende Annotationen eingeführt werden. Die HasGetter- und HasSetter-Annotationen stellen hier nur den Anfang des machbaren dar. Man könnte beispielsweise eine IsSingleton-Annotation definieren, mit welcher eine Klasse annotiert würde. Bei der späteren Erzeugung dieser Klasse könnten automatisiert die fehlenden Bestandteile für das Singleton Pattern generiert werden. Aufwendiger, aber vermutlich ebenso machbar, wäre eine IsBuildable-Annotation für Felder. Bei Erzeugung eines so markierten Feldes, könnte eine zugehörige Builder-Methode, die zum Setzen des Feldes verwendet werden kann und die Instanz des zu zugehörigen Klassenobjektes zurückgibt, generiert werden.
 
@@ -1615,7 +1619,7 @@ Abseits der genannten Punkte wäre es auch denkbar, eine Reihe kleinerer Untersu
 
 \backmatter
 %%%%%%%%%%%%%%%%%%%
-%% create  list
+%% create list
 %%%%%%%%%%%%%%%%%%%
 
 \listoffigures
@@ -1645,7 +1649,7 @@ Hiermit versichere ich, dass ich die vorgelegte Bachelorarbeit selbstständig ve
 
 \vspace{20pt}
 \begin{flushright}
-$\overline{~~~~~~~~~~~~~~~~~\mbox{\BaAuthor, am \today}~~~~~~~~~~~~~~~~~}$
+$\overline{~~~~~~~~~~~~~~~~~\mbox{\BaAuthor, am \BaDeadline}~~~~~~~~~~~~~~~~~}$
 \end{flushright}
 
 \addchap{Zustimmung zur Plagiatsüberprüfung}
@@ -1658,7 +1662,7 @@ Die Einwilligung ist freiwillig. Ohne diese Einwilligung kann unter Entfernung a
 
 \vspace{20pt}
 \begin{flushright}
-$\overline{~~~~~~~~~~~~~~~~~\mbox{\BaAuthor, am \today}~~~~~~~~~~~~~~~~~}$
+$\overline{~~~~~~~~~~~~~~~~~\mbox{\BaAuthor, am \BaDeadline}~~~~~~~~~~~~~~~~~}$
 \end{flushright}
 
 \end{document}
