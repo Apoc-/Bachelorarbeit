@@ -1,8 +1,0 @@
-
-\subsubsection{Bindung und Kopplung}
-
-Bindung und Kopplung beschreiben strukturelle Eigenschaften eines Softwaresystems. Bindung bezeichnet hierbei die Kompaktheit einer Systemkomponente.Ist ein System stark gebunden, so haben die einzelnen Komponenten ihre klar definierten Verantwortlichkeiten.
-
-Im Gegensatz zur Bindung steht die Kopplung, diese ist die Assoziation und Vererbungsstruktur zwischen verschiedenen Klassen und Paketen. Je höher der Kopplungsgrad ist, desto größere Auswirkungen haben Änderungen in einer Komponente auf andere, hiermit gekoppelte, Komponenten. Im Optimalfall sind Komponenten durch eine klar definierten Schnittstelle miteinander verbunden. Diese Schnittstelle bietet nur so viel Interaktionsmöglichkeit wie zwingend notwendig. Dadurch erfordern komponenteninterne Anpassungen wenige, bis gar keine Korrekturen in anderen verbundenen Komponenten \cite[S. 37]{balzert2009a}.
-
-Balzert stellte die These auf, je stärker die Bindung der Komponenten im Vergleich zu den Kopplungen zwischen den Systemkomponenten seien, desto stärker sei die Struktur des Systems und desto höher die Modularität ausgeprägt. Eine stärker ausgeprägte Struktur verringert dessen Komplexität und bietet somit einen hohen Grad an Einfachheit. Daher wird versucht die Kopplungen zu minimieren und die Bindungen zu maximieren \cite[S. 38]{balzert2009a}.
